@@ -1,0 +1,24 @@
+.i::before
+  content: ""
+  position: absolute
+  width: 0
+  height: 0
+  opacity: 20%
+  background: white
+
+.i:hover:before
+  animation: anim-in 0.7s forwards ease-out
+
+
+@keyframes anim-in
+  100%
+    opacity: 0
+    border-radius: 0
+    width: 600px
+    height: 600px
+
+  0%
+    width: 0
+    height: 0
+    border-radius: 100%
+    opacity: 20%

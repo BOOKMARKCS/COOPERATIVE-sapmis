@@ -1,0 +1,535 @@
+<div class="p-5 mb-44 mx-auto ">
+  <p class="text-xl my-5">รายงานประเมินผลโครงการกิจกรรมนิสิต</p>
+  <form [formGroup]="projectResultsReport" [ngClass]="{'w-2/3':commentProjectReport.projectReportId}">
+    <div>
+      <app-card [title]="'กรอกแบบฟอร์มรายงานประเมินผลโครงการกิจกรรมนิสิต'" class="text-lg">
+        <div class="card-content relative">
+
+          <!-- Project Report Name -->
+          <div class="card-content w-full mb-12 relative">
+            <app-input [inputFormControl]="projectResultsReport.get('projectReportName')" [label]="'ขื่อโครงการ'"></app-input>
+            <app-card *ngIf="commentProjectReport.projectReportName" [title]="'ชื่อโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0 "><p class="card-content">{{commentProjectReport.projectReportName}}</p></app-card>
+          </div>
+
+          <!-- Activity GroupName -->
+          <div class="card-content w-full my-12 relative">
+            <app-input [inputFormControl]="projectResultsReport.get('activityGroupName')" [label]="'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'"></app-input>
+            <app-card *ngIf="commentProjectReport.activityGroupName" [title]="'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.activityGroupName}}</p></app-card>
+          </div>
+
+          <!-- responsibleStudents -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <label class="block mb-2">รายชื่อนิสิตผู้รับผิดชอบโครงการ</label>
+            <div *ngFor="let responsibleStudent of getFormArray('responsibleStudents').controls; let i=index" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <div class="w-full p-2 px-4 relative">
+                <label class="-ms-2">นิสิตที่รับผิดชอบคนที่ {{i + 1}}</label>
+                <div class="flex gap-2 relative">
+                  <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('name')" [label]="'ชื่อ-นามสกุล'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('studentId')" [label]="'รหัสประจำตัวนิสิต'" class="w-full"></app-input>
+                </div>
+
+                <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('phoneNumber')" [label]="'หมายเลขโทรศัพท์ '" class="w-full"></app-input>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.responsibleStudents" [title]="'รายชื่อนิสิตผู้รับผิดชอบโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.responsibleStudents}}</p></app-card>
+          </div>
+
+          <!-- Advisor Names -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <label class="block mb-2">รายชื่อที่ปรึกษาโครงการ</label>
+            <div *ngFor="let  advisorName of getFormArray('advisorNames').controls; let i=index" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <div class="w-full p-2 px-4">
+                <label class="-ms-2">รายชื่อที่ปรึกษาคนที่  {{i + 1}}</label>
+                <div class="flex gap-2">
+                  <app-input [inputFormControl]="getFormArray('advisorNames').at(i).get('name')" [label]="'ชื่อ-นามสกุล'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormArray('advisorNames').at(i).get('phoneNumber')" [label]="'หมายเลขโทรศัพท์ '" class="w-full"></app-input>
+                </div>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.advisorNames" [title]="'รายชื่อที่ปรึกษาโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.advisorNames}}</p></app-card>
+          </div>
+
+          <!-- Location -->
+          <div class="card-content w-full my-12 relative">
+            <div class="w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <app-input [inputFormControl]="projectResultsReport.get('location')" [label]="'สถานที่ปฏิบัติงาน'"></app-input>
+            </div>
+            <app-card *ngIf="commentProjectReport.location" [title]="'สถานที่ปฏิบัติงาน'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0 "><p class="card-content">{{commentProjectReport.location}}</p></app-card>
+          </div>
+
+          <!-- Duration -->
+          <div class="card-content w-full my-12 relative z-10 bg-gray-50">
+            <div class="w-full p-4  rounded-lg border shadow shadow-teal-100">
+              <label class="block mb-2">ระยะเวลาการปฏิบัติงาน</label>
+              <div class="flex gap-6 pt-4 px-4 w-full mx-auto">
+                <app-datepicker [inputFormControl]="projectResultsReport.get('startTime')" [label]="'วันเริ่มต้นโครงการ'" [lang]="Lang.TH" class="w-full"></app-datepicker>
+                <p class="self-center"> - </p>
+                <app-datepicker [inputFormControl]="projectResultsReport.get('endTime')" [label]="'วันสิ้นสุดโครงการ'" [lang]="Lang.TH" class="w-full"></app-datepicker>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.duration" [title]="'สถานที่ปฏิบัติงาน'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0 "><p class="card-content">{{commentProjectReport.duration}}</p></app-card>
+          </div>
+
+          <!-- Attendant -->
+          <div class="card-content w-full my-12 bg-gray-50  relative border p-4 rounded-lg shadow shadow-teal-100">
+            <div class="flex justify-between">
+              <label class="block mb-2">จำนวนผู้เข้าร่วมโครงการที่ได้รับอนุมัติ</label>
+            </div>
+            <div *ngFor="let  attendant of getFormArray('attendants').controls; let i=index" class=" w-full gap-4 mb-2 p-2  relative">
+              <div>
+                <div class="w-full">
+                  <div class="grid grid-cols-4 gap-4">
+                    <!-- Advisor Count -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">ที่ปรึกษา</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['advisorCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['advisorCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['advisorCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['advisorCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- studentCount -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">นิสิต</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['studentCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['studentCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['studentCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['studentCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- Teacher Count -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">อาจารย์</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['teacherCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['teacherCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['teacherCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['teacherCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- Other -->
+                    <div *ngFor="let otherCount of getFormTwoArray('attendants','otherCounts').controls; index as odIndex" class="w-full relative  rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between items-center p-4 gap-x-3">
+                        <div class=" -mt-2 w-2/3">
+                          <app-input [inputFormControl]="getFormTwoArray('attendants','otherDetails').at(odIndex)" [placeholder]="'อื่นๆ'"></app-input>
+                        </div>
+                        <div><p class="bg-white shadow w-auto text-black py-2 px-4 rounded-md flex gap-x-2"> <span>รวม</span><span> {{toNumber(getFormTwoArray('attendants', 'otherCounts').at(odIndex).get('Male')?.value) + toNumber(getFormTwoArray('attendants', 'otherCounts').at(odIndex).get('Female')?.value)}} </span> </p></div>
+                      </div>
+                      <div class="bg-white p-2 m-2 ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('attendants','otherCounts').at(odIndex).get('Male')" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('attendants','otherCounts').at(odIndex).get('Female')" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.attendant" [title]="'รายชื่อที่ปรึกษาโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.attendant}}</p></app-card>
+          </div>
+
+          <!-- Actual Participants -->
+          <div class="card-content w-full my-12 bg-gray-50  relative border p-4 rounded-lg shadow shadow-teal-100">
+            <div class="flex justify-between">
+              <label class="block mb-2">จำนวนผู้เข้าร่วมโครงการจริง </label>
+              <button (click)="addFormControl(getFormTwoArray('actualParticipants','otherCounts')); addArray(getFormTwoArray('actualParticipants','otherDetails'))" class="bg-white shadow-xl hover:shadow hover:border hover:border-indigo-400 hover:bg-indigo-400 hover:text-white text-black font-bold py-2 px-4 rounded-md text-xs"> เพิ่มผู้เข้าร่วมอื่นๆ </button>
+            </div>
+            <div *ngFor="let  attendant of getFormArray('actualParticipants').controls; let i=index" class=" w-full gap-4 mb-2 p-2  relative">
+              <div>
+                <div class="w-full">
+                  <div class="grid grid-cols-4 gap-4">
+                    <!-- Advisor Count -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">ที่ปรึกษา</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('actualParticipants').at(i).get(['advisorCount', 'Male'])?.value) + toNumber(getFormArray('actualParticipants').at(i).get(['advisorCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  "> <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['advisorCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['advisorCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- studentCount -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">นิสิต</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('actualParticipants').at(i).get(['studentCount', 'Male'])?.value) + toNumber(getFormArray('actualParticipants').at(i).get(['studentCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['studentCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['studentCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- Teacher Count -->
+                    <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                      <div class="flex w-full justify-between p-2">
+                        <label class="block mb-2">อาจารย์</label>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('actualParticipants').at(i).get(['teacherCount', 'Male'])?.value) + toNumber(getFormArray('actualParticipants').at(i).get(['teacherCount', 'Female'])?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2  ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['teacherCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('actualParticipants').at(i).get(['teacherCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                    <!-- Other -->
+                    <div (mouseleave)="attendantOtherHover[odIndex] = false" (mouseout)="attendantOtherHover[odIndex] = true" *ngFor="let otherCount of getFormTwoArray('actualParticipants','otherCounts').controls; index as odIndex" class="w-full relative {{odIndex != 0?'hover:p-3 duration-1000':''}} rounded-lg border shadow-xl bg-white">
+                      <button (click)="deleteForm(getFormTwoArray('actualParticipants','otherCounts'),odIndex); addArray(getFormTwoArray('actualParticipants','otherDetails'))" *ngIf="odIndex != 0" class=" absolute {{!attendantOtherHover[odIndex]? 'hidden': 'block'}} duration-300 top-1 right-1  font-bold flex items-center justify-center  rounded-full"> <svg fill="red" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/> </svg> </button>
+                      <div class="flex w-full justify-between items-center p-4">
+                        <div class=" -mt-2 w-2/3">
+                          <app-input [inputFormControl]="getFormTwoArray('actualParticipants','otherDetails').at(odIndex)" [placeholder]="'อื่นๆ'"></app-input>
+                        </div>
+                        <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormTwoArray('actualParticipants', 'otherCounts').at(odIndex).get('Male')?.value) + toNumber(getFormTwoArray('actualParticipants', 'otherCounts').at(odIndex).get('Female')?.value)}} </p> </div>
+                      </div>
+                      <div class="bg-white p-2 m-2 {{odIndex == 0? '-mt-2':''}} ">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('actualParticipants','otherCounts').at(odIndex).get('Male')" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                      </div>
+                      <div class="bg-white p-2 m-2  -mt-2">
+                        <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('actualParticipants','otherCounts').at(odIndex).get('Female')" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.actualParticipants" [title]="'รายชื่อที่ปรึกษาโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.actualParticipants}}</p></app-card>
+          </div>
+
+          <!-- Achieving Objective -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg  shadow-teal-100">
+            <label class="block mb-2">การบรรลุวัตถุประสงค์ของโครงการ </label>
+            <div class="w-full bg-white rounded-lg p-5 shadow-xl">
+              <table class="w-full">
+                <thead>
+                <tr>
+                  <th class="p-2" rowspan="2">วัตถุประสงค์โครงการ</th>
+                  <th class="p-1" colspan="5">ระดับการบรรลุวัตถุประสงค์</th>
+                </tr>
+                <tr>
+                  <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3"> มากที่สุด</p></div> </th>
+                  <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">มาก</p> </div> </th>
+                  <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">ปานกลาง</p> </div> </th>
+                  <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">น้อย</p> </div> </th>
+                  <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">น้อยสุด</p> </div> </th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let aoIndex of getIndexArray(getFormArray('achievingObjectives').controls)" class="text-center">
+                <tr>
+                  <td class="p-2">
+                    <div class="relative shadow-lg">
+                      <app-input [inputFormControl]="getFormArray('achievingObjectives').at(aoIndex).get('projectObjectives')" [placeholder]="'วัตถุประสงค์โครงการ'"></app-input>
+                    </div>
+                  </td>
+                  <ng-container *ngFor="let level of ['มากที่สุด','มาก','ปานกลาง','น้อย','น้อยสุด'];index as lIndex">
+                    <td class="p-2">
+                      <app-radio (selectionChanged)="getFormArray('achievingObjectives').at(aoIndex).get('objectiveAchievementLevel')?.setValue($event)" [id]="lIndex + '' +  aoIndex" [inputFormControl]="getFormArray('achievingObjectives').at(aoIndex).get('objectiveAchievementLevel')" [name]="'5' + aoIndex"></app-radio>
+                    </td>
+                  </ng-container>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <app-card *ngIf="commentProjectReport.achievingObjective" [title]="'วัตถุประสงค์โครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.achievingObjective}}</p></app-card>
+          </div>
+
+          <!-- Kpi Goals -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <label class="block mb-2">การบรรลุเป้าหมายโครงการ </label>
+            <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <label class="block mb-2">ด้านปริมาณ </label>
+              <ng-container *ngFor="let kgIndex of getIndexArray(getFormGroupArray('kpiGoals','quantity').controls)">
+                <div class="w-full p-2 px-4 relative">
+                  <div class="flex w-full gap-x-3">
+                    <div *ngIf="getFormGroupArray('kpi','quantity').length >= (kgIndex + 1)" class=" w-full gap-2 relative">
+                      <app-input [inputFormControl]="getFormGroupArray('kpi','quantity').controls.at(kgIndex)" [placeholder]="'ข้อมูลการบรรลุเป้าหมายด้านปริมาณ'" class="w-full"></app-input>
+                    </div>
+                    <div class="w-full gap-2 relative">
+                      <app-input [inputFormControl]="getFormGroupArray('kpiGoals','quantity').controls.at(kgIndex)" [placeholder]="'ข้อมูลการบรรลุเป้าหมายด้านปริมาณ'" class="w-full"></app-input>
+<!--                      <button (click)="removeItem(getFormGroupArray('kpiGoals','quantity'),kgIndex)" *ngIf="rowState !== RowState.Unchanged || getFormGroupArray('kpi','quantity').length <= (kgIndex + 1)" class="absolute w-11 text-white h-11 top-1 right-1 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg> </button>-->
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+<!--              <div (click)="addArray(getFormGroupArray('kpiGoals','quantity'))" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">-->
+<!--                <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>-->
+<!--                <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลการบรรลุเป้าหมายด้านปริมาณ</a>-->
+<!--              </div>-->
+            </div>
+            <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <label class="block mb-2">ด้านคุณภาพ</label>
+              <ng-container *ngFor="let kpiGoal of getFormGroupArray('kpiGoals','quality').controls; index as kgIndex">
+                <div class="w-full p-2 px-4 relative">
+                  <div class="flex w-full gap-x-3">
+                  <div *ngIf="getFormGroupArray('kpi','quality').length >= (kgIndex + 1)" class=" w-full gap-2 relative">
+                    <app-input [inputFormControl]="getFormGroupArray('kpi','quality').controls.at(kgIndex)" [placeholder]="'ข้อมูลการบรรลุเป้าหมายด้านปริมาณ'" class="w-full"></app-input>
+                  </div>
+                  <div class="w-full gap-2 relative">
+                    <app-input [inputFormControl]="getFormGroupArray('kpiGoals','quality').controls.at(kgIndex)" [placeholder]="'ข้อมูลการบรรลุเป้าหมายด้านคุณภาพ'" class="w-full"></app-input>
+<!--                    <button (click)="removeItem(getFormGroupArray('kpiGoals','quality'),kgIndex)" *ngIf="rowState !== RowState.Unchanged || getFormGroupArray('kpi','quality').length >= (kgIndex + 1)" class="absolute w-11 text-white h-11 top-1 right-1 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg> </button>-->
+                  </div>
+                  </div>
+                </div>
+              </ng-container>
+<!--              <div (click)="addArray(getFormGroupArray('kpiGoals','quality'))" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">-->
+<!--                <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">-->
+<!--                </div>-->
+<!--                <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลการบรรลุเป้าหมายด้านคุณภาพ</a>-->
+<!--              </div>-->
+            </div>
+            <app-card *ngIf="commentProjectReport.kpiGoals" [title]="'การบรรลุเป้าหมายโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.kpiGoals}}</p></app-card>
+          </div>
+
+          <!-- problems -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <label class="block mb-2">ปัญหาในการปฏิบัติงาน </label>
+              <ng-container *ngFor="let  problem of getFormArray('problems').controls; index as pIndex">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative">
+                    <app-input [inputFormControl]="getFormArray('problems').controls.at(pIndex)" [placeholder]="'ข้อมูลปัญหาในการปฏิบัติงาน'" class="w-full"></app-input>
+                    <button (click)="removeItem(getFormArray('problems'),pIndex)" *ngIf="rowState !== RowState.Unchanged" class="absolute w-12 text-white h-12 top-1 right-2 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg> </button>
+                  </div>
+                </div>
+              </ng-container>
+              <div (click)="addArray(getFormArray('problems'))" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+                <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+                <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลปัญหาในการปฏิบัติงาน</a>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.problems" [title]="'ปัญหาในการปฏิบัติงาน'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.problems}}</p></app-card>
+          </div>
+
+          <!-- suggestions -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <label class="block mb-2">ข้อเสนอแนะแนวทางการแก้ปัญหาแต่ละปัญหา </label>
+              <ng-container *ngFor="let  suggestion of getFormArray('suggestions').controls; index as pIndex">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative">
+                    <app-input [inputFormControl]="getFormArray('suggestions').controls.at(pIndex)"
+                               [placeholder]="'ข้อเสนอแนะแนวทางการแก้ปัญหาแต่ละปัญหา'" class="w-full"></app-input>
+                    <button (click)="removeItem(getFormArray('suggestions'),pIndex)"
+                            *ngIf="rowState !== RowState.Unchanged"
+                            class="absolute w-12 text-white h-12 top-1 right-1 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+                      <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M200-440v-80h560v80H200Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+              <div (click)="addArray(getFormArray('suggestions'))"
+                   class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+                <div
+                  class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+                <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อเสนอแนะแนวทางการแก้ปัญหาแต่ละปัญหา</a>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.suggestions" [title]="'รายชื่อที่ปรึกษาโครงการ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.suggestions}}</p></app-card>
+          </div>
+
+          <!-- results -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+              <label class="block mb-2">ผลที่ได้รับในเชิงพัฒนานิสิต </label>
+              <ng-container *ngFor="let  result of getFormArray('results').controls; index as pIndex">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative">
+                    <app-input [inputFormControl]="getFormArray('results').controls.at(pIndex)" [placeholder]="'ผลที่ได้รับในเชิงพัฒนานิสิต'" class="w-full"></app-input>
+                    <button (click)="removeItem(getFormArray('results'),pIndex)" *ngIf="rowState !== RowState.Unchanged" class="absolute w-12 text-white h-12 top-1 right-1 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg> </button>
+                  </div>
+                </div>
+              </ng-container>
+              <div (click)="addArray(getFormArray('results'))" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+                <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+                <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อผลที่ได้รับในเชิงพัฒนานิสิต</a>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.results" [title]="'ผลที่ได้รับในเชิงพัฒนานิสิต'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.results}}</p></app-card>
+          </div>
+
+          <!-- Budgets -->
+          <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+            <label class="block mb-2">งบประมาณค่าใช้จ่ายจริงตามรายการดังนี้</label>
+            <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 relative ">
+              <label class="-ms-2">หมวดค่าใช้สอย</label>
+              <ng-container *ngIf="getFormTwoArray('budgetsProjects','costDetails')?.value[0]">
+                <div *ngFor="let budget of getFormTwoArray('budgetsProjects','costDetails').controls; index as bIndex" class="w-full p-2 px-4">
+                  <div class="relative border p-4 rounded-lg">
+                    <div class="flex gap-2">
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','costDetails').controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','costAmount').controls.at(bIndex)" [label]="'ได้รับอนุมัติ'" [type]="'number'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgets','costAmount').controls.at(bIndex)" [label]="'จ่ายจริง'" [type]="'number'" class="w-full"></app-input>
+                      <div class="w-full">
+                        <label class="block my-2 text-gray-500">คงเหลือ</label>
+                        <input class="border rounded-lg w-full py-3 ps-4" disabled placeholder="คงเหลือ" type="number" value="{{((getFormTwoArray('budgetsProjects','costAmount').at(bIndex).value || 0) - (getFormTwoArray('budgets','costAmount').at(bIndex).value || 0))}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="w-full p-2 px-4 flex">
+                <div class="w-full p-2 px-4">
+                  <div class="relative border p-4 rounded-lg">
+                    <div class="flex gap-x-3">
+                      <span class="w-full ps-2">รวม</span>
+                      <span class="w-full ps-4">{{calculateTotalCost(getFormArray('budgetsProjects').at(0).get('costAmount')?.value).toLocaleString('th-TH')}}</span>
+                      <span class="w-full ps-8">{{calculateTotalCost(getFormArray('budgets').at(0).get('costAmount')?.value).toLocaleString('th-TH')}}</span>
+                      <span class="w-full ps-8">{{(calculateTotalCost(getFormArray('budgetsProjects').at(0).get('costAmount')?.value) - calculateTotalCost(getFormArray('budgets').at(0).get('costAmount')?.value)).toLocaleString('th-TH')}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </ng-container>
+            </div>
+            <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+              <label class="-ms-2">หมวดค่าตอบแทน</label>
+              <ng-container *ngIf="getFormTwoArray('budgetsProjects','remunerationAmount')?.value[0]">
+                <div *ngFor="let budget of getFormTwoArray('budgetsProjects','remunerationAmount').controls; index as bIndex" class="w-full p-2 px-4">
+                  <div *ngIf="getFormTwoArray('budgetsProjects','remunerationDetails')?.value" class="relative border p-4 rounded-lg">
+                    <div class="flex gap-2">
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','remunerationDetails').controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','remunerationAmount').controls.at(bIndex)" [label]="'ได้รับอนุมัติ'" [type]="'number'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgets','remunerationAmount').controls.at(bIndex)" [label]="'จ่ายจริง'" [type]="'number'" class="w-full"></app-input>
+                      <div class="w-full">
+                        <label class="block my-2 text-gray-500">คงเหลือ</label>
+                        <input class="border rounded-lg w-full py-3 ps-4" disabled placeholder="คงเหลือ" type="number" value="{{(getFormTwoArray('budgetsProjects','remunerationAmount').at(bIndex).value || 0) - (getFormTwoArray('budgets','remunerationAmount').at(bIndex).value || 0)}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full p-2 px-4 flex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-x-3">
+                        <span class="w-full ps-2">รวม</span>
+                        <span class="w-full ps-4">{{calculateTotalCost(getFormArray('budgetsProjects').at(0).get('remunerationAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{calculateTotalCost(getFormArray('budgets').at(0).get('remunerationAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{(calculateTotalCost(getFormArray('budgetsProjects').at(0).get('remunerationAmount')?.value) - calculateTotalCost(getFormArray('budgets').at(0).get('remunerationAmount')?.value)).toLocaleString('th-TH')}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+              <label class="-ms-2">หมวดค่าวัสดุ</label>
+              <ng-container *ngIf="getFormTwoArray('budgetsProjects','equipmentCostDetails')?.value[0]" >
+                <div *ngFor="let budget of getFormTwoArray('budgetsProjects','equipmentCostDetails').value; index as bIndex" class="w-full p-2 px-4">
+                  <div class="relative border p-4 rounded-lg">
+                    <div class="flex gap-2">
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','equipmentCostDetails').controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgetsProjects','equipmentCostAmount').controls.at(bIndex)" [label]="'ได้รับอนุมัติ'" [type]="'number'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgets','equipmentCostAmount').controls.at(bIndex)" [label]="'จ่ายจริง'" [type]="'number'" class="w-full"></app-input>
+                      <div class="w-full">
+                        <label class="block my-2 text-gray-500">คงเหลือ</label>
+                        <input class="border rounded-lg w-full py-3 ps-4" disabled placeholder="คงเหลือ" type="number" value="{{(getFormTwoArray('budgetsProjects','equipmentCostAmount').at(bIndex).value || 0) - (getFormTwoArray('budgets','equipmentCostAmount').at(bIndex).value || 0)}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full p-2 px-4 flex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-x-3">
+                        <span class="w-full ps-2">รวม</span>
+                        <span class="w-full ps-4">{{calculateTotalCost(getFormArray('budgetsProjects').at(0).get('equipmentCostAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{calculateTotalCost(getFormArray('budgets').at(0).get('equipmentCostAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{(calculateTotalCost(getFormArray('budgetsProjects').at(0).get('equipmentCostAmount')?.value) - calculateTotalCost(getFormArray('budgets').at(0).get('equipmentCostAmount')?.value)).toLocaleString('th-TH')}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div  class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+              <label class="-ms-2">ค่าอื่น ๆ</label>
+              <ng-container *ngIf="getFormTwoArray('budgetsProjects','otherDetails')?.value[0]">
+                <div *ngFor="let budget of getFormTwoArray('budgetsProjects','otherDetails').value; index as bIndex" class="w-full p-2 px-4">
+                  <div class="relative border p-4 rounded-lg">
+                    <div *ngIf="getFormTwoArray('budgetsProjects','otherDetails')?.value" class="flex gap-2">
+                      <app-input
+                              [inputFormControl]="getFormTwoArray('budgetsProjects','otherDetails').controls.at(bIndex)"
+                              [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                      <app-input
+                              [inputFormControl]="getFormTwoArray('budgetsProjects','otherAmount').controls.at(bIndex)"
+                              [label]="'จำนวนเงิน'" [type]="'number'" class="w-full"></app-input>
+                      <app-input [inputFormControl]="getFormTwoArray('budgets','otherAmount').controls.at(bIndex)"
+                                 [label]="'จ่ายจริง'" [type]="'number'" class="w-full"></app-input>
+                      <div class="w-full">
+                        <label class="block my-2 text-gray-500">คงเหลือ</label>
+                        <input class="border rounded-lg w-full py-3 ps-4" disabled placeholder="คงเหลือ" type="number"
+                               value="{{(getFormTwoArray('budgetsProjects','otherAmount').at(bIndex).value || 0) - (getFormTwoArray('budgets','otherAmount').at(bIndex).value || 0)}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full p-2 px-4 flex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-x-3">
+                        <span class="w-full ps-2">รวม</span>
+                        <span class="w-full ps-4">{{calculateTotalCost(getFormArray('budgetsProjects').at(0).get('otherAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{calculateTotalCost(getFormArray('budgets').at(0).get('otherAmount')?.value).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8">{{(calculateTotalCost(getFormArray('budgetsProjects').at(0).get('otherAmount')?.value) - calculateTotalCost(getFormArray('budgets').at(0).get('otherAmount')?.value)).toLocaleString('th-TH')}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class=" w-full flex items-center gap-4 mb-2 p-4  rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+              <label class="w-2/6 px-12">งบประมาณทั้งหมด</label>
+              <div class="w-full px-4">
+<!--                <div class="relative  flex justify-end gap-x-3 w-full  p-4 rounded-lg">-->
+<!--                  <span>{{(calculateTotalCost(getFormTwoArray('budgets', 'costAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'equipmentCostAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'otherAmount').value))}}</span><span>บาท</span>-->
+<!--                </div>-->
+                <div class="w-full p-2 px-4 flex -ml-16">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative  p-4 rounded-lg">
+                      <div class="flex gap-x-3">
+                        <span class="w-full ps-4">{{(calculateTotalCost(getFormTwoArray('budgetsProjects', 'costAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'equipmentCostAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'otherAmount').value)).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-4 ml-20">{{(calculateTotalCost(getFormTwoArray('budgets', 'costAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'equipmentCostAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'otherAmount').value)).toLocaleString('th-TH')}}</span>
+                        <span class="w-full ps-8 ml-20">{{(calculateTotalCost(getFormTwoArray('budgetsProjects', 'costAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'equipmentCostAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgetsProjects', 'otherAmount').value) - (calculateTotalCost(getFormTwoArray('budgets', 'costAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'equipmentCostAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'otherAmount').value))).toLocaleString('th-TH')}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-card *ngIf="commentProjectReport.budget" [title]="'งบประมาณ'" class="card-content w-2/4 absolute -right-1/2 -mx-10 top-0"><p class="card-content">{{commentProjectReport.budget}}</p></app-card>
+          </div>
+
+        </div>
+        <div class="card-content mt-5 flex justify-end gap-4">
+          <div (click)="window.location.href = ''" class="mt-3 p-6  h-6 flex justify-center items-center relative">
+            <div class="i h-16 w-full bg-gradient-to-br from-gray-300 to-gray-500 items-center rounded-lg shadow-lg cursor-pointer  absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> </div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">กลับ</a>
+          </div>
+          <div (click)="submit()" class="mt-3 p-6  h-12 flex justify-center items-center relative">
+            <div class="i h-16 w-full bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-lg shadow-lg cursor-pointer right-0 absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> </div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">ส่งข้อมูลการรายงานผลโครงการ</a>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </form>
+</div>
+
+

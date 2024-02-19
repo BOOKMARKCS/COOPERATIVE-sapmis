@@ -1,0 +1,23 @@
+<!-- component -->
+
+<div aria-label="Progress">
+  <ol role="list" class="grid grid-cols-4 gap-4">
+    <li *ngFor="let approval_comment of projectApprovals.approval_comment; index as i " class="md:flex-1">
+      <!-- Completed Step -->
+      <a href="#"
+         class="group flex flex-col border-l-4 border-red-600  py-2 pl-4 hover:border-red-800 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
+        <span class="text-sm font-medium text-red-600 group-hover:text-red-800">{{projectFlow.flow[i]}}</span>
+        <span class="text-sm font-medium"> {{projectApprovals.approved_by_name[i]}} / {{approval_comment}}</span>
+      </a>
+    </li>
+  </ol>
+</div>
+
+<div class="flex justify-between py-5">
+  <button (click)="prev()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+    ส่งกลับเพื่อแก้ไข
+  </button>
+  <button (click)="next()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+    เห็นชอบ
+  </button>
+</div>

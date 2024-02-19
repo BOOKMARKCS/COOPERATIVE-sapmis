@@ -1,0 +1,364 @@
+<div class="p-5 mb-44 " id="commentProjectReport">
+  <p class="text-xl my-5 ">รายงานประเมินผลโครงการกิจกรรมนิสิต</p>
+  <form [formGroup]="commentProjectReport" [ngClass]="{'w-2/3':rowState === RowState.Added}">
+    <div class="relative">
+      <app-card [title]="'กรอกแบบฟอร์มรายงานประเมินผลโครงการกิจกรรมนิสิต'">
+        <div class="card-content" >
+          <div [formGroup]="commentProjectReport" class="card-content w-full  ">
+
+            <!-- Project Report Name -->
+            <div appHeightUpdater class="  flex my-1 ms-2 relative justify-center items-center" >
+              <span class="my-2 text-gray-500 w-full py-3 ps-2" ><b class="text-gray-800">ชื่อโครงการ :</b> {{projectResultsReport.projectReportName}}</span>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('projectReportName')" [label]="'ชื่อโครงการ'" ></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Activity GroupName -->
+            <div appHeightUpdater class=" flex my-1 ms-2 relative justify-center items-center">
+              <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ :</b> {{projectResultsReport.projectReportName}}</span>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('activityGroupName')" [label]="'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- responsibleStudents -->
+            <div class=" w-full my-4 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2"><b class="text-gray-800">รายชื่อนิสิตผู้รับผิดชอบโครงการ</b></label>
+              <div *ngFor="let responsibleStudent of projectResultsReport.responsibleStudents; let i=index" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow shadow-teal-100  relative">
+                <div class="w-full p-2 px-4">
+                  <label class="-ms-2"><b class="text-gray-800">นิสิตที่รับผิดชอบคนที่ {{i + 1}}</b></label>
+                  <div class="flex gap-2">
+                    <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">ชื่อ-นามสกุล : </b> {{responsibleStudent['name']}}</span>
+                    <span class=" my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">รหัสประจำตัวนิสิต :</b> {{responsibleStudent['studentId']}}</span>
+                    <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">เบอร์โทร :</b> {{responsibleStudent['phoneNumber']}}</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('responsibleStudents')" [label]="'รายชื่อนิสิตผู้รับผิดชอบโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Advisor Names -->
+            <div class=" w-full my-4 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2"><b class="text-gray-800">รายชื่อที่ปรึกษาโครงการ</b></label>
+              <div *ngFor="let advisorName of projectResultsReport.advisorNames; let i=index" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow shadow-teal-100  relative">
+                <div class="w-full p-2 px-4">
+                  <label class="-ms-2"><b class="text-gray-800">ที่ปรึกษาคนที่ {{i + 1}}</b></label>
+                  <div class="flex gap-2">
+                    <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">ชื่อ-นามสกุล :</b> {{advisorName['name']}}</span>
+                    <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">เบอร์โทร :</b> {{advisorName['phoneNumber']}}</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('advisorNames')" [label]="'รายชื่อที่ปรึกษาโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div appHeightUpdater class=" flex my-1 ms-2 relative justify-center items-center">
+              <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800">สถานที่ปฏิบัติงาน :</b> {{projectResultsReport.location}}</span>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('location')" [label]="'สถานที่ปฏิบัติงาน'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Duration -->
+            <div appHeightUpdater class=" flex my-1 ms-2 relative justify-center items-center">
+              <span class="my-2 text-gray-500 w-full py-3 ps-2"><b class="text-gray-800"> ระยะเวลาการปฏิบัติงาน :</b> {{projectResultsReport.startTime}} - {{projectResultsReport.endTime}}</span>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('duration')" [label]="'ระยะเวลาการปฏิบัติงาน'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Attendant -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50  relative border p-4 rounded-lg shadow shadow-teal-100">
+              <div class="flex justify-between">
+                <label class="block mb-2">จำนวนผู้เข้าร่วมโครงการที่ได้รับอนุมัติ</label>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-2  relative">
+                <div>
+                  <div class="w-full">
+<!--                    <div class="grid grid-cols-4 gap-4">-->
+                <div class=" {{projectResultsReport.attendants[0]['otherCounts'][0] !== ''? 'grid  grid-cols-4' : 'grid  grid-cols-3'}} gap-4">
+                      <!-- Advisor Count -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">ที่ปรึกษา</label>
+                          <div>
+                            <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{ toNumber(projectResultsReport.attendants[0]['advisorCount']['Male']) + toNumber(projectResultsReport.attendants[0]['advisorCount']['Female']) }} </p>
+                          </div>
+                        </div>
+                        <div class="bg-white p-2 m-2 "> ผู้ชาย {{toNumber(projectResultsReport.attendants[0]['advisorCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.attendants[0]['advisorCount']['Female'])}} คน </div>
+                      </div>
+                      <!-- studentCount -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">นิสิต</label>
+                          <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(projectResultsReport.attendants[0]['studentCount']['Male']) + toNumber(projectResultsReport.attendants[0]['studentCount']['Female'])}} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2  "> ผู้ชาย {{toNumber(projectResultsReport.attendants[0]['studentCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{ toNumber(projectResultsReport.attendants[0]['studentCount']['Female'])}} คน </div>
+                      </div>
+                      <!-- Teacher Count -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">อาจารย์</label>
+                          <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(projectResultsReport.attendants[0]['teacherCount']['Male']) + toNumber(projectResultsReport.attendants[0]['teacherCount']['Female'])}} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2  "> ผู้ชาย {{toNumber(projectResultsReport.attendants[0]['teacherCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.attendants[0]['teacherCount']['Female'])}} คน </div>
+                      </div>
+                      <div *ngFor="let odIndex of getIndexArray(projectResultsReport.attendants[0]['otherCounts'])" class="w-full relative  rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between items-center p-4 gap-x-3">
+                          <div class=" -mt-2 w-2/3">
+                            <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{projectResultsReport.attendants[0]['otherDetails'][odIndex]}} </p> </div>
+                          </div>
+                          <div><p class="bg-white shadow w-auto text-black py-2 px-4 rounded-md flex gap-x-2"> <span>รวม</span><span> {{toNumber(projectResultsReport.attendants[0]['otherCounts'][odIndex]['Male']) + toNumber(projectResultsReport.attendants[0]['otherCounts'][odIndex]['Female'])}} </span> </p></div>
+                        </div>
+                        <div class="bg-white p-2 m-2 "> ผู้ชาย {{toNumber(projectResultsReport.attendants[0]['otherCounts'][odIndex]['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.attendants[0]['otherCounts'][odIndex]['Female'])}} คน </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('attendant')" [label]="'จำนวนผู้เข้าร่วมโครงการที่ได้รับอนุมัติ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- actualParticipants -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50  relative border p-4 rounded-lg shadow shadow-teal-100">
+              <div class="flex justify-between">
+                <label class="block mb-2">จำนวนผู้เข้าร่วมโครงการที่ได้รับอนุมัติ</label>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-2  relative">
+                <div>
+                  <div class="w-full">
+                    <div class="grid grid-cols-4 gap-4">
+                      <!-- Advisor Count -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">ที่ปรึกษา</label>
+                          <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{ toNumber(projectResultsReport.actualParticipants[0]['advisorCount']['Male']) + toNumber(projectResultsReport.actualParticipants[0]['advisorCount']['Female']) }} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2 "> ผู้ชาย {{toNumber(projectResultsReport.actualParticipants[0]['advisorCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.actualParticipants[0]['advisorCount']['Female'])}} คน </div>
+                      </div>
+                      <!-- studentCount -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">นิสิต</label>
+                          <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(projectResultsReport.actualParticipants[0]['studentCount']['Male']) + toNumber(projectResultsReport.actualParticipants[0]['studentCount']['Female'])}} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2  "> ผู้ชาย {{toNumber(projectResultsReport.actualParticipants[0]['studentCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{ toNumber(projectResultsReport.actualParticipants[0]['studentCount']['Female'])}} คน </div>
+                      </div>
+                      <!-- Teacher Count -->
+                      <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between p-2">
+                          <label class="block mb-2">อาจารย์</label>
+                          <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(projectResultsReport.actualParticipants[0]['teacherCount']['Male']) + toNumber(projectResultsReport.actualParticipants[0]['teacherCount']['Female'])}} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2  "> ผู้ชาย {{toNumber(projectResultsReport.actualParticipants[0]['teacherCount']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.actualParticipants[0]['teacherCount']['Female'])}} คน </div>
+                      </div>
+                      <!-- Other -->
+                      <div *ngFor="let otherCount of projectResultsReport.actualParticipants['otherDetails']; index as i" class="w-full relative rounded-lg border shadow-xl bg-white">
+                        <div class="flex w-full justify-between items-center p-4">
+                          <div class=" -mt-2 w-2/3"> {{otherCount}} </div>
+                          <div><p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{projectResultsReport.actualParticipants['otherCounts'][i]['Male'] + projectResultsReport.actualParticipants['otherCounts'][i]['Female']}} </p> </div>
+                        </div>
+                        <div class="bg-white p-2 m-2 "> ผู้ชาย {{toNumber(projectResultsReport.actualParticipants[0]['otherCounts[i]']['Male'])}} คน </div>
+                        <div class="bg-white p-2 m-2  -mt-2"> ผู้หญิง {{toNumber(projectResultsReport.actualParticipants[0]['otherCounts'][i]['Male'])}} คน </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('actualParticipants')" [label]="'จำนวนผู้เข้าร่วมโครงการที่ได้รับอนุมัติ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Achieving Objective -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg  shadow-teal-100">
+              <label class="block mb-2">การบรรลุวัตถุประสงค์ของโครงการ </label>
+              <div class="w-full bg-white rounded-lg p-5 shadow-xl">
+                <table class="w-full">
+                  <thead>
+                  <tr>
+                    <th class="p-2" rowspan="2">วัตถุประสงค์โครงการ</th>
+                    <th class="p-1" colspan="5">ระดับการบรรลุวัตถุประสงค์</th>
+                  </tr>
+                  <tr>
+                    <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3"> มากที่สุด</p></div> </th>
+                    <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">มาก</p> </div> </th>
+                    <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3"> ปานกลาง</p> </div> </th>
+                    <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3">น้อย</p> </div> </th>
+                    <th class="p-2"> <div class="flex justify-center p-2"><p class="bg-gray-100 border rounded-full p-2 px-3"> น้อยสุด</p> </div> </th>
+                  </tr>
+                  </thead>
+                  <tbody *ngFor="let index of projectResultsReport.achievingObjectives; index as aoIndex" class="text-center">
+                  <tr>
+                    <td class="p-2"> <div class="relative shadow"> {{projectResultsReport.achievingObjectives[aoIndex]['projectObjectives']}} </div> </td>
+                    <ng-container *ngFor="let level of ['มากที่สุด','มาก','ปานกลาง','น้อย','น้อยสุด'];index as lIndex">
+
+                      <td class="p-2"> <app-radio [disable]="(rowState === RowState.Unchanged)" [id]="lIndex + '' +  aoIndex" [inputFormControl]="projectResultsReport.achievingObjectives.at(aoIndex)['objectiveAchievementLevel']" [name]="'5' + aoIndex"></app-radio> </td>
+                    </ng-container>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('achievingObjective')" [label]="'การบรรลุวัตถุประสงค์ของโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Kpi Goals -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2">การบรรลุเป้าหมายโครงการ </label>
+              <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+                <label class="block mb-2">ด้านปริมาณ </label>
+                <ng-container *ngFor="let index of projectResultsReport.kpiGoals['quantity']; index as kgIndex">
+                  <div class="w-full p-2 px-4 relative">
+                    <div class=" gap-2 relative"> {{projectResultsReport.kpiGoals['quantity'][kgIndex]}} </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+                <label class="block mb-2">ด้านคุณภาพ</label>
+                <ng-container *ngFor="let index of projectResultsReport['kpiGoals']['quality']; index as kgIndex">
+                  <div class="w-full p-2 px-4 relative">
+                    <div class=" gap-2 relative"> {{projectResultsReport.kpiGoals.quality[kgIndex]}} </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('kpiGoals')" [label]="'การบรรลุเป้าหมายโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- problems -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2">การบรรลุเป้าหมายโครงการ </label>
+              <div *ngFor="let problem of projectResultsReport.problems" class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative"> {{problem}} </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('problems')" [label]="'การบรรลุเป้าหมายโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- suggestions -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2">การบรรลุเป้าหมายโครงการ </label>
+              <div *ngFor="let suggestion of projectResultsReport.suggestions" class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative"> {{suggestion}} </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('suggestions')" [label]="'การบรรลุเป้าหมายโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- results -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <label class="block mb-2">การบรรลุเป้าหมายโครงการ </label>
+              <div *ngFor="let result of projectResultsReport.results" class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+                <div class="w-full p-2 px-4 relative">
+                  <div class=" gap-2 relative"> {{result}} </div>
+                </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('results')" [label]="'การบรรลุเป้าหมายโครงการ'"></app-input-in-label>
+              </div>
+            </div>
+
+            <!-- Budgets -->
+            <div appHeightUpdater class="card-content w-full my-7 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+              <div>
+              <label class="block mb-2">งบประมาณค่าใช้จ่ายจริงตามรายการดังนี้</label>
+              <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+                <label class="-ms-2">หมวดค่าใช้สอย</label>
+                <ng-container *ngFor="let budget of projectResultsReport.budgets[0]['costDetails']; index as bIndex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-2">
+                        <p>{{projectResultsReport.budgets[0]['costDetails'][bIndex]}}</p>
+                        <p>{{projectResultsReport.budgets[0]['costAmount'][bIndex]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+                <label class="-ms-2">หมวดค่าตอบแทน</label>
+                <ng-container
+                  *ngFor="let index of projectResultsReport.budgets[0]['remunerationDetails']; index as bIndex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-2">
+                        <p>{{projectResultsReport.budgets[0]['remunerationDetails'][bIndex]}}</p>
+                        <p>{{projectResultsReport.budgets[0]['remunerationAmount'][bIndex]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+                <label class="-ms-2">หมวดค่าวัสดุ</label>
+                <ng-container *ngFor="let index of projectResultsReport.budgets[0]['equipmentCostDetails']; index as bIndex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-2">
+                        <p>{{projectResultsReport.budgets[0]['equipmentCostDetails'][bIndex]}}</p>
+                        <p>{{projectResultsReport.budgets[0]['equipmentCostAmount'][bIndex]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+                <label class="-ms-2">ค่าอื่น ๆ</label>
+                <ng-container *ngFor="let index of projectResultsReport.budgets[0]['otherDetails']; index as bIndex">
+                  <div class="w-full p-2 px-4">
+                    <div class="relative border p-4 rounded-lg">
+                      <div class="flex gap-2">
+                        <p>{{projectResultsReport.budgets[0]['otherDetails'][bIndex]}}</p>
+                        <p>{{projectResultsReport.budgets[0]['otherAmount'][bIndex]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              </div>
+              <div *ngIf="rowState === RowState.Added" class="absolute height-updater -right-1/2 w-1/2 -mx-10 top-0  bg-white rounded-lg shadow-teal-400">
+                <app-input-in-label [inputFormControl]="commentProjectReport.get('budget')" [label]="'งบประมาณค่าใช้จ่ายจริงตามรายการดังนี้'"></app-input-in-label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-content mt-5">
+          <div class="mb-4 flex space-x-2 justify-end">
+            <button (click)="rowState === RowState.Added? rowState = RowState.Unchanged :window.location.href = ''" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">กลับ </button>
+            <button (click)="save()" *ngIf="rowState === RowState.Added" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"> บันทึกความคิดเห็น </button>
+            <button (click)="reject()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button"> {{btnCommentReportName}} </button>
+            <button (click)="toggleBtnApprove = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"> อนุมัติโครงการ </button>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </form>
+</div>
+<app-comment-box (cancel)="toggleBtnApprove = false" (submit)="approve()" *ngIf="toggleBtnApprove" [inputFormControl]="projectResultsReportForm.get('approved')"></app-comment-box>
+
+

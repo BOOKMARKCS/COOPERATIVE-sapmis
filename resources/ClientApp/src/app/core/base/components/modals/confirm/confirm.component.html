@@ -1,0 +1,36 @@
+<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+<div class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-end h-full  justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class=" w-full h-full flex items-center justify-center">
+        <div aria-labelledby="modal-headline" aria-modal="true" class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog">
+            <div class="bg-white  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg"><path d="m664.846-123.231 104.077-103.077v83.461H810v-153.384H656.616v41.077h82.845L636-152.078l28.846 28.847Zm-470.152-.77q-29.596 0-50.145-20.548-20.548-20.549-20.548-50.145v-569.612q0-28.596 20.548-49.645 20.549-21.048 50.145-21.048h570.612q29.596 0 50.145 21.048 20.548 21.049 20.548 49.645v305.459q-13.923-7.308-28.577-12.269-14.653-4.962-29.807-8.577v-284.613q0-4.616-3.846-8.463-3.847-3.846-8.463-3.846H194.694q-4.616 0-8.463 3.846-3.846 3.847-3.846 8.463v569.612q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846h271.228q2.034 15.96 5.732 31.075 3.698 15.115 9.73 27.309h-286.69Zm-12.309-93.461v35.077V-776.615v296.922-4.615 266.846Zm99.616-65.154h189.614q3.615-15.769 9.154-30.115 5.538-14.346 14.615-28.269H282.001v58.384Zm0-167.692h320.691q15.461-9.077 31.576-15.615 16.116-6.539 35.269-9.539v-33.23H282.001v58.384Zm0-166.692h395.998v-58.384H282.001V-617ZM729.357-31.309q-76.53 0-130.712-54.262-54.182-54.261-54.182-130.27 0-76.444 54.037-131.224 54.038-54.78 131.089-54.78 76.03 0 130.528 54.78 54.497 54.78 54.497 131.224 0 76.009-54.363 130.27-54.363 54.262-130.894 54.262Z"/></svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">{{label}}</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">คุณแน่ใจหรือว่าต้องการส่งกลับโครงการ <span
+                                    class="font-bold">{{itemName}}</span>? การดำเนินการนี้ไม่สามารถยกเลิกได้</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button (click)="confirm()"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        type="button">
+                    ส่งกลับ
+                </button>
+                <button (click)="close()"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        type="button">
+                   ยกเลิก
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

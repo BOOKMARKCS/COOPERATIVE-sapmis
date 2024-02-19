@@ -1,0 +1,30 @@
+import { Component } from '@angular/core';
+import { AccountService } from "../../../../../presentation/features/account/account.service";
+import jwt_decode from "jwt-decode";
+
+@Component({
+  selector: 'app-nav-bottom',
+  templateUrl: './nav-bottom.component.html',
+  styleUrls: ['./nav-bottom.component.sass']
+})
+export class NavBottomComponent {
+  isExpanded: boolean = false;
+  user: any;
+
+  constructor(private accountService: AccountService) {
+    accountService.user$.subscribe((user: any) => {
+      if (user) {
+        this.user = user
+        this.user.role = (jwt_decode(user.jwt) as any).role
+      }
+    })
+  }
+
+  toggle() {
+    this.isExpanded = !this.isExpanded;
+  }
+
+  logout() {
+    this.accountService.logout()
+  }
+}

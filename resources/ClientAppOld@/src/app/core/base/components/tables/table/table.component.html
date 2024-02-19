@@ -1,0 +1,191 @@
+<div *ngIf="data.length" class="col-span-12 ">
+    <div class="lg:overflow-visible overflow-x-auto  p-2  rounded-lg ">
+        <table class="table overflow-hidden text-gray-400 rounded-3xl shadow-2xl shadow-sky-50  p-2  w-full">
+            <thead class=" text-white"> <tr> <th *ngFor="let column of columns;index as i" class="p-3 text-xl text-left {{data[0].strategicDetail?'bg-sky-500':'bg-emerald-500'}} whitespace-nowrap {{i == 0? 'rounded-tl-3xl':''}} {{(i + 1) == columns.length? 'rounded-tr-3xl':''}}">{{column}}</th> </tr> </thead> <tbody>
+            <ng-container *ngTemplateOutlet="project"></ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #project>
+    <tr *ngFor="let proj of data; index as i" class="bg-slate-50 text-gray-800  {{data.length != (i+1)?'border-b-2':''}}">
+        <td class="p-2">
+            <div class="flex whitespace-nowrap align-items-center">
+                <img alt="unsplash image" class="rounded-full object-cover w-12 h-12" height="12" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" width="12">
+                <div class="ml-3 self-center">
+                    <div class="text-black whitespace-nowrap">{{proj.users?.firstName | titlecase}}  {{proj.users?.lastName | titlecase}}</div>
+                    <div class="text-gray-500 whitespace-nowrap -mt-2">{{proj.users?.email}}</div>
+                </div>
+            </div>
+        </td>
+        <td class="px-1 whitespace-nowrap"> {{proj.projectName || proj.projectReportName}} </td>
+        <td *ngIf="proj.strategicDetail" class="px-1 whitespace-nowrap"> {{proj.strategicDetail}} </td>
+        <td class="px-1 whitespace-nowrap">
+            <div class="flex"> {{ proj.totalBudget.toLocaleString() }}</div>
+        </td>
+        <td class="px-1 whitespace-nowrap">{{ proj.startTime | date: 'dd/MM/yyy'}} - {{proj.endTime | date: 'dd/MM/yyyy'}} </td>
+        <td class="px-1 whitespace-nowrap ">{{proj.status}}</td>
+        <td class="py-3 bg-slate-50 px-6 flex gap-x-4 justify-around ">
+<!--          <button *ngIf="proj.status === ProjectStatus.Approved;" [routerLink]="ProjPath.EditReportResults" [state]="{projectReport:proj}"-->
+<!--                  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"> ประเมิน-->
+<!--          </button>-->
+
+
+          <ng-container *ngTemplateOutlet="selectedOperation == 'projectOperation'? projectOperation:null; context: {proj:proj}"></ng-container>
+            <ng-container *ngTemplateOutlet="selectedOperation == 'officerProjectOperation'? officerProjectOperation:null; context: {proj:proj}"></ng-container>
+            <ng-container *ngTemplateOutlet="selectedOperation == 'readOnly'? officerProjectOperation:null; context: {proj:proj}"></ng-container>
+            <ng-container *ngTemplateOutlet="selectedOperation == 'approvedOperation'? OperationApproved:null; context: {proj:proj}"></ng-container>
+
+
+          <ng-container *ngTemplateOutlet="selectedOperation == 'projectReportOperation'? projectReportOperation:null; context: {proj:proj}"></ng-container>
+          <ng-container *ngTemplateOutlet="selectedOperation == 'officerProjectReportOperation'? officerProjectReportOperation:null; context: {proj:proj}"></ng-container>
+
+            <ng-container *ngTemplateOutlet="selectedOperation == 'approvedOperationReport'? OperationApprovedReport:null; context: {proj:proj}"></ng-container>
+        </td>
+    </tr>
+</ng-template>
+
+<ng-template #projectOperation let-proj="proj">
+    <!-- แสดงเฉพาะเมื่อ proj.status เป็น 'Approved' -->
+<!--    <ng-container *ngIf="proj.status === ProjectStatus.Approved; else otherButtons">-->
+      <ng-container *ngIf="proj.status === ProjectStatus.Approved; else otherButtons">
+        <button [routerLink]="ProjPath.EditReportResults" [state]="{project:proj}"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"> ประเมิน
+        </button>
+    </ng-container>
+
+    <!-- แสดงเมื่อ proj.status ไม่เป็น 'Approved' -->
+    <ng-template #otherButtons>
+        <button [ngClass]="{'bg-blue-500 hover:bg-blue-500': proj.status == ProjectStatus.WaitingCorrection, 'bg-gray-300 cursor-default': proj.status !== ProjectStatus.WaitingCorrection}"
+                class="text-white font-bold py-2 px-4 rounded-full">
+            <ng-container *ngIf="proj.status == ProjectStatus.WaitingCorrection; then editButton else otherButton">
+                แก้ไข
+            </ng-container>
+        </button>
+        <ng-template #editButton><a [routerLink]="[RoutePath.EditProject]" [state]="{ proj: proj }"> แก้ไข </a>
+        </ng-template>
+        <ng-template #otherButton><a> แก้ไข </a></ng-template>
+    </ng-template>
+    <button [routerLink]="[RoutePath.EditProject]" [state]="{ proj: proj ,rowState:RowState.Unchanged}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ดู
+    </button>
+<!--    <button (click)="deleteProject(proj)" *ngIf="proj?.status !== 'ผ่านการอนุมัติ'"-->
+<!--            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ลบ-->
+<!--    </button>-->
+</ng-template>
+
+<ng-template #projectReportOperation let-proj="proj">
+    <!-- แสดงเฉพาะเมื่อ proj.status เป็น 'Approved' -->
+    <ng-container *ngIf="proj.status === ProjectStatus.Approved; else otherButton">
+        <button [routerLink]="ProjPath.EditReportResults" [state]="{projectReport:proj}"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"> ประเมิน
+        </button>
+    </ng-container>
+
+    <!-- แสดงเมื่อ proj.status ไม่เป็น 'Approved' -->
+    <ng-template #otherButton>
+        <button
+                [ngClass]="{'bg-blue-500 hover:bg-blue-500': proj.status === ProjectStatus.WaitingCorrection, 'bg-gray-300 cursor-default': proj.status !== ProjectStatus.WaitingCorrection}"
+                class="text-white font-bold py-2 px-4 rounded-full">
+            <a *ngIf="proj.status === ProjectStatus.WaitingCorrection; then editButton else otherButton"> แก้ไข </a>
+        </button>
+        <ng-template #editButton><a [routerLink]="[ProjPath.EditReportResults]" [state]="{ projectReport: proj }">
+            แก้ไข </a></ng-template>
+        <ng-template #otherButton><a> แก้ไข </a></ng-template>
+    </ng-template>
+
+    <button [routerLink]="[ProjPath.EditReportResults]"
+            [state]="{ projectReport: proj ,rowState:RowState.Unchanged}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ดู
+    </button>
+<!--    <button (click)="deleteProjectReport(proj)" *ngIf="proj?.status !== 'ผ่านการอนุมัติ'"-->
+<!--            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ลบ-->
+<!--    </button>-->
+</ng-template>
+<ng-template #OperationApproved let-proj="proj">
+    <!-- แสดงเฉพาะเมื่อ proj.status เป็น 'Approved' -->
+    <ng-container *ngIf="proj.status === ProjectStatus.Approved;">
+        <button (click)="generatePDF(proj,'project')"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-16 rounded-full">
+            พิมพ์
+        </button>
+    </ng-container>
+
+    <!-- แสดงเมื่อ proj.status ไม่เป็น 'Approved' -->
+    <button [routerLink]="[RoutePath.EditProject]"
+            [state]="{ proj: proj ,rowState:RowState.Unchanged}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ดู
+    </button>
+</ng-template>
+
+<ng-template #OperationApprovedReport let-proj="proj">
+    <ng-container *ngIf="proj.status === ProjectStatus.Approved;">
+        <button (click)="generatePDF(proj,'projectReport')"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"> พิมพ์
+        </button>
+    </ng-container>
+    <button [routerLink]="[ProjPath.EditReportResults]"
+            [state]="{ projectReport: proj ,rowState:RowState.Unchanged}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> ดู
+    </button>
+</ng-template>
+
+<ng-template #officerProjectOperation let-proj="proj">
+    <div class="flex justify-center">
+        <a [routerLink]="'/project/edit-project'" [state]="{ proj: proj ,rowState:RowState.Unchanged}"
+           class="text-gray-400 hover:text-gray-100 mr-2" title="ตรวจสอบโครงการ">
+            <i>
+                <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
+                </svg>
+            </i>
+        </a>
+        <ng-container *ngIf="proj.status === increasedStatus(role)">
+            <a [routerLink]="'/project/approval'" [state]="{proj}" class="text-gray-400 hover:text-gray-100 mx-2"
+               title="อนุมัติโครงการ">
+                <i>
+                    <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M547.076-84.001v-114.692L766.23-416.846q7.295-8.194 17.207-11.866 9.912-3.672 19.825-3.672 10.813 0 21.065 3.538 10.252 3.539 18.594 11.615l37 38.385q8.077 8.461 11.808 17.903 3.73 9.443 3.73 19.885 0 10.442-4.672 20.598-4.672 10.156-11.391 18.305L661.767-84.002H547.076Zm293.692-257.307-37-37.385 37 37.385Zm-240 202.615h38l129.847-130.462-18-19.395-19-18.374-130.847 130.231v38ZM225.694-84.001q-28.254 0-49.473-21.22-21.22-21.219-21.22-49.473v-650.612q0-28.254 21.22-49.473 21.219-21.22 49.473-21.22h329.307l229.998 230.998v91.077h-58.384v-55.077H518.001v-208.614H225.694q-4.616 0-8.463 3.846-3.846 3.847-3.846 8.463v650.612q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846h248.305v58.383H225.694ZM499.692-480Zm250.923 191.45-19-18.374 37 37.769-18-19.395Z"/>
+                    </svg>
+                </i>
+            </a>
+        </ng-container>
+    </div>
+</ng-template>
+<ng-template #officerProjectReportOperation let-projReport='proj'>
+    <div class="flex justify-center">
+        <a [routerLink]="'/project/edit-report-results'"
+           [state]="{ projectReport: projReport ,rowState:RowState.Unchanged}"
+           class="text-gray-400 hover:text-gray-100 mr-2" title="ตรวจสอบโครงการ">
+            <i>
+                <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
+                </svg>
+            </i>
+        </a>
+        <a *ngIf="projReport.status === increasedStatus(role)" [routerLink]="RoutePath.ApprovalReport"
+           [state]="{proj:projReport}" class="text-gray-400 hover:text-gray-100 mx-2" title="อนุมัติโครงการ">
+            <i>
+                <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M547.076-84.001v-114.692L766.23-416.846q7.295-8.194 17.207-11.866 9.912-3.672 19.825-3.672 10.813 0 21.065 3.538 10.252 3.539 18.594 11.615l37 38.385q8.077 8.461 11.808 17.903 3.73 9.443 3.73 19.885 0 10.442-4.672 20.598-4.672 10.156-11.391 18.305L661.767-84.002H547.076Zm293.692-257.307-37-37.385 37 37.385Zm-240 202.615h38l129.847-130.462-18-19.395-19-18.374-130.847 130.231v38ZM225.694-84.001q-28.254 0-49.473-21.22-21.22-21.219-21.22-49.473v-650.612q0-28.254 21.22-49.473 21.219-21.22 49.473-21.22h329.307l229.998 230.998v91.077h-58.384v-55.077H518.001v-208.614H225.694q-4.616 0-8.463 3.846-3.846 3.847-3.846 8.463v650.612q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846h248.305v58.383H225.694ZM499.692-480Zm250.923 191.45-19-18.374 37 37.769-18-19.395Z"/>
+                </svg>
+            </i>
+        </a>
+    </div>
+</ng-template>
+
+<ng-template #readOnly let-proj="proj">
+    <div class="flex justify-center">
+        <ng-container *ngIf="proj.status === increasedStatus(role)">
+            <a [routerLink]="'/project/approval'" [state]="{proj}" class="text-gray-400 hover:text-gray-100 mx-2"
+               title="อนุมัติโครงการ">
+                <i>
+                    <svg height="32" viewBox="0 -960 960 960" width="32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M547.076-84.001v-114.692L766.23-416.846q7.295-8.194 17.207-11.866 9.912-3.672 19.825-3.672 10.813 0 21.065 3.538 10.252 3.539 18.594 11.615l37 38.385q8.077 8.461 11.808 17.903 3.73 9.443 3.73 19.885 0 10.442-4.672 20.598-4.672 10.156-11.391 18.305L661.767-84.002H547.076Zm293.692-257.307-37-37.385 37 37.385Zm-240 202.615h38l129.847-130.462-18-19.395-19-18.374-130.847 130.231v38ZM225.694-84.001q-28.254 0-49.473-21.22-21.22-21.219-21.22-49.473v-650.612q0-28.254 21.22-49.473 21.219-21.22 49.473-21.22h329.307l229.998 230.998v91.077h-58.384v-55.077H518.001v-208.614H225.694q-4.616 0-8.463 3.846-3.846 3.847-3.846 8.463v650.612q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846h248.305v58.383H225.694ZM499.692-480Zm250.923 191.45-19-18.374 37 37.769-18-19.395Z"/>
+                    </svg>
+                </i>
+            </a>
+        </ng-container>
+    </div>
+</ng-template>

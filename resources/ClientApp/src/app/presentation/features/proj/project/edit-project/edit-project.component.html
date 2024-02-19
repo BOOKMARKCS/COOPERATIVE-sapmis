@@ -1,0 +1,483 @@
+<div *ngIf="projectForm" class="w-full mt-10 ps-20 mb-44 ">
+  <div
+    class="relative bg-white rounded-lg p-6  shadow-md {{commentProject.commentStatus && rowState != RowState.Unchanged?'w-7/12': 'w-full m-auto'}}">
+    <h2 class="text-xl font-semibold mb-4">{{title}}</h2>
+    <form [formGroup]="projectForm" class=" space-y-4">
+      <!-- projectName -->
+      <div class="flex relative">
+        <app-input [inputFormControl]="projectForm.get('projectName')" [label]="'ขื่อโครงการ'" class="mb-4 w-full"></app-input>
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.projectName,label:'ชื่อโครงการ'}"></ng-container>
+      </div>
+
+      <!-- activityGroupName -->
+      <div class="flex relative">
+        <app-input [inputFormControl]="projectForm.get('activityGroupName')" [label]="'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'" class="mb-4 w-full"></app-input>
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.activityGroupName,label:'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'}"></ng-container>
+      </div>
+
+      <!-- responsibleStudents -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.responsibleStudent,label:'รายชื่อนิสิตผู้รับผิดชอบโครงการ'}"></ng-container>
+        <label class="block mb-2">รายชื่อนิสิตผู้รับผิดชอบโครงการ</label>
+        <div *ngFor="let i of getIndexArray(getFormArray('responsibleStudents').controls)" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <div class="w-full p-2 px-4 relative">
+            <label class="-ms-2">นิสิตที่รับผิดชอบคนที่ {{i + 1}}</label>
+            <div class="flex gap-2 relative">
+              <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('name')" [label]="'ชื่อ-นามสกุล'" class="w-full"></app-input>
+            </div>
+            <div class="flex gap-x-3">
+              <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('studentId')" [label]="'รหัสประจำตัวนิสิต'" class="w-full"></app-input>
+              <app-input [inputFormControl]="getFormArray('responsibleStudents').at(i).get('phoneNumber')" [label]="'หมายเลขโทรศัพท์ '" class="w-full"></app-input>
+            </div>
+          </div>
+          <button (click)="removeItem(getFormArray('responsibleStudents'),i)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2"> X </button>
+        </div>
+        <div (click)="addResponsibleStudents(getFormArray('responsibleStudents'))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+          <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+          <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มรายชื่อนิสิตผู้รับผิดชอบโครงการ</a>
+        </div>
+      </div>
+
+      <!-- advisorNames -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.advisorName,label:'รายชื่อที่ปรึกษาโครงการ'}"></ng-container>
+        <label class="block mb-2">รายชื่อที่ปรึกษาโครงการ</label>
+        <div *ngFor="let i of getIndexArray(getFormArray('advisorNames').controls)" class="flex w-full gap-4 mb-2 p-2 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <div class="w-full p-2 px-4">
+            <label class="-ms-2">รายชื่อที่ปรึกษาคนที่  {{i + 1}}</label>
+            <div class="flex gap-3">
+              <app-input [inputFormControl]="getFormArray('advisorNames').at(i).get('name')" [label]="'ชื่อ-นามสกุล'" class="w-full"></app-input>
+              <app-input [inputFormControl]="getFormArray('advisorNames').at(i).get('phoneNumber')" [label]="'หมายเลขโทรศัพท์ '" class="w-full"></app-input>
+            </div>
+          </div>
+          <button (click)="removeItem(getFormArray('advisorNames'),i)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2"> X </button>
+        </div>
+        <div (click)="addResponsibleAdvisor(getFormArray('advisorNames'))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+          <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+          <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มรายชื่อที่ปรึกษาโครงการ</a>
+        </div>
+      </div>
+
+      <!-- tsuTalent -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.tsuTalent,label:'ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน'}"></ng-container>
+        <label class="">ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน(กรณีขอเทียบกิจกรรมพัฒนานิสิตนอกชั้นเรียน โปรดระบุ)</label>
+        <div class="block bg-white mb-4 w-full">
+          <div class="border rounded p-2">
+            <div formGroupName="tsuTalent">
+              <div *ngFor="let tsuTalent of tsuTalents; index as i " [formArrayName]="camelCase(tsuTalent[0]['activityGroup'])" class="p-2  my-1 border rounded">
+                <label class="block  mb-2">{{tsuTalent[0]['activityGroup']}}:</label>
+                <div *ngFor="let item of tsuTalent; let j = index" class="flex items-center gap-4 mb-2">
+                  <input (change)="updateValueChange(getFormGroupArray('tsuTalent',camelCase(tsuTalent[0]['activityGroup'])),item)" [checked]="tsuChecked(item['tsuTalentId'],tsuTalent)" [disabled]="rowState == RowState.Unchanged" class="form-checkbox text-indigo-600" type="checkbox">
+                  <span  class="ml-2">{{item['tsuTalentDetails']}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- strategiesId -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.strategy,label:'ความสอดคล้องกับยุทธศาสตร์ของมหาวิทยาลัย'}"></ng-container>
+        <h2 class="mb-2">ความสอดคล้องกับยุทธศาสตร์ของมหาวิทยาลัย:</h2>
+        <div class="block bg-white mb-4 w-full">
+          <div class="p-2 border rounded">
+            <div *ngFor="let strategy of strategies; index as i">
+              <input class="form-radio text-indigo-600" formControlName="strategyId" name="strategyId" type="radio" value="{{strategy['strategyId']}}">
+              <span class="ml-2"> {{ strategy['strategicDetail'] }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- background -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.background,label:'หลักการและเหตุผล'}"></ng-container>
+        <div class="w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2" for="background">หลักการและเหตุผล:</label>
+          <textarea class="block w-full border border-gray-300 rounded p-2" formControlName="background" id="background" placeholder="Background" type="textarea"></textarea>
+        </div>
+      </div>
+
+      <!-- objective -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.objective,label:'วัตถุประสงค์ของโครงการ'}"></ng-container>
+        <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2">วัตถุประสงค์ของโครงการ </label>
+          <ng-container *ngFor="let  pIndex of getIndexArray(getFormArray('objectives').controls)">
+            <div class="w-full p-2 px-4 relative">
+              <div class=" gap-2 relative">
+                <app-input [inputFormControl]="getFormArray('objectives').controls.at(pIndex)" [placeholder]="'วัตถุประสงค์ของโครงการ'" class="w-full"></app-input>
+                <button (click)="removeItem(getFormArray('objectives'),pIndex)" *ngIf="rowState !== RowState.Unchanged" class="absolute w-12 text-white h-9 top-2 right-2 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+                  <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <div (click)="addArray(getFormArray('objectives'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+            <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มวัตถุประสงค์ของโครงการ</a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- activityFormats -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.activityFormat,label:'รูปแบบกิจกรรม'}"></ng-container>
+        <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2">รูปแบบกิจกรรม </label>
+          <ng-container *ngFor="let  pIndex of getIndexArray(getFormArray('activityFormats').controls)">
+            <div class="w-full p-2 px-4 relative">
+              <div class=" gap-2 relative">
+                <app-input [inputFormControl]="getFormArray('activityFormats').controls.at(pIndex)" [placeholder]="'รูปแบบกิจกรรม'" class="w-full"></app-input>
+                <button (click)="removeItem(getFormArray('activityFormats'),pIndex)" *ngIf="rowState !== RowState.Unchanged" class="absolute w-12 text-white h-9 top-2 right-2 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"> <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg> </button>
+              </div>
+            </div>
+          </ng-container>
+          <div (click)="addArray(getFormArray('activityFormats'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+            <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มรูปแบบกิจกรรม</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- attendants -->
+      <div class="card-content w-full my-12 bg-gray-50  relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.attendant,label:'ผู้เข้าร่วมโครงการ'}"></ng-container>
+        <div class="flex justify-between">
+          <label class="block mb-2">จำนวนผู้เข้าร่วมโครงการ</label>
+          <button (click)="addFormControl(getFormTwoArray('attendants','otherCounts',0)); addArray(getFormTwoArray('attendants','otherDetails',0))" class="bg-white shadow-xl hover:shadow hover:border hover:border-indigo-400 hover:bg-indigo-400 hover:text-white text-black font-bold py-2 px-4 rounded-md text-xs"> เพิ่มผู้เข้าร่วมอื่นๆ </button>
+        </div>
+        <div *ngFor="let  i of getIndexArray(getFormArray('attendants').controls)" class=" w-full gap-4 mb-2 p-2  relative">
+          <div>
+            <div class="w-full">
+              <div class="grid grid-cols-4 gap-4">
+                <!-- Advisor Count -->
+                <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                    <div class="flex w-full justify-between p-2">
+                      <label class="block mb-2">ที่ปรึกษา</label>
+                      <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['advisorCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['advisorCount', 'Female'])?.value)}} </p> </div>
+                    </div>
+                  <div class="bg-white p-2 m-2  ">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['advisorCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                  </div>
+                  <div class="bg-white p-2 m-2  -mt-2">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['advisorCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                  </div>
+                </div>
+                <!-- studentCount -->
+                <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                    <div class="flex w-full justify-between p-2">
+                      <label class="block mb-2">นิสิต</label>
+                      <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['studentCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['studentCount', 'Female'])?.value)}} </p> </div>
+                    </div>
+                  <div class="bg-white p-2 m-2  ">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['studentCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                  </div>
+                  <div class="bg-white p-2 m-2  -mt-2">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['studentCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                  </div>
+                </div>
+                <!-- Teacher Count -->
+                <div class="w-full p-2 rounded-lg border shadow-xl bg-white">
+                  <div class="flex w-full justify-between p-2">
+                    <label class="block mb-2">อาจารย์</label>
+                    <div> <p class="bg-white shadow text-black py-2 px-4 rounded-md "> รวม {{toNumber(getFormArray('attendants').at(i).get(['teacherCount', 'Male'])?.value) + toNumber(getFormArray('attendants').at(i).get(['teacherCount', 'Female'])?.value)}} </p> </div>
+                  </div>
+                  <div class="bg-white p-2 m-2  ">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['teacherCount','Male'])" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                  </div>
+                  <div class="bg-white p-2 m-2  -mt-2">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormArray('attendants').at(i).get(['teacherCount','Female'])" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                  </div>
+                </div>
+                <!-- Other -->
+                <div (mouseleave)="attendantOtherHover[odIndex] = false" (mouseout)="attendantOtherHover[odIndex] = true" *ngFor="let odIndex of getIndexArray(getFormTwoArray('attendants','otherCounts',i).controls)" class="w-full relative {{odIndex != 0?'hover:p-1 duration-1000':''}} rounded-lg border shadow-xl bg-white">
+                  <button (click)="deleteForm(getFormTwoArray('attendants','otherCounts',0),odIndex); addArray(getFormTwoArray('attendants','otherDetails',0))" *ngIf="odIndex != 0" class=" absolute {{!attendantOtherHover[odIndex]? 'hidden': 'block'}} duration-300 top-1 right-1  font-bold flex items-center justify-center  rounded-full">
+                    <svg fill="red" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/> </svg>
+                  </button>
+                  <div class="flex w-full justify-between  items-center gap-x-2 p-4">
+                    <div class="w-full self-center">
+                      <app-input [inputFormControl]="getFormTwoArray('attendants','otherDetails',i).at(odIndex)" [placeholder]="'อื่นๆ'"></app-input>
+                    </div>
+                    <div class="w-full self-center">
+                      <p class="bg-white shadow text-black py-2 px-4 gap-x-2  flex rounded-md ">
+                        <span>รวม </span>
+                      <span>{{toNumber(getFormTwoArray('attendants', 'otherCounts').at(odIndex).get('Male')?.value) + toNumber(getFormTwoArray('attendants', 'otherCounts', i).at(odIndex).get('Female')?.value)}} </span></p>
+                    </div>
+                  </div>
+                  <div class="bg-white p-2 m-2 {{odIndex == 0? '-mt-2':''}} ">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('attendants','otherCounts',i).at(odIndex).get('Male')" [label]="'ชาย'" [type]="'number'"></app-input-in-label>
+                  </div>
+                  <div class="bg-white p-2 m-2  -mt-2">
+                    <app-input-in-label [class]="'text-right'" [inputFormControl]="getFormTwoArray('attendants','otherCounts',i).at(odIndex).get('Female')" [label]="'หญิง'" [type]="'number'"></app-input-in-label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full p-2 px-4">
+            <div class="relative border p-4 rounded-lg">
+              <div class="flex gap-x-4 justify-end">
+                <span>รวม</span>
+                <span>{{totalAttendants()}}</span><span>คน</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- location -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.location,label:'สถานที่ปฏิบัติงาน'}"></ng-container>
+        <div class="w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2" for="location">สถานที่ปฏิบัติงาน:</label>
+          <input class="block w-full border border-gray-300 rounded p-2" formControlName="location" id="location" placeholder="Location" type="text">
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div class="card-content w-full my-12 bg-gray-50 relative  border p-4 rounded-lg shadow shadow-teal-100 z-40">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.duration,label:'ผลที่คาดว่าจะได้รับ'}" class="z-30" ></ng-container>
+        <div class="w-full p-4  rounded-lg border shadow shadow-teal-100">
+          <label class="block mb-2">ระยะเวลาการปฏิบัติงาน</label>
+          <div class="flex gap-6 pt-4 px-4 w-full mx-auto z-30">
+            <app-datepicker [disable]="rowState != RowState.Unchanged" [inputFormControl]="projectForm.get('startTime')"  [label]="'วันเริ่มต้นโครงการ'" [lang]="Lang.TH" class="w-full"></app-datepicker>
+            <p class="self-center"> - </p>
+            <app-datepicker [disable]="rowState != RowState.Unchanged" [inputFormControl]="projectForm.get('endTime')" [label]="'วันสิ้นสุดโครงการ'" [lang]="Lang.TH" class="w-full"></app-datepicker>
+          </div>
+        </div>
+      </div>
+
+      <!-- operation -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.operation,label:'วิธีการดำเนินงาน'}"></ng-container>
+        <div class=" w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2">วิธีการดำเนินงาน </label>
+          <ng-container *ngFor="let  pIndex of getIndexArray(getFormArray('operation').controls)">
+            <div class="w-full p-2 px-4 relative">
+              <div class=" gap-2 relative">
+                <app-input [inputFormControl]="getFormArray('operation').controls.at(pIndex)" [placeholder]="'วิธีการดำเนินงาน'" class="w-full"></app-input>
+                <button (click)="removeItem(getFormArray('operation'),pIndex)" *ngIf="rowState !== RowState.Unchanged" class="absolute w-12 text-white h-9 top-2 right-2 bg-gradient-to-br hover:text-lg from-red-300 to-red-600 items-center rounded-lg shadow-2xl cursor-pointer  overflow-hidden transform  hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+                  <svg class="mx-auto" fill="white" height="24" viewBox="0 -960 960 960" width="24" xmlns="http://www.w3.org/2000/svg"> <path d="M200-440v-80h560v80H200Z"/> </svg>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <div (click)="addArray(getFormArray('operation'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+            <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มวิธีการดำเนินงาน</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Budgets -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.budget,label:'งบประมาณค่าใช้จ่าย'}"></ng-container>
+        <label class="block mb-2">งบประมาณค่าใช้จ่าย</label>
+        <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 relative ">
+          <label class="-ms-2">หมวดค่าใช้สอย</label>
+          <ng-container *ngFor="let bIndex of getIndexArray(getFormTwoArray('budgets','costDetails',0).controls)">
+            <div class="w-full p-2 px-4">
+              <div class="relative border p-4 rounded-lg">
+                <div class="flex gap-2">
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','costDetails',0).controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','costAmount',0).controls.at(bIndex)" [label]="'จำนวนเงิน'" [type]="'number'" class="w-full"></app-input>
+                </div>
+                <button (click)="removeItem(getFormTwoArray('budgets','costDetails',0),bIndex); removeItem(getFormTwoArray('budgets','costAmount',0),bIndex)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2"> X</button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="w-full p-2 px-4">
+            <div class="relative border p-4 rounded-lg">
+              <div class="flex gap-x-4 justify-end">
+                <span>รวม</span>
+                <span>{{calculateTotalCost(getFormTwoArray('budgets', 'costAmount', 0).value).toLocaleString('th-TH')}}</span><span>บาท</span>
+              </div>
+            </div>
+          </div>
+          <div (click)="addArray(getFormTwoArray('budgets','costDetails',0)); addArray(getFormTwoArray('budgets','costAmount',0))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+            <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลค่าใช้สอย</a>
+          </div>
+        </div>
+        <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+          <label class="-ms-2">หมวดค่าตอบแทน</label>
+          <ng-container *ngFor="let bIndex of getIndexArray(getFormTwoArray('budgets','remunerationDetails').controls)">
+            <div class="w-full p-2 px-4">
+              <div class="relative border p-4 rounded-lg">
+                <div class="flex gap-2">
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','remunerationDetails',0).controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','remunerationAmount',0).controls.at(bIndex)" [label]="'จำนวนเงิน'" [type]="'number'" class="w-full"></app-input>
+                </div>
+                <button (click)="removeItem(getFormTwoArray('budgets','remunerationDetails',0),bIndex); removeItem(getFormTwoArray('budgets','remunerationAmount',0),bIndex)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2">X</button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="w-full p-2 px-4">
+            <div class="relative border p-4 rounded-lg">
+              <div class="flex gap-x-4 justify-end">
+                <span>รวม</span>
+                <span>{{calculateTotalCost(getFormTwoArray('budgets', 'remunerationAmount', 0).value).toLocaleString('th-TH')}}</span><span>บาท</span>
+              </div>
+            </div>
+          </div>
+          <div (click)="addArray(getFormTwoArray('budgets','remunerationDetails',0)); addArray(getFormTwoArray('budgets','remunerationAmount',0))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+            <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลค่าตอบแทน</a>
+          </div>
+        </div>
+        <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+          <label class="-ms-2">หมวดค่าวัสดุ</label>
+          <ng-container *ngFor="let bIndex of getIndexArray(getFormTwoArray('budgets','equipmentCostDetails').controls)">
+            <div class="w-full p-2 px-4">
+              <div class="relative border p-4 rounded-lg">
+                <div class="flex gap-2">
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','equipmentCostDetails',0).controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','equipmentCostAmount',0).controls.at(bIndex)" [label]="'จำนวนเงิน'" [type]="'number'" class="w-full"></app-input>
+                </div>
+                <button (click)="removeItem(getFormTwoArray('budgets','equipmentCostDetails',0),bIndex); removeItem(getFormTwoArray('budgets','equipmentCostAmount',0),bIndex)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2">X </button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="w-full p-2 px-4">
+            <div class="relative border p-4 rounded-lg">
+              <div class="flex gap-x-4 justify-end">
+                <span>รวม</span>
+                <span>{{calculateTotalCost(getFormTwoArray('budgets', 'equipmentCostAmount', 0).value).toLocaleString('th-TH')}}</span><span>บาท</span>
+              </div>
+            </div>
+          </div>
+          <div (click)="addArray(getFormTwoArray('budgets','equipmentCostDetails',0)); addArray(getFormTwoArray('budgets','equipmentCostAmount',0))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+            <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลค่าวัสดุ</a>
+          </div>
+        </div>
+        <div class=" w-full gap-4 mb-2 p-8 border rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+          <label class="-ms-2">ค่าอื่น ๆ</label>
+          <ng-container *ngFor="let bIndex of getIndexArray(getFormTwoArray('budgets','otherDetails').controls)">
+            <div class="w-full p-2 px-4">
+              <div class="relative border p-4 rounded-lg">
+                <div class="flex gap-2">
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','otherDetails',0).controls.at(bIndex)" [label]="'รายการ'" [type]="'text'" class="w-full"></app-input>
+                  <app-input [inputFormControl]="getFormTwoArray('budgets','otherAmount',0).controls.at(bIndex)" [label]="'จำนวนเงิน'" [type]="'number'" class="w-full"></app-input>
+                </div>
+                <button (click)="removeItem(getFormTwoArray('budgets','otherDetails',0),bIndex); removeItem(getFormTwoArray('budgets','otherAmount',0),bIndex)" *ngIf="rowState !== RowState.Unchanged" class=" absolute right-2 top-2 text-white bg-red-500 rounded-full px-2">X</button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="w-full p-2 px-4">
+            <div class="relative border p-4 rounded-lg">
+              <div class="flex gap-x-4 justify-end">
+                <span>รวม</span>
+                <span>{{calculateTotalCost(getFormTwoArray('budgets', 'otherAmount', 0).value).toLocaleString('th-TH')}}</span><span>บาท</span>
+              </div>
+            </div>
+          </div>
+          <div (click)="addArray(getFormTwoArray('budgets','otherDetails',0)); addArray(getFormTwoArray('budgets','otherAmount',0))" *ngIf="rowState !== RowState.Unchanged" class="mt-3 p-12 mx-auto h-12 flex justify-center items-center relative">
+            <div class="i h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลค่าอื่นๆ</a>
+          </div>
+        </div>
+        <div class=" w-full flex items-center gap-4 mb-2 p-4  rounded-lg bg-white shadow-xl  shadow-teal-100 ">
+          <label class="w-2/6">งบประมาณทั้งหมด</label>
+          <div class="w-full px-4">
+            <div class="relative  flex justify-end gap-x-3 w-full  p-4 rounded-lg">
+                <span>{{(calculateTotalCost(getFormTwoArray('budgets', 'costAmount', 0).value) + calculateTotalCost(getFormTwoArray('budgets', 'equipmentCostAmount', 0).value) + calculateTotalCost(getFormTwoArray('budgets', 'remunerationAmount').value) + calculateTotalCost(getFormTwoArray('budgets', 'otherAmount', 0).value)).toLocaleString('th-TH')}}</span><span>บาท</span>
+            </div>
+          </div>
+       </div>
+      </div>
+
+      <!-- expectedOutcomes -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.expectedOutcome,label:'ผลที่คาดว่าจะได้รับ'}"></ng-container>
+        <div class="w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2">ผลที่คาดว่าจะได้รับ:</label>
+          <div *ngFor="let i of getIndexArray(getFormArray('expectedOutcomes').controls)" class="flex items-center gap-4 mb-2">
+            <app-input [inputFormControl]="getFormArray('expectedOutcomes').controls.at(i)" [placeholder]="'ผลที่คาดว่าจะได้รับ'" class="w-full"></app-input>
+            <button (click)="removeItem(getFormArray('expectedOutcomes'),i)" *ngIf="rowState !== RowState.Unchanged" class="px-3 py-2 bg-red-500 text-white rounded">ลบ </button>
+          </div>
+          <div (click)="addArray(getFormArray('expectedOutcomes'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+            <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มผลที่คาดว่าจะได้รับ</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- kpi -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.kpi,label:'การบรรลุเป้าหมายโครงการ'}"></ng-container>
+        <h2 class="text-xl font-semibold mb-2">KPI (การบรรลุเป้าหมายโครงการ)</h2>
+        <div class="p-2 px-6 border rounded bg-white" formGroupName="kpi">
+          <div formArrayName="quantity">
+            <label class="block mb-2">ด้านปริมาณ :</label>
+            <div *ngFor="let i of getIndexArray(getFormGroupArray('kpi','quantity').controls)" class="flex items-center gap-4 mb-2">
+              <app-input [inputFormControl]="getFormGroupArray('kpi','quantity').controls.at(i)" [placeholder]="'kpi ด้านปริมาณ'" class="w-full"></app-input>
+              <button (click)="removeItem(getFormGroupArray('kpi','quantity'), i)" *ngIf="rowState !== RowState.Unchanged" class="px-3 py-2 bg-red-500 text-white rounded"> ลบ </button>
+            </div>
+            <div (click)="addArray(getFormGroupArray('kpi','quantity'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+              <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+              <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลด้านปริมาณ</a>
+            </div>
+          </div>
+          <div formArrayName="quality">
+            <label class="block mb-2">ด้านคุณภาพ</label>
+            <div *ngFor="let i of getIndexArray(getFormGroupArray('kpi','quality').controls)" class="flex items-center gap-4 mb-2">
+              <app-input [inputFormControl]="getFormGroupArray('kpi','quality').controls.at(i)" [placeholder]="'kpi ด้านคุณภาพ'" class="w-full"></app-input>
+              <button (click)="removeItem(getFormGroupArray('kpi','quality'), i)" *ngIf="rowState !== RowState.Unchanged" class="px-3 py-2 bg-red-500 text-white rounded"> ลบ </button>
+            </div>
+            <div (click)="addArray(getFormGroupArray('kpi','quality'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+              <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+              <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มข้อมูลด้านคุณภาพ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- evaluate -->
+      <div class="card-content w-full my-12 bg-gray-50 relative border p-4 rounded-lg shadow shadow-teal-100">
+        <ng-container *ngTemplateOutlet="commentBox; context: {comment:commentProject?.evaluate,label:'วิธีการติดตามประเมินผล'}"></ng-container>
+        <div class="w-full gap-4 mb-2 p-4 border rounded-lg bg-white shadow-xl shadow-teal-100  relative">
+          <label class="block mb-2">วิธีการติดตามประเมินผล:</label>
+          <div *ngFor="let i of getIndexArray(getFormArray('evaluate').controls)" class="flex items-center gap-4 mb-2">
+            <app-input [inputFormControl]="getFormArray('evaluate').controls.at(i)" [placeholder]="'วิธีการติดตามประเมินผล'" class="w-full"></app-input>
+            <button (click)="removeItem(getFormArray('evaluate'),i)" *ngIf="rowState !== RowState.Unchanged" class="px-3 py-2 bg-red-500 text-white rounded"> ลบ </button>
+          </div>
+          <div (click)="addArray(getFormArray('evaluate'))" *ngIf="rowState !== RowState.Unchanged" class=" p-10 mx-auto h-10 flex justify-center items-center relative">
+            <div class="h-16 w-10/12 bg-gradient-to-br from-indigo-300 to-indigo-500 items-center rounded-full shadow-lg cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
+            <a class="text-center text-white font-semibold z-10 pointer-events-none">เพิ่มวิธีการติดตามประเมินผล</a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="rowState != 0" class="mb-4 flex space-x-2 justify-end">
+        <button (click)="window.location.href = ''" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"> กลับ </button>
+        <button (click)="save()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"> บันทึกโครงการ </button>
+        <button (click)="onSubmit()" *ngIf="this.projectForm.get('rowState')?.value !== RowState.Unchanged" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"> ยื่นเสนอโครงการ </button>
+      </div>
+      <div *ngIf="rowState == 0" class="mb-4 flex space-x-2 justify-end">
+        <button><a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href=""> กลับ </a>
+        </button>
+      </div>
+    </form>
+    <div *ngIf="commentProject.commentStatus && rowState != RowState.Unchanged" class="absolute w-2/3 h-full top-0 -right-2/3 p-5 ">
+      <div class="bg-white absolute w-10/12 ms-7 -mt-5 rounded-lg shadow z-20 h-full ">
+        <label *ngIf="commentProject?.user"
+               class="flex justify-end p-4 z-50 text-gray-700">ส่งกลับจาก {{commentProject.user.firstName}}  {{commentProject.user.lastName}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #commentBox let-comment="comment" let-label="label">
+  <div class=" absolute  -right-2/3 w-3/6 z-30">
+    <div *ngIf="comment" class="bg-white w-full h-auto -ms-10 p-4 rounded-lg shadow ">
+      <label class="text-lg"><b>{{label}}</b></label>
+      <hr class="my-2">
+      <p class="ms-5">{{comment}}</p>
+    </div>
+  </div>
+</ng-template>
