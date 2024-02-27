@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organizations;
-use App\Models\Positions;
-use App\Models\Roles;
+use App\Models\Organization;
+use App\Models\Position;
+use App\Models\Role;
 use App\Models\User;
-use App\Models\UsersRoles;
+use App\Models\UsersRole;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -45,16 +46,16 @@ class UsersController extends Controller
         ]);
 
         $user = User::create([
-            'name_surname' => $request->first_name . ' ' . $request->last_name,
+            'name' => $request->first_name . ' ' . $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
             'organization_id' => $request->organization_id,
             'position_id' => $request->position_id,
-            'academic_year_id' => $request->academic_year_id,
+            'academic_year' => $request->academic_year_id,
         ]);
 
-        UsersRoles::create([
+        UsersRole::create([
             'user_id' => $user->id,
             'role_id' => $request->role_id
         ]);
@@ -66,9 +67,16 @@ class UsersController extends Controller
     public function master(): array
     {
         return [
-            'positions' => Positions::pluck('name', 'id'),
-            'organizations' => Organizations::pluck('name', 'id'),
-            'roles' => Roles::pluck('name', 'id')
+            'positions' => Position::join('organizations', 'positions.organization_id', '=', 'organizations.id')
+                ->select('organizations.name as group', DB::raw('GROUP_CONCAT(positions.name) AS names'))
+                ->groupBy('organizations.name')
+                ->pluck('names', 'group')
+                ->map(fn ($names) => explode(',', $names)),
+            'organizations' => Organization::pluck('name', 'id'),
+            'roles' => Role::pluck('name', 'id')
         ];
     }
+
+
+
 }

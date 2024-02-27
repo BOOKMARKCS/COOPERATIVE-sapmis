@@ -13,6 +13,6 @@ class AcademicYearSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('academic_years')->insert(['id' => '66', 'start_date' => '2566-06-26', 'end_date' => '2567-03-23', 'created_at' => now() , 'updated_at' => now()]);
+        DB::table('academic_years')->insert(['year' => '66', 'start_date' => '2566-06-26', 'end_date' => '2567-03-23', 'created_at' => now() , 'updated_at' => now()]);
     }
 }

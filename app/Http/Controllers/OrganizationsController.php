@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organizations;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 
 class OrganizationsController extends Controller
 {
     function index(){
-        return Organizations::all();
+        return Organization::all();
     }
 }

@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavigationEnd, Router, RouterOutlet, Event } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavigationEnd, Router, Event } from '@angular/router';
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  standalone: true,
-  imports: [SidebarComponent, NavbarComponent, RouterOutlet, FooterComponent],
 })
 export class LayoutComponent implements OnInit {
   private mainContent: HTMLElement | null = null;

@@ -1,8 +1,9 @@
-import { Injectable, OnDestroy, signal } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Menu } from 'src/app/core/constants/menu';
-import { MenuItem, SubMenuItem } from 'src/app/core/models/menu.model';
+import {inject, Injectable, OnDestroy, signal} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {map, Subscription} from 'rxjs';
+import {MenuItem, SubMenuItem} from "../../../core/models/menu.model";
+import {Menu} from "../../../core/constants/menu";
+import {AuthService} from "../../../core/services/auth.service";
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +13,13 @@ export class MenuService implements OnDestroy {
   private _showMobileMenu = signal(false);
   private _pagesMenu = signal<MenuItem[]>([]);
   private _subscription = new Subscription();
+  private _label: string | undefined = ''
+  private _route: string | null | undefined = ''
 
-  constructor(private router: Router) {
+  constructor(private router: Router, authService: AuthService) {
     /** Set dynamic menu */
-    this._pagesMenu.set(Menu.pages);
+    authService.user$.subscribe(u => this._pagesMenu.set((Menu as any)[u.user.role.name]))
+    // this._pagesMenu.set(Menu['pages']);
 
     let sub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -26,6 +30,7 @@ export class MenuService implements OnDestroy {
             const active = this.isActive(subMenu.route);
             subMenu.expanded = active;
             subMenu.active = active;
+            active ? (this._label = subMenu.label) && (this._route = subMenu.route) : undefined
             if (active) activeGroup = true;
             if (subMenu.children) {
               this.expand(subMenu.children);
@@ -41,9 +46,11 @@ export class MenuService implements OnDestroy {
   get showSideBar() {
     return this._showSidebar();
   }
+
   get showMobileMenu() {
     return this._showMobileMenu();
   }
+
   get pagesMenu() {
     return this._pagesMenu();
   }
@@ -51,6 +58,7 @@ export class MenuService implements OnDestroy {
   set showSideBar(value: boolean) {
     this._showSidebar.set(value);
   }
+
   set showMobileMenu(value: boolean) {
     this._showMobileMenu.set(value);
   }
@@ -82,6 +90,14 @@ export class MenuService implements OnDestroy {
       fragment: 'ignored',
       matrixParams: 'ignored',
     });
+  }
+
+  get label() {
+    return this._label
+  }
+
+  get route() {
+    return this._route
   }
 
   ngOnDestroy(): void {

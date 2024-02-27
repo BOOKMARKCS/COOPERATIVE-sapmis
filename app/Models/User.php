@@ -2,16 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -19,7 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -81,30 +76,26 @@ class User extends Authenticatable implements JWTSubject
 
     public function getUser()
     {
-        return User::with(['position:id,name', 'organization:id,name', 'role:name']) ->where('id', auth()->id()) ->first();
+        return User::with(['position:id,name', 'organization:id,name', 'role:name'])->where('id', auth()->id()) ->first();
     }
 
 
     public function hasRole(...$roles)
     {
-        foreach ($roles as $role) {
-            if ($this->roles->contains('name', $role)) {
-                return true;
-            }
-        }
+        foreach ($roles as $role) if ($this->roles->contains('name', $role)) return true;
         return false;
     }
     public function position(): BelongsTo
     {
-        return $this->belongsTo(Positions::class);
+        return $this->belongsTo(Position::class);
     }
     public function organization() : BelongsTo
     {
-        return $this->belongsTo(Organizations::class);
+        return $this->belongsTo(Organization::class);
     }
 
     public function role() : HasOneThrough {
-        return $this->hasOneThrough(Roles::class, UsersRoles::class, 'user_id', 'id', 'id', 'role_id');
+        return $this->hasOneThrough(Role::class, UsersRole::class, 'user_id', 'id', 'id', 'role_id');
     }
 
 }

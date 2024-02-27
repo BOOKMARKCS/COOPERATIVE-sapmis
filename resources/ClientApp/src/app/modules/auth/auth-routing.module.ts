@@ -6,6 +6,7 @@ import { NewPasswordComponent } from './pages/new-password/new-password.componen
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { TwoStepsComponent } from './pages/two-steps/two-steps.component';
+import {NotFoundComponent} from "../../shared/components/pages/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,13 @@ const routes: Routes = [
       { path: '**', redirectTo: 'sign-in', pathMatch: 'full' },
     ],
   },
+  {
+    path: 'error',
+    children: [
+      {path: '404', component: NotFoundComponent}
+    ]
+  },
+  {path: '**', redirectTo: 'error/404'},
 ];
 
 @NgModule({

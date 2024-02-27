@@ -1,0 +1,54 @@
+<div class="bg-white  ">
+  <div class="flex justify-between p-4">
+    <span class="font-semibold text-base text-blueGray-700">รายชื่อผู้ใช้</span>
+    <a routerLink="add_user"
+       class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-5 py-4 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+      เพิ่มผู้ใช้ใหม่
+    </a>
+  </div>
+
+  <div class="block w-full overflow-x-auto">
+    <table class="items-center bg-transparent w-full border-collapse ">
+      <thead>
+      <tr class="bg-sky-50">
+        <th
+          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle   py-3 text-xs uppercase border-l-0  whitespace-nowrap font-semibold text-left">
+          ชื่อ
+        </th>
+        <th
+          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle  py-3 text-xs uppercase  whitespace-nowrap font-semibold text-left">
+          อีเมล
+        </th>
+        <th
+          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle  text-xs uppercase  whitespace-nowrap font-semibold text-left">
+          องค์กร
+        </th>
+        <th
+          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle  py-3 text-xs uppercase  whitespace-nowrap font-semibold text-left">
+          ตำแหน่ง
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let user of users">
+        <th
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+          {{ user.name_surname }}
+        </th>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+          {{ user.email }}
+        </td>
+        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          {{ user.affiliation_name }}
+        </td>
+        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+          <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+          {{ user.position_name }}
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

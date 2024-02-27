@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { SubMenuItem } from 'src/app/core/models/menu.model';
-import { MenuService } from 'src/app/modules/layout/services/menu.service';
 import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mobile-submenu.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgFor, NgClass, NgTemplateOutlet, NgIf } from '@angular/common';
+import {MenuService} from "../../../../services/menu.service";
+import {SubMenuItem} from "../../../../../../core/models/menu.model";
+
+interface Menu {
+  subMenu: SubMenuItem;
+}
 
 @Component({
     selector: 'app-navbar-mobile-menu',
@@ -25,7 +29,7 @@ import { NgFor, NgClass, NgTemplateOutlet, NgIf } from '@angular/common';
 export class NavbarMobileMenuComponent implements OnInit {
   constructor(public menuService: MenuService) {}
 
-  public toggleMenu(subMenu: SubMenuItem) {
+  public toggleMenu({subMenu}: Menu) {
     this.menuService.toggleMenu(subMenu);
   }
 

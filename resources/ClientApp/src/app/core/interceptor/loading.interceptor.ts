@@ -3,7 +3,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Observable } from 'rxjs';
 
 import { finalize } from 'rxjs/operators';
-import { LoadingService } from "../base/components/loading/loading.service";
+import {LoadingService} from "../services/loading.service";
 
 /**
  * Block UI when requesting`.

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Positions;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class PositionsController extends Controller
 {
     function index()
     {
-        return Positions::all();
+        return Position::all();
     }
 }

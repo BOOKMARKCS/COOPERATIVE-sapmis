@@ -1,10 +1,32 @@
-<!--<app-sidebar></app-sidebar>-->
-<!--<div class="h-full w-full bg-lightPrimary dark:!bg-navy-900">-->
-<!--  <main class="mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]">-->
-<!--    <app-navbar></app-navbar>-->
-<!--    <router-outlet class="p-5"></router-outlet>-->
+<!--<app-loading></app-loading>-->
+<!--<app-sidebar [role]="role"></app-sidebar>-->
+<!--&lt;!&ndash;<div class="h-full w-full bg-lightPrimary dark:!bg-navy-900">&ndash;&gt;-->
+<!--  <main [ngClass]="{'mx-[12px] xl:ml-[313px]':accountService.user$ | async}">-->
+<!--    <app-navbar *ngIf="accountService.user$ | async"></app-navbar>-->
+<!--&lt;!&ndash;    <div class=" bg-amber-500 w-full h-full">&ndash;&gt;-->
+<!--      <router-outlet></router-outlet>-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
 <!--  </main>-->
-<!--</div>-->
-<router-outlet></router-outlet>
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
+<div class="flex h-screen w-full overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
 
+  <div class="flex grow flex-col content-start overflow-hidden bg-gray-100 dark:bg-night-800">
+    <!-- Header -->
+    <app-navbar></app-navbar>
+    <!-- main content -->
+    <div
+      id="main-content"
+      class="scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-gray-100 dark:scrollbar-thumb-night-700 dark:scrollbar-track-night-800">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- footer -->
+<!--    <app-footer></app-footer>-->
+
+    <!-- Bottom bar -->
+    <!-- <app-bottom-navbar></app-bottom-navbar> -->
+  </div>
+</div>

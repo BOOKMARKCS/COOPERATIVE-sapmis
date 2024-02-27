@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Roles;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PositionsSeeder::class,
             AcademicYearSeeder::class,
             RolesSeeder::class,
-            UsersSeeder::class
+            UsersSeeder::class,
+            FacultiesSeeder::class
         ]);
 
         // \App\Models\User::factory()->create([

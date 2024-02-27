@@ -9,11 +9,9 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ErrorHandlerInterceptor } from './error-handler.interceptor';
-import { ApiPrefixInterceptor } from './api-prefix.interceptor';
-import { LoadingInterceptor } from './loading.interceptor';
 import { Encoder } from './encoder';
-import { AuthInterceptor } from "./auth.interceptor";
+import {LoadingInterceptor} from "../interceptor/loading.interceptor";
+import {ErrorHandlerInterceptor} from "../interceptor/error-handler.interceptor";
 // import { AuthInterceptor } from './auth.interceptor';
 
 // HttpClient is declared in a re-exported module, so we have to extend the original module to make it work properly
@@ -93,10 +91,10 @@ export class HttpService extends HttpClient {
 
     if (!this.interceptors) {
       this.interceptors = [
-        this.injector.get(ApiPrefixInterceptor),
+        // this.injector.get(apiPrefixInterceptor),
         this.injector.get(LoadingInterceptor),
         this.injector.get(ErrorHandlerInterceptor),
-        this.injector.get(AuthInterceptor),
+        // this.injector.get(authInterceptor),
       ];
     }
   }
@@ -123,18 +121,14 @@ export class HttpService extends HttpClient {
     return this.removeInterceptor(ErrorHandlerInterceptor);
   }
 
-  override disableApiPrefix(): HttpClient {
-    return this.removeInterceptor(ApiPrefixInterceptor);
-  }
+  // override disableApiPrefix(): HttpClient {
+  //   return this.removeInterceptor(apiPrefixInterceptor);
+  // }
 
   override disableLoading(): HttpClient {
     return this.removeInterceptor(LoadingInterceptor);
   }
 
-
-  override disableAuthen(): HttpClient {
-    return this.removeInterceptor(AuthInterceptor);
-  }
 
   private removeInterceptor(interceptorType: Type<HttpInterceptor>): HttpService {
     return new HttpService(
