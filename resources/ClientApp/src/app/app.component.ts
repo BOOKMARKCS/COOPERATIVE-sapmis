@@ -1,50 +1,18 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { map, of, ReplaySubject, Subject, take, takeUntil } from "rxjs";
-import { AccountService } from "./presentation/features/account/account.service";
-import { LoadingService } from "./core/base/components/loading/loading.service";
-import {
-  ActivatedRoute, ActivatedRouteSnapshot,
-  GuardsCheckEnd,
-  NavigationCancel,
-  NavigationEnd,
-  RouteConfigLoadEnd,
-  RouteConfigLoadStart,
-  Router, RouterStateSnapshot
-} from "@angular/router";
-import { UpdateService } from "./core/update.service";
-import { jwtDecode } from "jwt-decode";
-import { HttpHeaders } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { ThemeService } from './core/services/theme.service';
+import { RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
+import { ResponsiveHelperComponent } from './shared/components/responsive-helper/responsive-helper.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [NgClass, RouterOutlet, ResponsiveHelperComponent],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'ClientApp';
-  protected ngUnsubscribe: Subject<void> = new Subject<void>();
-  user = new ReplaySubject<any>(1);
-  user$ = this.user.asObservable()
+export class AppComponent {
+  title = 'Angular Tailwind';
 
-  constructor(protected accountService: AccountService, private ls: LoadingService, public update: UpdateService, private router: Router) {
-    this.refreshUser()
-  }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next()
-  }
-
-  ngOnInit() {
-    this.update.init();
-    this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((evt) => {
-      if (evt instanceof RouteConfigLoadStart || evt instanceof GuardsCheckEnd) {
-        this.ls.show();
-      } else if (evt instanceof RouteConfigLoadEnd || evt instanceof NavigationEnd || evt instanceof NavigationCancel)
-        this.ls.hide();
-    });
-  }
-
-  refreshUser() {
-    this.accountService.refreshUser(this.accountService.getJWT()).subscribe({ error: _ => this.accountService.logout()});
-  }
+  constructor(public themeService: ThemeService) {}
 }
