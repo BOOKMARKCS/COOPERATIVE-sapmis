@@ -1,0 +1,63 @@
+<div class="relative ml-3" *ngIf="user">
+  <!-- Profile Button -->
+  <button (click)="toggleMenu()" class="relative flex rounded-full bg-gray-800 text-sm" type="button">
+    <span class="sr-only">Open user menu</span>
+    <img (clickOutside)="isMenuOpen = false" [ngSrc]="environment.apiUrl + user[user.type].profile" width="36" height="36" alt=""/>
+  </button>
+  <!-- Dropdown -->
+  <div
+    [ngClass]="
+      isMenuOpen
+        ? 'pointer-events-auto scale-100 animate-fade-in-up opacity-100 duration-200'
+        : 'pointer-events-none scale-95 opacity-0 duration-100 ease-in'
+    "
+    class="absolute right-0 z-20 mt-2 w-60 origin-top-right transform rounded-md bg-background py-4 shadow-custom ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
+    <div class="flex-row flex items-center px-4 pb-4">
+      <div class="w-10 shrink-0">
+        <img class="rounded-md" [ngSrc]="environment.apiUrl + user[user.type].profile" width="40" height="40" alt=""/>
+      </div>
+      <div class="overflow-hidden px-2 text-sm font-semibold text-gray-700 dark:text-night-50">
+        {{ user[user.type].name | titlecase }}
+        <p class="truncate text-ellipsis text-xs font-semibold text-gray-400 dark:text-night-300">{{ user.email }}</p>
+      </div>
+    </div>
+
+    <hr class="border-dashed border-border"/>
+
+    <ul class="my-2 mx-4 flex flex-col" *ngFor="let obj of profileMenu; index as i">
+      <li routerLink="{{ obj.link }}"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-xs font-semibold text-muted-foreground hover:bg-card hover:text-primary group">
+        <svg-icon src="{{ obj.icon }}"
+                  [svgClass]="'h-5 w-5 text-muted-foreground/50 group-hover:text-primary'"></svg-icon>
+        {{ obj.title }}
+      </li>
+    </ul>
+    <hr class="border-dashed border-border"/>
+    <div class="mx-4 my-2">
+      <span class="text-xs font-semibold text-foreground">Color</span>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <div *ngFor="let obj of themeColors; index as i"
+                (click)="toggleThemeColor(obj.name)"
+                [ngClass]="{ 'border-muted-foreground bg-card': obj.name == themeService.theme().color }"
+                class="focus-visible:ring-ring inline-flex h-8 cursor-pointer items-center justify-start whitespace-nowrap rounded-md border border-border bg-background px-3 text-xs font-medium text-muted-foreground shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 hover:bg-card hover:text-foreground">
+                <span
+                  [style.background-color]="obj.code"
+                  class="mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-rose-500"></span>
+                <p class="capitalize">{{ obj.name }}</p>
+              </div>
+            </div>
+    </div>
+    <div class="mx-4 my-2">
+      <span class="text-xs font-semibold text-foreground">Mode</span>
+            <div class="mt-2 grid grid-cols-2 gap-2" >
+              <div *ngFor="let obj of themeMode; index as i"
+                (click)="toggleThemeMode()"
+                [ngClass]="{ 'border-muted-foreground bg-card': obj == themeService.theme().mode }"
+                class="focus-visible:ring-ring inline-flex h-8 cursor-pointer items-center justify-start whitespace-nowrap rounded-md border border-border bg-background px-3 text-xs font-medium text-muted-foreground shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 hover:bg-card hover:text-foreground">
+                <svg-icon [src]=" obj == 'light' ? 'assets/icons/heroicons/outline/sun.svg' : 'assets/icons/heroicons/outline/moon.svg' " [svgClass]="'h-5 mr-2 w-5 text-muted-foreground/50'"> </svg-icon>
+                <p class="capitalize">{{ obj }}</p>
+              </div>
+            </div>
+    </div>
+  </div>
+</div>

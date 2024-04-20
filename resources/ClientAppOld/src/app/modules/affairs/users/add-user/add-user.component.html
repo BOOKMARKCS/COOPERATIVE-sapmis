@@ -1,0 +1,199 @@
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+  <div class=" max-w-screen-2xl mx-auto">
+    <div>
+
+      <div class=" ">
+        <div class="">
+          <div class="">
+            <h2 class="font-semibold text-xl ">แบบฟอร์มเพิ่มข้อมูลผู้ใช้</h2>
+            <p class=" mb-6">กรุณาตรวจสอบข้อมูลก่อนทำการบันทึก</p>
+          </div>
+
+          <div class="my-5 rounded-lg bg-background px-8 py-8 sm:flex-row">
+            <!--    <h6 class="mb-1 text-15">Personal Information</h6>-->
+            <!--    <p class="mb-4 text-slate-500 dark:text-zink-200">Update your photo and personal details here easily.</p>-->
+            <form [formGroup]="form">
+              <div class="grid grid-cols-1 gap-5 xl:grid-cols-12 ">
+                <div class="{{typeUser === (TypeUser.Advisor || TypeUser.Student) ? 'xl:col-span-4':'xl:col-span-6' }}"  formGroupName="role">
+                  <label class="inline-block mb-2 text-base font-medium">องค์กร</label>
+                  <div class="relative">
+                    <select formControlName="organization_id" (change)="form.get(['role','position_id'])?.reset()"
+                            class="form-input focus:outline-none block w-full mt-2 py-2 px-3 rounded-md shadow-sm">
+                      <option disabled selected hidden [ngValue]="null">เลือกองค์กร</option>
+                      <option *ngFor="let obj of this.organizations" [value]="obj.id">{{ obj.name }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="{{typeUser === (TypeUser.Advisor || TypeUser.Student)? 'xl:col-span-4':'xl:col-span-6' }}" formGroupName="role">
+                  <label class="inline-block mb-2 text-base font-medium">ตำแหน่ง</label>
+                  <div class="relative">
+                    <select (change)="setRole()" formControlName="position_id"
+                            class="form-input  focus:outline-none  block w-full mt-2 py-2 px-3 rounded-md shadow-sm"
+                            name="type">
+                      <option disabled selected hidden [ngValue]="null">เลือกตำแหน่ง</option>
+                      <option *ngIf="!roles[getOrganizationId]" disabled>ไม่พบข้อมูล</option>
+                      <ng-container *ngIf="roles[getOrganizationId]">
+                        <ng-container *ngFor="let obj of roles[getOrganizationId]">
+                          <option [value]="obj.position.id">{{ obj.position.name }}</option>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+
+                <div *ngIf="typeUser === (TypeUser.Advisor || TypeUser.Student)" class="xl:col-span-4">
+                  <label class="inline-block mb-2 text-base font-medium">คณะ</label>
+                  <div class="relative">
+                    <select
+                      class="form-input  focus:outline-none  block w-full mt-2 py-2 px-3 rounded-md shadow-sm">
+                      <option value="" disabled selected hidden>เลือกคณะ</option>
+                      <option *ngFor="let obj of this.faculties" [value]="obj.id">{{ obj.name }}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+                <ng-container *ngIf="typeUser" [formGroupName]="getTypeUser">
+                  <div class="relative xl:col-span-6">
+                    <input id="email" type="text" class="peer block rounded" placeholder=" "/>
+                    <label for="email" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> อีเมล </label>
+                  </div>
+                  <div class="relative xl:col-span-6">
+                    <input id="name" formControlName="name" type="text" class="peer block rounded" placeholder=" "/>
+                    <label for="name" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> ชื่อ </label>
+                  </div>
+                  <div class="relative {{typeUser === TypeUser.Student? 'xl:col-span-6':'xl:col-span-12'}}">
+                    <input id="phoneNumber" formControlName="phoneNumber" type="text" class="peer block rounded" placeholder=" "/>
+                    <label for="phoneNumber" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> หมายเลขโทรศัพท์ </label>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="typeUser === TypeUser.Student" [formGroupName]="getTypeUser">
+                  <div class="relative xl:col-span-6">
+                    <input id="2email" type="text" class="peer block rounded" placeholder=" "/>
+                    <label for="2email" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> รหัสประจำตัวนิสิต </label>
+                  </div>
+<!--                  <div class="relative xl:col-span-6">-->
+<!--                    <input id="name" formControlName="name" type="text" class="peer block rounded" placeholder=" "/>-->
+<!--                    <label for="name" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> ชื่อ </label>-->
+<!--                  </div>-->
+<!--                  <div class="relative xl:col-span-12">-->
+<!--                    <input id="phoneNumber" formControlName="phoneNumber" type="text" class="peer block rounded" placeholder=" "/>-->
+<!--                    <label for="phoneNumber" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary"> หมายเลขโทรศัพท์ </label>-->
+<!--                  </div>-->
+                </ng-container>
+
+<!--                <div class="relative xl:col-span-6">-->
+<!--                  <input id="last_name2" type="text" class="peer block rounded" placeholder=" "/>-->
+<!--                  <label for="last_name2"-->
+<!--                         class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">-->
+<!--                    นามสกุล </label>-->
+<!--                </div>-->
+<!--                <div class="relative xl:col-span-6">-->
+<!--                  <input id="first_name3" type="text" class="peer block rounded" placeholder=" "/>-->
+<!--                  <label for="first_name3"-->
+<!--                         class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">-->
+<!--                    อีเมล </label>-->
+<!--                </div>-->
+
+
+<!--                <div class="relative xl:col-span-6">-->
+<!--                  <input id="last_name4" type="text" class="peer block rounded" placeholder=" "/>-->
+<!--                  <label for="last_name4"-->
+<!--                         class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">-->
+<!--                    นามสกุล </label>-->
+<!--                </div>-->
+
+
+              </div><!--end grid-->
+
+              <div class="flex justify-end mt-6 gap-x-4">
+<!--                <button type="button"-->
+<!--                        class="text-white btn bg-primary border-primary hover:text-white hover:bg-primary hover:border-primary focus:text-white focus:bg-primary focus:border-primary focus:ring focus:ring-primary active:text-white active:bg-primary active:border-primary active:ring active:ring-primary dark:ring-primary/20">-->
+<!--                  Updates-->
+<!--                </button>-->
+                <app-button full impact="bold" tone="card" shape="rounded" size="medium">กลับ</app-button>
+                <app-button full impact="bold" tone="primary" shape="rounded" size="medium">บันทึก</app-button>
+              </div>
+            </form><!--end form-->
+          </div>
+          <!--          <div class="lg:col-span-2">-->
+          <!--            <form [formGroup]="form" class="grid gap-4 gap-y-2  text-sm grid-cols-1 md:grid-cols-5">-->
+          <!--              <div class="md:col-span-full flex gap-4">-->
+          <!--                <div class="w-full">-->
+          <!--                  <label>ชื่อ</label>-->
+          <!--                  <input type="text" formControlName="first_name"-->
+          <!--                         class="h-10 border mt-1 rounded px-4 w-full " value=""/>-->
+          <!--                </div>-->
+          <!--                <div class="w-full">-->
+          <!--                  <label>นามสกุล</label>-->
+          <!--                  <input type="text" formControlName="last_name" class="h-10 border mt-1 rounded px-4 w-full "-->
+          <!--                         value=""/>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--              <div class="md:col-span-5">-->
+          <!--                <label>อีเมล</label>-->
+          <!--                <input type="text" formControlName="email" class="h-10 border mt-1 rounded px-4 w-full "-->
+          <!--                       value="" placeholder=""/>-->
+          <!--              </div>-->
+          <!--&lt;!&ndash;              <div class="md:col-span-full flex gap-4">&ndash;&gt;-->
+          <!--&lt;!&ndash;                <div class="w-full">&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <label>รหัสผ่าน</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <input type="text" formControlName="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"&ndash;&gt;-->
+          <!--&lt;!&ndash;                         value="" placeholder=""/>&ndash;&gt;-->
+          <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+          <!--&lt;!&ndash;                <div class="w-full">&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <label>ยืนยันรหัสผ่าน</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <input type="text" formControlName="password_confirmation"&ndash;&gt;-->
+          <!--&lt;!&ndash;                         class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder=""/>&ndash;&gt;-->
+          <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+          <!--&lt;!&ndash;              </div>&ndash;&gt;-->
+          <!--              <div class="md:col-span-5">-->
+          <!--                <label>เบอร์โทรศัพท์</label>-->
+          <!--                <input type="text" formControlName="phone_number"-->
+          <!--                       class="cdk-text-field-autofill-monitored h-10 border mt-1 rounded px-4 w-full "-->
+          <!--                       maxlength="10" value="" placeholder=""/>-->
+          <!--              </div>-->
+          <!--              <div class="md:col-span-5 flex">-->
+          <!--                <div class="w-full" *ngIf="organizations">-->
+          <!--                  <p>องค์กร</p>-->
+          <!--                  <select formControlName="organization_id"-->
+          <!--                          class="border border-gray-300 rounded-full text-gray-600 w-44 h-10 pl-5 pr-10 hover:border-gray-400 focus:outline-none appearance-none">-->
+          <!--                    <option [ngValue]="null">เลือกชื่อองค์กร</option>-->
+          <!--                    <option *ngFor="let organization of organizations; index as i" [ngValue]="organization.id">{{ organization.name }} </option>-->
+          <!--                  </select>-->
+          <!--                </div>-->
+
+          <!--&lt;!&ndash;                <div class="w-full" *ngIf="faculties && getOrganizationValue?.id == '5'">&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <p>คณะ</p>&ndash;&gt;-->
+          <!--&lt;!&ndash;                  <select formControlName="faculty_id" class="border border-gray-300 rounded-full w-44 text-gray-600 h-10 pl-5 pr-10  hover:border-gray-400 focus:outline-none appearance-none">&ndash;&gt;-->
+          <!--&lt;!&ndash;                    <option [ngValue]="null">เลือกคณะ</option>&ndash;&gt;-->
+          <!--&lt;!&ndash;                    <option *ngFor="let faculty of faculties; index as i" [ngValue]="faculty.id">{{ faculty.name }}&ndash;&gt;-->
+          <!--&lt;!&ndash;                    </option>&ndash;&gt;-->
+          <!--&lt;!&ndash;                  </select>&ndash;&gt;-->
+          <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+          <!--                <div class="w-full" *ngIf="positions">-->
+          <!--                  <p>ตำแหน่ง</p>-->
+          <!--                  <select formControlName="position_id" class="border border-gray-300 rounded-full w-44 text-gray-600 h-10 pl-5 pr-10 hover:border-gray-400 focus:outline-none appearance-none">-->
+          <!--&lt;!&ndash;                    <option *ngIf="form.get('position_id')?.value !== getPositionValue?.id || form.get('position_id')?.value == null" [ngValue]="form.get('position_id')?.value">เลือกตำแหน่ง </option>&ndash;&gt;-->
+          <!--&lt;!&ndash;                    <option *ngFor="let position of positions[getOrganizationValue?.name]" [ngValue]="position.id">{{ position.name }} </option>&ndash;&gt;-->
+          <!--                  </select>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--              <div class="md:col-span-5 text-right">-->
+          <!--                <div class="inline-flex items-end">-->
+          <!--                  <button [disabled]="!form.valid" (click)="submit()" [ngClass]="{'cursor-not-allowed': !form.valid}"-->
+          <!--                          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> บันทึก-->
+          <!--                  </button>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </form>-->
+          <!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

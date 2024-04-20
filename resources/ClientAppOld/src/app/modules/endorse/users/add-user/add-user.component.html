@@ -1,0 +1,79 @@
+<div class=" p-6  text-gray-400 dark:text-night-300">
+  <div class="container max-w-screen-lg mx-auto">
+    <div>
+      <h2 class="font-semibold text-xl ">แบบฟอร์มเพิ่มข้อมูลผู้ใช้</h2>
+      <p class=" mb-6">กรุณาตรวจสอบข้อมูลก่อนทำการบันทึก</p>
+      <div class=" rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          <div class="">
+            <p class="font-medium text-lg">รายละเอียดข้อมูลผู้ใช้</p>
+            <p>กรุณากรอกข้อมูลให้ครบทุกช่อง</p>
+          </div>
+          <div class="lg:col-span-2">
+            <form [formGroup]="form" class="grid gap-4 gap-y-2  text-sm grid-cols-1 md:grid-cols-5">
+              <div class="md:col-span-full flex gap-4">
+                <div class="w-full">
+                  <label>ชื่อ</label>
+                  <input type="text" formControlName="first_name"
+                         class="h-10 border mt-1 rounded px-4 w-full " value=""/>
+                </div>
+                <div class="w-full">
+                  <label>นามสกุล</label>
+                  <input type="text" formControlName="last_name" class="h-10 border mt-1 rounded px-4 w-full "
+                         value=""/>
+                </div>
+              </div>
+              <div class="md:col-span-5">
+                <label>อีเมล</label>
+                <input type="text" formControlName="email" class="h-10 border mt-1 rounded px-4 w-full "
+                       value="" placeholder=""/>
+              </div>
+              <!--              <div class="md:col-span-full flex gap-4">-->
+              <!--                <div class="w-full">-->
+              <!--                  <label>รหัสผ่าน</label>-->
+              <!--                  <input type="text" formControlName="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"-->
+              <!--                         value="" placeholder=""/>-->
+              <!--                </div>-->
+              <!--                <div class="w-full">-->
+              <!--                  <label>ยืนยันรหัสผ่าน</label>-->
+              <!--                  <input type="text" formControlName="password_confirmation"-->
+              <!--                         class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder=""/>-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <div class="md:col-span-5">
+                <label>เบอร์โทรศัพท์</label>
+                <input type="text" formControlName="phone_number"
+                       class="cdk-text-field-autofill-monitored h-10 border mt-1 rounded px-4 w-full "
+                       maxlength="10" value="" placeholder=""/>
+              </div>
+              <div class="md:col-span-5 flex">
+                <div class="w-full" *ngIf="faculties && user.organization_id == '5'">
+                  <p>คณะ</p>
+                  <select formControlName="faculty_id" class="border border-gray-300 rounded-full w-44 text-gray-600 h-10 pl-5 pr-10  hover:border-gray-400 focus:outline-none appearance-none">
+                    <option [ngValue]="null">เลือกคณะ</option>
+                    <option *ngFor="let faculty of faculties; index as i" [ngValue]="faculty.id">{{ faculty.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="w-full" *ngIf="positions">
+                  <p>ตำแหน่ง</p>
+                  <select formControlName="position_id" class="border border-gray-300 rounded-full w-44 text-gray-600 h-10 pl-5 pr-10 hover:border-gray-400 focus:outline-none appearance-none">
+                    <option *ngIf="form.get('position_id')?.value !== getPositionValue?.id || form.get('position_id')?.value == null" [ngValue]="form.get('position_id')?.value">เลือกตำแหน่ง </option>
+                    <option *ngFor="let position of positions[user.organization.name]" [ngValue]="position.id">{{ position.name }} </option>
+                  </select>
+                </div>
+              </div>
+              <div class="md:col-span-5 text-right">
+                <div class="inline-flex items-end">
+                  <button [disabled]="!form.valid" (click)="submit()" [ngClass]="{'cursor-not-allowed': !form.valid}"
+                          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> บันทึก
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

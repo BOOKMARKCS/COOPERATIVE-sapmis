@@ -1,0 +1,25 @@
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+  <div class="bg-background mb-5 rounded-md">
+    <div class="p-5">
+      <div class="grid grid-cols-1 gap-3 xl:grid-cols-12">
+        <div class="xl:col-span-full">
+          <ul class="flex flex-wrap whitespace-nowrap text-sm font-medium overflow-x-visible overflow-y-hidden"
+              *ngIf="organizations">
+            <li *ngFor="let obj of organizations">
+              <a [ngClass]="{'bg-primary text-white hover:text-white': tap == obj.name}" (click)="tap = obj.name"
+                 class="flex  px-4 py-2 duration-300     rounded-md border border-transparent text-muted-foreground    hover:text-primary cursor-pointer -mb-[1px]">{{ obj.name }}
+                <span [ngClass]="{'ms-2 bg-primary  shadow  font-bold text-[14px]': tap == obj.name}"
+                      *ngIf="users[obj.name]"
+                      class="flex duration-100  items-center justify-center size-5 ltr:ml-2 rtl:mr-2  shrink-0 font-medium  rounded-full  border-none ">{{ users[obj.name].length }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-table-affairs-users *ngIf="users[tap]" [data]="users[tap]"></app-table-affairs-users>
+
+
+</div>
