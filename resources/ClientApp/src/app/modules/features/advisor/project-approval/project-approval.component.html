@@ -1,0 +1,111 @@
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <div class="mb-4 flex justify-between">
+    <div class="inline-block">
+      <h3 class="font-semibold text-gray-900 dark:text-white">การอนุมัติโครงการ</h3>
+      <div class="space-x-1 text-xs font-medium text-gray-400 dark:text-night-300">
+        <a href="" class="hover:text-primary-500">Approval</a>
+      </div>
+    </div>
+  </div>
+  <div class=" bg-background rounded-lg p-4">
+    <h2 class="text-md text-muted-foreground  font-semibold  ms-3">แบบฟอร์มขออนุมัติโครงการ</h2>
+    <div class="p-4">
+      <div class="flex"> <h3 class="text-md font-bold text-foreground me-2">1. ชื่อโครงการ </h3> สโมสรนิสิตคณะวิทยาศาสตร์และนวัตกรรมดิจิทัล</div>
+      <div class="flex"> <h3 class="text-md font-bold text-foreground me-2">2. ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ</h3> สโมสรนิสิตคณะวิทยาศาสตร์และนวัตกรรมดิจิทัล</div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">3. รายชื่อนิสิตผู้รับผิดชอบโครงการ</h3>
+        <div class="px-4">
+          <p>3.1 ชวิศ แก้วรัตน์ รหัสนิสิต 632021211 หมายเลขโทรศัพท์ 0952957279</p>
+          <p>3.2 มีนา ทรงศิริ รหัสนิสิต 632021213 หมายเลขโทรศัพท์ 09873638272</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">4. รายชื่อที่ปรึกษาโครงการ</h3>
+        <div class="px-4">
+          <p>3.2 ภูมิใจ คงงาม หมายเลขโทรศัพท์ 0927465721</p>
+        </div>
+      </div>
+      <div class="">
+        <h3 class="text-md font-bold text-foreground">5. ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน (กรณีขอเทียบกิจกรรมพัฒนานิสิตนอกชั้นเรียน โปรดระบุ)</h3>
+        <div class="ms-5" *ngFor="let tsuTalent of [{ 'id': 1, 'name': 'กิจกรรม TSU Glocal Talent', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'talentDetails': [ { 'id': 1, 'name': 'กลุ่มกิจกรรมเกี่ยวกับการคิด วิจารณญาณ และการแก้ปัญหา', 'tsuTalentGroupId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 2, 'name': 'กลุ่มกิจกรรมเกี่ยวกับการบริหารจัดการตนเอง', 'tsuTalentGroupId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, {'id': 3, 'name': 'กลุ่มกิจกรรมเกี่ยวกับการทำงานร่วมกับผู้อื่น', 'tsuTalentGroupId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z','updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 4, 'name': 'กลุ่มกิจกรรมเกี่ยวกับความรู้ ความเข้าใจ และการใช้เทคโนโลยีดิจิทัล', 'tsuTalentGroupId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 5, 'name': 'กลุ่มกิจกรรม TSU Good ได้แก่ กิจกรรมจิตอาสา บำเพ็ญประโยชน์ และสิ่งแวดล้อม', 'tsuTalentGroupId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt':'2024-03-26T10:11:38.000000Z' } ] }, { 'id': 2, 'name': 'กิจกรรม TSU Communication Talent', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'talentDetails': [ { 'id': 6, 'name': 'กิจกรรมเกี่ยวกับการใช้ภาษาเพื่อการสื่อสารในชีวิตประจำวัน', 'tsuTalentGroupId': '2', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] }, { 'id': 3, 'name' : 'กิจกรรม TSU Social Innovation/Entrepreneurship Talent', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'talentDetails': [ { 'id': 7, 'name': 'กลุ่มกิจกรรมด้านการสร้างนวัตกรรมสังคม', 'tsuTalentGroupId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 8, 'name': 'กลุ่มกิจกรรมด้านการเป็นผู้ประกอบการ', 'tsuTalentGroupId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] } ]">
+          <label class="block mb-2 ">{{ tsuTalent.name }}</label>
+          <div class="ms-6" *ngFor="let detail of tsuTalent.talentDetails; index as i">
+            <input type="checkbox" class=" w-5 h-5s checked:bg-primary-500"/>
+            <label class="ml-3">{{ detail.name }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <h3 class="text-md font-bold text-foreground">6. ความสอดคล้องกับยุทธศาสตร์ของมหาวิทยาลัย</h3>
+        <div class="ms-6" *ngFor="let strategic of [ { 'id': 1, 'name': 'กิจกรรมเสริมสร้างนิสิตให้มีคุณลักษณะตามอัตลักษณ์ของมหาวิทยาลัย' }, { 'id': 2, 'name': 'กิจกรรมพัฒนานิสิตให้มีทักษะการเรียนรู้ในศตวรรษที่ 21' }, { 'id': 3, 'name': 'กิจกรรมนิสิตระหว่างประเทศ' }, { 'id': 4, 'name': 'กิจกรรมพหุวัฒนธรรม ศิลปวัฒนธรรม และแลกเปลี่ยนวัฒนธรรม' }, { 'id': 5, 'name': 'กิจกรรมกีฬา นันทนาการ และสุขภาพ' }, { 'id': 6, 'name': 'กิจกรรมจิตอาสาทั้งภายในและชุมชนโดยรอบมหาวิทยาลัยทักษิณ' } ]; index as i">
+          <input type="checkbox" class="w-5 h-5s checked:bg-primary-500"/>
+          <label class="ml-3">{{ strategic.name }}</label>
+        </div>
+      </div>
+      <div class="">
+        <h3 class="text-md font-bold text-foreground"> 7.ความสอดคล้องกับการพัฒนาอัตลักษณ์นิสิต</h3>
+        <p>เสริมสร้างอัตลักษณ์นิสิต จำนวน 2 ด้าน ดังนี้</p>
+        <div class="ms-5" *ngFor="let obj of [ { 'id': 1, 'name': 'รับผิดชอบ', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'congruenceIdentityDetail': [ { 'id': 1, 'name': 'การรับผิดชอบต่อหน้าที่', 'congruenceIdentityGroupsId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 2, 'name': 'การบริหารจัดการตนเอง', 'congruenceIdentityGroupsId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 3, 'name': 'การมีจิตสำนึกและตระหนักในการเป็นพลเมืองไทยและพลเมือง ', 'congruenceIdentityGroupsId': '1', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] }, { 'id': 2, 'name': 'รอบรู้', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'congruenceIdentityDetail': [ { 'id': 4, 'name': 'การมีรู้ ทักษะ ความสามารถตามบริบทของอาชีพ', 'congruenceIdentityGroupsId': '2', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 5, 'name': 'มีความรู้ ความเข้าใจ และทักษะการใช้เทคโนโลยีดิจิทัลและเครื่องมือสื่อสารอย่างเหมาะสม', 'congruenceIdentityGroupsId': '2', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 6, 'name': 'ความสามารถใช้ภาษาไทยและภาษาต่างประเทศเพื่อการสื่อสาร', 'congruenceIdentityGroupsId': '2', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 7, 'name': 'มีทักษะการเรียนรู้ การไม่ยึดติดกับสิ่งที่เคยเรียนรู้มา และการเรียนรู้สิ่งที่เคยรู้ด้วยมุมมองใหม่ตลอดชีวิต', 'congruenceIdentityGroupsId': '2', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] }, { 'id': 3, 'name': 'สู้งาน', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'congruenceIdentityDetail': [ { 'id': 10, 'name': 'ทำงานเป็นทีม ความร่วมมือ การเป็นผู้นำการเปลี่ยนแปลง', 'congruenceIdentityGroupsId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 11, 'name': 'การล้มแล้วลุกเร็ว', 'congruenceIdentityGroupsId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 8, 'name': 'การมีความมุ่งมั่น อดทนเพื่อทำงานที่ท้าทายโดยไม่ล้มเลิก', 'congruenceIdentityGroupsId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 9, 'name': 'มีความสามารถในการปรับตัวและยืดหยุ่น', 'congruenceIdentityGroupsId': '3', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] }, { 'id': 4, 'name': 'มีประสบการณ์เชิงปฏิบัติ', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z', 'congruenceIdentityDetail': [ { 'id': 12, 'name': 'ความเชี่ยวชาญที่เกิดจากการฝึกฝนและประสบการณ์จริง', 'congruenceIdentityGroupsId': '4', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 13, 'name': 'การแก้ปัญหาอย่างเป็นระบบ', 'congruenceIdentityGroupsId': '4', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' }, { 'id': 14, 'name': 'การสร้างนวัตกรรมสังคมเพื่อการพัฒนาและแก้ปัญหาในชุมชน', 'congruenceIdentityGroupsId': '4', 'createdAt': '2024-03-26T10:11:38.000000Z', 'updatedAt': '2024-03-26T10:11:38.000000Z' } ] } ]; index as key">
+          <input type="checkbox" class="w-5 h-5s checked:bg-primary-500"/>
+          <label class="ml-3  font-semibold">{{ obj.name }}</label>
+          <div class="ms-6" *ngFor="let detail of obj.congruenceIdentityDetail; index as i">
+            <input type="checkbox"  class=" w-5 h-5s checked:bg-primary-500"/>
+            <label class="ml-3">{{ detail.name }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="flex">  <h3 class="text-md font-bold text-foreground me-2">8. หลักการและเหตุผล</h3> บูรณาการสถานที่</div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">9. วัตถุประสงค์ของโครงการ (จัดเพื่ออะไร)</h3>
+        <div class="px-4">
+          <p>9.1 บูรณาการสถานที่</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">10. รูปแบบกิจกรรม</h3>
+        <div class="px-4">
+          <p>10.1 บูรณาการสถานที่</p>
+        </div>
+      </div>
+      <div class="flex"> <h3 class="text-md font-bold text-foreground">11. สถานที่ปฏิบัติงาน (ระบุชื่อ สถานที่ ตำบล อำเภอ จังหวัด)</h3> <span class="ms-2">กระบี่ </span></div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">12. วิธีการดำเนินการ</h3>
+        <div class="px-4">
+          <p>12.1 ไปกลาดลาน</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">13. ผลที่คาดว่าจะได้รับ</h3>
+        <div class="px-4">
+          <p>13.1 สะอาด</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-md font-bold text-foreground">14. วิธีการติดตามประเมินนผล</h3>
+        <div class="px-4">
+          <p>14.1 ภาพ</p>
+        </div>
+      </div>
+    </div>
+
+  <!-- comment form -->
+  <div class="flex mx-auto items-center justify-center shadow-lg  mb-4 max-w-lg">
+    <form class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">แสดงความคิดเห็น</h2>
+        <div class="w-full md:w-full px-3 mb-2 mt-2">
+          <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" placeholder='ความคิดเห็น' required></textarea>
+        </div>
+        <div class="w-full md:w-full flex items-start md:w-full px-3">
+          <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
+          </div>
+          <div class="flex gap-2">
+            <app-button full impact="bold" tone="danger" shape="rounded" size="medium">ส่งกลับเพื่อแก้ไข</app-button>
+            <app-button full impact="bold" tone="primary" shape="rounded" size="medium">เห็นชอบ</app-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row text-muted-foreground">
+  <div class="mb-4 flex items-center justify-between">
+    <div class="flex-col items-center">
+      <h3 class="text-md font-bold text-foreground">รายการโครงการ</h3>
+      <!--      <span class="text-sm text-gray-400 dark:text-night-300">Updated 37 minutes ago</span>-->
+    </div>
+  </div>
+
+  <div class="relative overflow-x-auto">
+    <table class="w-full table-auto" *ngIf="projects">
+      <!--Table head-->
+      <thead class="text-xs uppercase text-muted-foreground">
+      <tr class="bg-background">
+        <th class="py-3 text-left">รหัสโครงการ</th>
+        <th class="py-3 text-right">ชื่อ</th>
+        <th class="py-3 text-right">องค์กร</th>
+        <th class="py-3 text-right">สถานะโครงการ</th>
+      </tr>
+      </thead>
+      <tbody class="rounded-xl bg-red-300 overflow-hidden">
+      <tr class="py-2 pl-2 text-left rounded" *ngFor="let obj of projects; index as i">
+        <td class="py-2 pl-2 text-left  first:rounded-lg"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[0].id }}</span></td>
+        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[0].projectName }}</span></td>
+        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[0].activityGroupName }}</span></td>
+        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.status }}</span></td>
+        <td class="py-2 pl-2 text-right  first:rounded-lg">
+          <div class="flex justify-end">
+            <button class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+              <svg-icon src="assets/icons/heroicons/outline/dots-horizontal.svg" [svgClass]="'h-5 w-5'"></svg-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="w-full text-center" *ngIf="!projects?.length"> ไม่พบข้อมูลโครงการ</div>
+  </div>
+</div>

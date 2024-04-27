@@ -1,0 +1,61 @@
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+
+
+  <div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
+    <div class="mb-4 flex items-center justify-between">
+      <div class="flex-col items-center">
+        <h3 class="text-md font-bold text-foreground">รายการโครงการ</h3>
+        <!--      <span class="text-sm text-gray-400 dark:text-night-300">Updated 37 minutes ago</span>-->
+      </div>
+    </div>
+
+    <div class="relative overflow-x-auto">
+      <table class="w-full table-auto" *ngIf="projects">
+        <!--Table head-->
+        <thead class="text-xs uppercase text-muted-foreground">
+        <tr>
+          <th class="py-3 text-left">ชื่อ</th>
+          <th class="py-3 text-right">องค์กร</th>
+          <th class="py-3 text-right">ประเภทโปรเจ็ค</th>
+          <th class="py-3 text-right">สถานที่</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let obj of projects; index as i">
+          <td class="py-2 pl-2 text-left">
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].projectName }} </span>
+          </td>
+          <td class="py-2 pl-2 text-right">
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].activityGroupName }} </span>
+          </td>
+          <td class="py-2 pl-2 text-right">
+          <span
+            class="text-sm font-semibold text-muted-foreground">{{ obj.projectType}}</span>
+          </td>
+          <td class="py-2 pl-2 text-right">
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].location }}</span>
+          </td>
+          <td class="py-2 pl-2 text-right">
+            <div class="flex justify-end">
+              <a href="/advisor/approval" class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
+                <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" [svgClass]="'h-5 w-5'"></svg-icon>
+              </a>
+            </div>
+          </td>
+        </tr>
+        <!--        </tbody>-->
+        <!--        <tbody class="col-span-full" *ngIf="!projects">-->
+        <!--        <tr class="text-center col-span-full w-full bg-yellow-500">-->
+        <!--          <td class="col-span-full bg-blue-500 text-white">ไม่พบข้อมูลโครงการ</td>-->
+        <!--        </tr>-->
+        <!--        </tbody>-->
+        <!--end::Table body-->
+      </table>
+      <div class="w-full text-center" *ngIf="!projects">
+        ไม่พบข้อมูลโครงการ
+      </div>
+    </div>
+  </div>
+
+</div>

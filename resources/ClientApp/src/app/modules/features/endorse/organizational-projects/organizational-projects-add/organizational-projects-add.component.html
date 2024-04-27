@@ -1,0 +1,18 @@
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+
+  <div>
+    <h2 class="text-md text-muted-foreground  font-semibold">แบบฟอร์มขออนุมัติโครงการ</h2>
+    <form [formGroup]="form" class="mt-4">
+      <app-input-peer [inputFormControl]="getFormControl('projectName')" [label]="'ขื่อโครงการ'" class="peer block shadow-lg" [placeholder]="' '"></app-input-peer>
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormControl('projectName')?.invalid && getFormControl('projectName')?.touched "> กรุณาป้อนชื่อโครงการ</p>
+      <app-responsible-students [form]="getFormArray('responsibleStudents')" [users]="responsibleStudents"></app-responsible-students>
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormArray('responsibleStudents').at(0).get(['user','email'])?.invalid && getFormArray('responsibleStudents').at(0).get(['user','email'])?.touched"> กรุณาเลือกผู้รับผิดชอบโครงการ</p>
+      <app-project-advisor [form]="getFormArray('projectAdvisors')" [users]="projectAdvisors"></app-project-advisor>
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormArray('projectAdvisors').at(0).get(['user','email'])?.invalid && getFormArray('projectAdvisors').at(0).get(['user','email'])?.touched"> กรุณาเลือกที่ปรึกษาโครงการ</p>
+      <div class="flex justify-end mt-4">
+        <app-button (click)="onSubmit()" class="self-center " full impact="bold" tone="primary" shape="rounded" size="medium">เสนอโครงการ</app-button>
+      </div>
+    </form>
+  </div>
+</div>

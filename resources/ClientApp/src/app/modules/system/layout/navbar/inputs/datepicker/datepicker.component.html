@@ -1,0 +1,46 @@
+<div class="mb-5 w-full ">
+  <label class="mb-1 text-muted-foreground block">{{label}}</label>
+  <div class="relative ">
+    <div (click)="disable? showDatepicker = !showDatepicker: undefined">
+      <input #dateRef name="date" type="hidden">
+      <input (keydown.escape)="showDatepicker = false"  [id]="inputFormControl"  [ngModel]="datepickerValue" class="w-full text-center text-lg pl-4 pr-10 py-3 shadow-xl leading-none rounded-lg  focus:outline-none focus:shadow-outline  font-medium" placeholder="Select date" readonly type="text"/>
+      <div class="absolute top-0 right-0 px-3 py-2">
+        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+
+    </div>
+    <div [style.display]="showDatepicker ? 'block' : 'none'" class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0  w-full">
+      <div class="flex justify-between items-center mb-2">
+        <div>
+          <span class="text-lg font-bold text-gray-800">{{ MONTH_NAMES[month] }}</span>
+          <span class="ml-1 text-lg text-gray-600 font-normal">{{ year }}</span>
+        </div>
+        <div>
+          <button (click)="changeMonth(-1)" [disabled]="month == 0" [ngClass]="{ 'cursor-not-allowed opacity-25': month == 0 }" class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full" type="button">
+            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </button>
+          <button (click)="changeMonth(1)" [disabled]="month == 11" [ngClass]="{ 'cursor-not-allowed opacity-25': month == 11 }" class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full" type="button">
+            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-wrap mb-3 -mx-1">
+        <div *ngFor="let day of DAYS" class="px-1" style="width: 14.26%; height: 14.26%">
+          <div class="text-gray-800 font-medium text-center text-xs">{{ day }}</div>
+        </div>
+      </div>
+      <div class="flex flex-wrap -mx-1">
+        <div *ngFor="let blankDay of blankDays" class="text-center border p-1 border-transparent text-sm" style="width: 14.28%; height: 14.28%"></div>
+        <div *ngFor="let date of no_of_days; let dateIndex = index" class="px-1 mb-1" style="width: 14.28%; height: 14.28%">
+          <div (click)="getDateValue(date)" [ngClass]="{ 'bg-blue-500 text-white': selectedDate == date, 'text-gray-700 hover:bg-blue-200': !selectedDate  }" [textContent]="date" class="cursor-pointer text-center text-sm  rounded-full leading-loose transition ease-in-out duration-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
