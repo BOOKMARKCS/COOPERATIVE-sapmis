@@ -1,14 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\OrganizationsController;
-use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UsersController;
-use App\Models\Organization;
 use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +32,3 @@ Route::get('roles', fn() => Role::pluck('name'));
 Route::get('master-user', [UsersController::class, 'master']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::get('test', [UsersController::class, 'test']);
-Route::get('positions', [PositionsController::class, 'index']);
-Route::get('organizations', [OrganizationsController::class, 'index']);

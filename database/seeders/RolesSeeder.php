@@ -62,6 +62,8 @@ class RolesSeeder extends Seeder
             ['permission' => 'ProjectAdvisor', 'organization' => '3', 'position' => ['5']],
             ['permission' => 'Endorser', 'organization' => '5', 'position' => ['2','3']],
             ['permission' => 'Responsible', 'organization' => '5', 'position' => ['14']],
+            ['permission' => 'OrganizationAdvisor', 'organization' => '5', 'position' => ['4']],
+            ['permission' => 'ProjectAdvisor', 'organization' => '5', 'position' => ['5']],
 //            ['permission' => 'Endorser', 'organization' => '2', 'position' => ['2', '3', '4']],
 //            ['permission' => 'Endorser', 'organization' => '3', 'position' => ['5', '6', '7', '8', '9']],
 //            ['permission' => 'Endorser', 'organization' => '5', 'position' => ['10', '11', '14', '15']],

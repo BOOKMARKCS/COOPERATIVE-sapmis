@@ -4,7 +4,430 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c79245f2-fd13-4f91-8679-5afca7f4340e" name="Changes" comment="" />
+    <list default="true" id="c79245f2-fd13-4f91-8679-5afca7f4340e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrganizationsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PositionsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Advisor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Advisor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ProjectAdvisor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ProjectAdvisor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ProjectDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ProjectDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ResponsibleStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ResponsibleStudent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2024_02_26_122334_create_project_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2024_02_26_122334_create_project_details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/RolesSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RolesSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@esbuild/win32-x64/esbuild.exe" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@esbuild/win32-x64/esbuild.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@esbuild/win32-x64/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@esbuild/win32-x64/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@rollup/rollup-win32-x64-msvc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@rollup/rollup-win32-x64-msvc/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@rollup/rollup-win32-x64-msvc/rollup.win32-x64-msvc.node" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@rollup/rollup-win32-x64-msvc/rollup.win32-x64-msvc.node" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/axios.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/browser/axios.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/browser/axios.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/browser/axios.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/browser/axios.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/esm/axios.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/node/axios.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/node/axios.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/dist/node/axios.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/dist/node/axios.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/lib/adapters/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/lib/adapters/http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/lib/core/mergeConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/mergeConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/lib/env/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/lib/env/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/axios/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/axios/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/bin/esbuild" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esbuild/bin/esbuild" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/lib/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esbuild/lib/main.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/lib/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esbuild/lib/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/esbuild/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/follow-redirects/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/follow-redirects/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/follow-redirects/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/follow-redirects/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/laravel-vite-plugin/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/laravel-vite-plugin/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/laravel-vite-plugin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/laravel-vite-plugin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/map-generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/map-generator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/processor.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/processor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/postcss/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/bin/rollup" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/bin/rollup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/getLogFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/getLogFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/parseAst.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/parseAst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/node-entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/node-entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/parseAst.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/parseAst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/watch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/getLogFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/getLogFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/loadConfigFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/loadConfigFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/native.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/parseAst.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/parseAst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/fsevents-importer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/fsevents-importer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/loadConfigFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/loadConfigFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/parseAst.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/parseAst.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/rollup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch-cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch-cli.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/rollup/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/source-map-js/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/source-map-js/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/source-map-js/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/source-map-js/lib/source-map-consumer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/source-map-js/lib/source-map-consumer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/source-map-js/lib/source-map-generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/source-map-js/lib/source-map-generator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/source-map-js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/source-map-js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node-cjs/publicUtils.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node-cjs/publicUtils.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-8a-6Quh6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-94_H5fT6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-XbJJvsnO.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-kjUoH5nk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-xESY8DUV.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/cli.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/runtime.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/runtime.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/dist/node/runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/types.d-jgA8ss1A.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/customEvent.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/types/customEvent.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/hmrPayload.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/vite/types/hmrPayload.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/build/assets/app-CifqVuM1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/build/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/build/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientApp/src/app/modules/features/affairs/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ClientApp/src/app/modules/features/affairs/users/users.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/karma.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/app.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/constants/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/guards/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/guards/auth-role.guard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/api-prefix.interceptor.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/api-prefix.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/auth.interceptor.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/auth.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/error-handler.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/loading.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/interceptor/logging.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/auth/login.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/auth/user.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/menu.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/project/project.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/projectDetail/project-detail.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/models/theme.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/auth.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/encoder.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/http.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/loading.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/theme.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/services/theme.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/core/utils/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/affairs.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/components/table-affairs-users/affairs-user-table.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/components/table-affairs-users/affairs-user-table.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/components/table-affairs-users/table-affairs-users.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/add-user/add-user.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/add-user/add-user.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/add-user/add-user.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/users.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/users.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/affairs/users/users.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/auth.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/forgot-password/forgot-password.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/forgot-password/forgot-password.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/forgot-password/forgot-password.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/forgot-password/forgot-password.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/new-password/new-password.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/new-password/new-password.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/new-password/new-password.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/new-password/new-password.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-in/sign-in.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-in/sign-in.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-in/sign-in.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-in/sign-in.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-up/sign-up.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-up/sign-up.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-up/sign-up.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/sign-up/sign-up.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/two-steps/two-steps.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/two-steps/two-steps.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/two-steps/two-steps.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/auth/pages/two-steps/two-steps.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table-item/nft-auctions-table-item.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table-item/nft-auctions-table-item.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table-item/nft-auctions-table-item.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table/nft-auctions-table.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table/nft-auctions-table.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-auctions-table/nft-auctions-table.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-chart-card/nft-chart-card.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-chart-card/nft-chart-card.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-chart-card/nft-chart-card.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-dual-card/nft-dual-card.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-dual-card/nft-dual-card.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-header/nft-header.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-header/nft-header.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-header/nft-header.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-single-card/nft-single-card.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-single-card/nft-single-card.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/nft/nft-single-card/nft-single-card.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-banner/podcast-card-banner.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-banner/podcast-card-banner.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-banner/podcast-card-banner.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-item/podcast-card-item.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-item/podcast-card-item.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-card-item/podcast-card-item.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-header/podcast-header.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-header/podcast-header.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-header/podcast-header.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-list/podcast-list.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-list/podcast-list.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-list/podcast-list.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-list/podcast-list.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-player/podcast-player.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-player/podcast-player.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/components/podcast/podcast-player/podcast-player.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/dashboard-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/dashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/dashboard.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/dashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/dashboard.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/models/nft.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/nft/nft.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/nft/nft.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/nft/nft.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/podcast/podcast.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/podcast/podcast.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/dashboard/pages/podcast/podcast.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/endorse.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/add-user/add-user.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/add-user/add-user.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/add-user/add-user.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/add-user/add-user.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/users.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/users.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/users.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/endorse/users/users.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/bottom-navbar/bottom-navbar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/bottom-navbar/bottom-navbar.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/bottom-navbar/bottom-navbar.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/bottom-navbar/bottom-navbar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/footer/footer.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/footer/footer.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/footer/footer.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/footer/footer.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/header/header.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/header/header.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/header/header.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/header/header.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/datepicker/datepicker.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/datepicker/datepicker.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/datepicker/datepicker.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/datepicker/datepicker.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/input/input.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/input/input.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/input/input.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/inputs/input/input.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-menu/navbar-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-menu/navbar-menu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-menu/navbar-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-menu/navbar-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-menu/navbar-mobile-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-menu/navbar-mobile-menu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-menu/navbar-mobile-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-menu/navbar-mobile-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-submenu/navbar-mobile-submenu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-submenu/navbar-mobile-submenu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-submenu/navbar-mobile-submenu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile-submenu/navbar-mobile-submenu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobile.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-mobile/navbar-mobilecomponent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-submenu/navbar-submenu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-submenu/navbar-submenu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-submenu/navbar-submenu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar-submenu/navbar-submenu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/navbar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-menu/sidebar-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-menu/sidebar-menu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-menu/sidebar-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-menu/sidebar-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-submenu/sidebar-submenu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-submenu/sidebar-submenu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-submenu/sidebar-submenu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar-submenu/sidebar-submenu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/components/sidebar/sidebar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/layout.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/services/menu.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/layout/services/menu.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/project-advisor/project-advisor.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/project-advisor/project-advisor.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/project-advisor/project-advisor.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/project-advisor/project-advisor.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.resolver.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/proposal.resolver.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/responsible-students/responsible-students.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/responsible-students/responsible-students.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/responsible-students/responsible-students.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposal/responsible-students/responsible-students.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/modules/proposer/proposer.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/button/button.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/button/button.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/button/button.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/button/button.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/pages/not-found/not-found.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/pages/not-found/not-found.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/pages/not-found/not-found.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/pages/not-found/not-found.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/responsive-helper/responsive-helper.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/responsive-helper/responsive-helper.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/responsive-helper/responsive-helper.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/responsive-helper/responsive-helper.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/table/table.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/table/table.component.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/table/table.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/components/table/table.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/directives/click-outside.directive.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/models/chart-options.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/pipes/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/utils/ckassnames.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/app/shared/validators/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/avatars/avt-01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/bg/auth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/google-logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/arrow-sm-right.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/arrow-sm-up.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/bell.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/bookmark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/chart-pie.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/cog-6-tooth.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/cog.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/cursor-click.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/document.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/dots-horizontal.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/download.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/eye-off.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/eye.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/folder.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/gift.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/information-circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/lock-closed.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/logout.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/menu.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/moon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/pencil-square.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/plus.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/refresh.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/shield-check.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/sun.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/user-circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/users.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/view-grid.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/outline/x.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/solid/chevron-double-left.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/solid/chevron-right.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/heroicons/solid/play.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/tablericons/arrows-shuffle-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/tablericons/headphones.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/tablericons/player-skip-back-filled.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/tablericons/player-skip-forward-filled.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/icons/tablericons/repeat.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/anonymous.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/anonymous36x36.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/auth-screens.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/img-01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/img-02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/img-03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/logo-114.24x40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/images/podcast-episode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/preview/dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/preview/light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/preview/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/preview/preview.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/preview/preview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/assets/styles/apexchart.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/environments/environment.development.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/src/styles.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/ClientAppOld/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/pest-plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/pest-plugins.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,12 +438,12 @@
     <execution />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/resources/ClientApp" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Addon\php\php.exe">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Addon\xampp\php\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/uid" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
@@ -172,7 +595,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.laravel-idea.update-module-directories&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/mark_/Documents/Cooperative/Projects/SAPMIS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -180,8 +603,8 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\mark_\\Documents\\Cooperative\\Projects\\SAPMIS\\resources\\ClientAppOld\\node_modules\\typescript\\lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\mark_\\Documents\\Cooperative\\Projects\\SAPMIS\\resources\\ClientApp\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -217,7 +640,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.15026.12" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
       </set>
     </attachedChunks>
   </component>
@@ -322,7 +746,11 @@
       <workItem from="1713411781955" duration="8583000" />
       <workItem from="1713550434560" duration="497000" />
       <workItem from="1713550956186" duration="1372000" />
-      <workItem from="1713568525130" duration="1486000" />
+      <workItem from="1713568525130" duration="3341000" />
+      <workItem from="1713592295119" duration="45585000" />
+      <workItem from="1713826455352" duration="14927000" />
+      <workItem from="1713972617420" duration="5876000" />
+      <workItem from="1714061122346" duration="7247000" />
     </task>
     <servers />
   </component>

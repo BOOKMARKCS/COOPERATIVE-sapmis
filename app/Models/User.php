@@ -76,9 +76,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function getUser()
     {
-        return CaseConverter::convertToCamelCase(tap(User::with([auth()->user()->type, 'role'])->find(auth()->id()), fn($user) => $user->{auth()->user()->type}->faculty = json_decode($user->{auth()->user()->type}->faculty)));
+        return CaseConverter::convertToCamelCase(User::with(auth()->user()->type ,'role')->where('id',auth()->id())->first());
     }
-
 
     public function officer(): HasOne
     {
@@ -87,7 +86,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function advisor(): HasOne
     {
-        return $this->hasOne(Advisor::class);
+        return $this->hasOne(Advisor::class)->with('faculty');
     }
 
     /**

@@ -14,9 +14,8 @@ class ProjectAdvisor extends Model
         'status'
     ];
 
-    public function store($requests,$projectDetailId)
+    public static function store($requests,$projectDetailId): void
     {
         array_map(fn($req) => ProjectAdvisor::create([ 'project_detail_id' => $projectDetailId, 'user_id' => $req['user']['id'] ]), $requests);
-        return $requests;
     }
 }

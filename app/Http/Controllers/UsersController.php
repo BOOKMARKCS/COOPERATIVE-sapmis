@@ -39,12 +39,19 @@ class UsersController extends Controller
             $requestData = CaseConverter::convertToSnakeCase($request->all());
             $user = User::create($requestData);
             $userId = $user->id;
-            $model = match ($request->type) { 'officer' => Officer::class, 'advisor' => Advisor::class, 'student' => Student::class, default => null };
+            $model = match ($request->type) {
+                'officer' => Officer::class,
+                'advisor' => Advisor::class,
+                'student' => Student::class,
+                default => null
+            };
             if (!$model) throw new \Exception('Invalid user type.');
             $model::create(array_merge($requestData[$request->type], ['user_id' => $userId]));
-            DB::commit(); return response()->json(['user' => $request->all()]);
+            DB::commit();
+            return response()->json(['user' => $request->all()]);
         } catch (\Exception $e) {
-            DB::rollBack();    return response()->json(['error' => $e->getMessage()], 400);
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 400);
         }
     }
 
@@ -64,9 +71,7 @@ class UsersController extends Controller
 
     public function test()
     {
-        $data1 = CongruenceIdentityGroup::with('congruenceIdentityDetail')->get();
-        $data2 = CongruenceIdentityGroup::with('congruenceIdentityDetail')->first();
-        return ['one' => CaseConverter::convertToSnakeCase(CaseConverter::convertToCamelCase($data1)), 'two' => CaseConverter::convertToSnakeCase(CaseConverter::convertToCamelCase($data2))];
+        return auth()->user()->getUser()['role']['organizationId'];
     }
 
 }

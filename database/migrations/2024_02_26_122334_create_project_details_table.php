@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('project_details', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('project_name');
-            $table->string('activity_group_name')->nullable();
+            $table->string('activity_group_name');
             $table->string('background')->nullable();
             $table->json('objectives');
             $table->json('activity_formats');
