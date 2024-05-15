@@ -1,0 +1,74 @@
+<div class="w-full my-2 mt-4  bg-card text-muted-foreground relative  rounded-lg">
+  <div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
+    <div class="mb-4 flex items-center justify-between">
+      <div class="flex-col items-center"><h3 class="text-md font-bold text-foreground"> งบประมาณ</h3></div>
+      <div class="flex justify-end w-1/3">
+        <div class="relative flex align-middle text-center  p-2 w-full" *ngIf="addToggle">
+          <select #input [(ngModel)]="input.value" (change)="add(input.value)" class="form-input focus:outline-none bg-card block w-full  py-2 px-3 rounded-md shadow-sm text-muted-foreground">
+            <option selected value="">เลือกผู้รับผิดชอบโครงการ</option>
+            <option *ngFor="let obj of users; index as i" [value]="i">{{ obj.student?.name }}</option>
+          </select>
+          <app-button (click)="add('')" class="self-center mx-4" full impact="bold" tone="primary" shape="rounded" size="medium">เลือก</app-button>
+        </div>
+      </div>
+    </div>
+    <div class="relative overflow-x-auto">
+      <div class="bg-background text-muted-foreground shadow-md rounded my-6">
+        <table class=" w-full  border border-muted">
+          <thead>
+          <tr class="border border-card-foreground  text-sm ">
+            <th class="py-3 px-6 border text-center border-card-foreground">รายการ</th>
+            <th class="py-3 px-6 border text-center border-card-foreground">จำนวนเงิน (บาท)</th>
+          </tr>
+          </thead>
+          <tbody class="border border-card-foreground text-sm font-light">
+          <tr class="border border-card-foreground group-hover:bg-card">
+            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap border border-card-foreground bg-primary-foreground/45">
+              <div class="flex justify-between">
+                <p class="align-middle self-center">15.1 หมวดค่าใช้สอย</p>
+                <app-button (click)="add('')" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่มค่าใช้สอย</app-button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border border-card-foreground hover:bg-card">
+            <td class="py-3 px-12 border border-card-foreground">15.1.1 <span class="ms-3"><input type="text" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="รายการ"></span></td>
+            <td class="py-3 px-6 text-right border border-card-foreground"><input type="number" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="จำนวนเงิน (บาท)"></td>
+          </tr>
+          <tr class="border border-card-foreground group-hover:bg-card">
+            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap border border-card-foreground bg-primary-foreground/45">
+              <div class="flex justify-between">
+                <p class="align-middle self-center "> 15.2 หมวดค่าตอบแทน </p>
+                <app-button (click)="add('')" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่มค่าใช้สอย</app-button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border border-card-foreground hover:bg-card">
+            <td class="py-3 px-12 border border-card-foreground">15.2.1 <span class="ms-3"><input type="text" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="รายการ"></span></td>
+            <td class="py-3 px-6 text-right border border-card-foreground"><input type="number" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="จำนวนเงิน (บาท)"></td>
+          </tr>
+          <tr class="border border-card-foreground group-hover:bg-card">
+            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap border border-card-foreground bg-primary-foreground/45">
+              <div class="flex justify-between">
+                <p class="align-middle self-center ">15.3 หมวดค่าวัสดุอุปกรณ์</p>
+                <app-button (click)="add('')" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่มค่าใช้สอย</app-button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border border-card-foreground hover:bg-card">
+            <td class="py-3 px-12 border border-card-foreground">15.3.1 <span class="ms-3"><input type="text" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="รายการ"></span></td>
+            <td class="py-3 px-6 text-right border border-card-foreground"><input type="number" class="border border-muted-foreground rounded-md px-2 py-2 w-1/3" placeholder="จำนวนเงิน (บาท)"></td>
+          </tr>
+          <tr class="border border-card-foreground group-hover:bg-card">
+            <td class="py-3 px-6 text-left whitespace-nowrap border border-card-foreground">15.4 ค่าอื่น ๆ</td>
+            <td class="py-3 px-6 text-right border border-card-foreground"><input type="number" class="border border-muted-foreground  rounded-md px-2 py-2 w-1/3" placeholder="จำนวนเงิน (บาท)"></td>
+          </tr>
+          <tr class="border border-card-foreground uppercase text-sm leading-normal">
+            <td class="py-3 px-6 text-center border border-card-foreground font-bold">รวม</td>
+            <td class="py-3 px-6 text-center border border-card-foreground font-bold">0 &nbsp; บาท</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

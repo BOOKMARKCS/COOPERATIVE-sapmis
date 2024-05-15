@@ -22,10 +22,6 @@ const routes: Routes = [
         loadChildren: () => import('../../features/endorse/endorse.module').then(m => m.EndorseModule)
       },
       {
-        path : 'proposer',
-        loadChildren: () => import('../../features/proposer/proposer.module').then(m => m.ProposerModule)
-      },
-      {
         path : 'responsible',
         loadChildren: () => import('../../features/responsible/responsible.module').then(m => m.ResponsibleModule)
       }

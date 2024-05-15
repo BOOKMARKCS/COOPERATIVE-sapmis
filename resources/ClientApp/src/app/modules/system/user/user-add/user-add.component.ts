@@ -27,8 +27,7 @@ export class UserAddComponent implements OnInit {
   auth: any;
   protected faculties: any;
 
-  constructor(private usv: UserService, auth: AuthService, fb: FormBuilder, private readonly alertService: AlertService, private vcr: ViewContainerRef) {
-    this.alertService.setVCR(this.vcr)
+  constructor(private usv: UserService, auth: AuthService, fb: FormBuilder, private readonly alertService: AlertService) {
     this.form = fb.group(new User())
     auth.user$.subscribe(u => this.auth = u)
   }

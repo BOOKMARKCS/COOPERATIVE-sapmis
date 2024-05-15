@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { EndorseComponent } from "./endorse.component";
 import { OrganizationalUsersListComponent } from "./organizational-users-management/organizational-users-list/organizational-users-list.component";
 import { OrganizationalUsersAddComponent } from "./organizational-users-management/organizational-users-add/organizational-users-add.component";
-import { OrganizationalProjectsListComponent } from "./organizational-projects/organizational-projects-list/organizational-projects-list.component";
-import { OrganizationalProjectsAddComponent } from "./organizational-projects/organizational-projects-add/organizational-projects-add.component";
 import { projectMaterResolver } from "../../system/project/projectResolver";
+import { ProjectAddComponent } from "../../system/project/project-add/project-add.component";
+import { ProjectListComponent } from "../../system/project/project-list/project-list.component";
 
 const routes: Routes = [
   {path: '', component: EndorseComponent},
@@ -19,8 +19,8 @@ const routes: Routes = [
   {
     path: 'projects',
     children: [
-      {path: 'list', component: OrganizationalProjectsListComponent},
-      {path: 'add', component: OrganizationalProjectsAddComponent, resolve: {master: projectMaterResolver}}
+      {path: 'list', component: ProjectListComponent},
+      {path: 'add', component: ProjectAddComponent, resolve: {master: projectMaterResolver}}
     ]
   }
 ];

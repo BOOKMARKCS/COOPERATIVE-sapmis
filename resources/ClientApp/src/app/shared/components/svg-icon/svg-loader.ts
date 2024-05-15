@@ -1,16 +1,10 @@
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-export abstract class SvgLoader {
-  abstract getSvg(url: string): Observable<string>;
-}
+import { Observable, from } from 'rxjs'
+import { Injectable } from '@angular/core'
 
 @Injectable()
-export class SvgHttpLoader extends SvgLoader {
-
-  constructor(private http: HttpClient) {
-    super();
-  }
-  getSvg = (url: string): Observable<string> => this.http.get(url, {responseType: 'text'});
+export class SvgLoader {
+  getSvg = (url: string): Observable<string> => from(fetch(url).then(response => {
+    if (response.ok) return response.text()
+    else throw new Error(`Failed to load SVG from ${url}`)
+  }))
 }

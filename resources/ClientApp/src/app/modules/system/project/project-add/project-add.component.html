@@ -1,98 +1,18 @@
 <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
   <app-header></app-header>
-  <h2 class="text-md text-muted-foreground  font-semibold  ms-3">แบบฟอร์มขออนุมัติโครงการ</h2>
-  <form [formGroup]="form" class="mt-4">
-    <app-input [inputFormControl]="getFormControl('projectName')" [label]="'ขื่อโครงการ'" class="bg-card text-muted-foreground rounded-lg" [placeholder]="' '"></app-input>
-    <app-input [inputFormControl]="getFormControl('activityGroupName')" [label]="'ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ'" class="bg-card text-muted-foreground  rounded-lg" [placeholder]="' '"></app-input>
-    <app-responsible-students [form]="getFormArray('responsibleStudents')" [users]="responsibleStudents"></app-responsible-students>
-    <app-project-advisor [form]="getFormArray('projectAdvisors')" [users]="projectAdvisors"></app-project-advisor>
-    <app-tsu-talents [data]="tsuTalents" [inputFormControl]="getFormControl([ 'tsuTalent', 'tsuTalentDetailId'])"></app-tsu-talents>
-    <app-strategic-talents [data]="strategicTalents" [inputFormControl]="getFormControl(['strategicTalent','strategicTalentDetailId'])"></app-strategic-talents>
-    <app-congruence-identities [data]="congruenceIdentities" [inputFormControl]="getFormControl(['congruenceIdentity','congruenceIdentityDetailId'])"></app-congruence-identities>
-    <app-input [inputFormControl]="getFormControl('background')" [label]="'หลักการและเหตุผล'" class="bg-card text-muted-foreground rounded-lg my-4" [placeholder]="' '"></app-input>
-    <div class="my-4 relative bg-background  p-8 rounded-lg">
-      <div class="flex justify-between">
-        <h3 class="text-md font-bold text-foreground"> วัตถุประสงค์ของโครงการ (จัดเพื่ออะไร)</h3>
-        <app-button (click)="getFormArray('objectives').push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่ม </app-button>
+
+  <div>
+    <h2 class="text-md text-muted-foreground  font-semibold">แบบฟอร์มขออนุมัติโครงการ</h2>
+    <form [formGroup]="form" class="mt-4">
+      <app-input-peer [inputFormControl]="getFormControl('projectName')" [label]="'ขื่อโครงการ'" class="peer block shadow-lg" [placeholder]="' '"></app-input-peer>
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormControl('projectName')?.invalid && getFormControl('projectName')?.touched "> กรุณาป้อนชื่อโครงการ</p>
+<!--      <app-responsible-students [form]="getFormArray('responsibleStudents')" [user]="responsibleStudents"></app-responsible-students>-->
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormArray('responsibleStudents').at(0).get(['user','email'])?.invalid && getFormArray('responsibleStudents').at(0).get(['user','email'])?.touched"> กรุณาเลือกผู้รับผิดชอบโครงการ</p>
+<!--      <app-project-advisor [form]="getFormArray('projectAdvisors')" [user]="projectAdvisors"></app-project-advisor>-->
+      <p class="mt-1 p-2 text-red-500" *ngIf="getFormArray('projectAdvisors').at(0).get(['user','email'])?.invalid && getFormArray('projectAdvisors').at(0).get(['user','email'])?.touched"> กรุณาเลือกที่ปรึกษาโครงการ</p>
+      <div class="flex justify-end mt-4">
+        <app-button (click)="onSubmit()" class="self-center " full impact="bold" tone="primary" shape="rounded" size="medium">เสนอโครงการ</app-button>
       </div>
-      <div *ngFor="let  pIndex of getIndexArray(getFormArray('objectives').controls)">
-        <div class="w-full relative">
-          <div class=" gap-2 relative">
-            <app-input [inputFormControl]="getFormArray('objectives').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('objectives').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="my-4 relative bg-background text-muted-foreground  p-8 rounded-lg">
-      <div class="flex justify-between">
-        <h3 class="text-md font-bold text-foreground"> รูปแบบกิจกรรม</h3>
-        <app-button (click)="getFormArray('activityFormats').push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่ม </app-button>
-      </div>
-      <div *ngFor="let  pIndex of getIndexArray(getFormArray('activityFormats').controls)">
-        <div class="w-full relative">
-          <div class=" gap-2 relative">
-            <app-input [inputFormControl]="getFormArray('activityFormats').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('activityFormats').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <app-project-participant [inputFormControl]="form"></app-project-participant>
-    <app-input [inputFormControl]="getFormControl('location')" [label]="'สถานที่ปฏิบัติงาน (ระบุชื่อ สถานที่ ตำบล อำเภอ จังหวัด)'" class="bg-card text-muted-foreground rounded-lg my-4 " [placeholder]="' '"></app-input>
-    <div class="my-4 relative bg-background text-muted-foreground  p-8 rounded-lg z-10">
-      <h3 class="text-md font-bold text-foreground">ระยะเวลาการปฏิบัติงาน</h3>
-      <div class="flex gap-6 pt-4 px-4 w-full mx-auto z-30">
-        <app-datepicker [disable]="true" [inputFormControl]="getFormControl('durationStart')" [label]="'วันเริ่มต้นโครงการ'" [lang]="'th'" class="w-full"></app-datepicker>
-        <p class="self-center"> - </p>
-        <app-datepicker [disable]="true" [inputFormControl]="getFormControl('durationEnd')" [label]="'วันสิ้นสุดโครงการ'" [lang]="'th'" class="w-full"></app-datepicker>
-      </div>
-    </div>
-    <div class="my-4 relative  bg-background text-muted-foreground p-8 rounded-lg  z-0">
-      <div class="flex justify-between">
-        <h3 class="text-md font-bold text-foreground">วิธีการดำเนินงาน</h3>
-        <app-button (click)="getFormArray('operations').push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่ม </app-button>
-      </div>
-      <div *ngFor="let  pIndex of getIndexArray(getFormArray('operations').controls)">
-        <div class="w-full relative">
-          <div class=" gap-2 relative">
-            <app-input [inputFormControl]="getFormArray('operations').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('operations').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <app-budget></app-budget>
-    <div class="my-4 relative bg-background text-muted-foreground p-8 rounded-lg">
-      <div class="flex justify-between">
-        <h3 class="text-md font-bold text-foreground">ผลที่คาดว่าจะได้รับ</h3>
-        <app-button (click)="getFormArray('expectedResults').push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่ม </app-button>
-      </div>
-      <div *ngFor="let  pIndex of getIndexArray(getFormArray('expectedResults').controls)">
-        <div class="w-full relative">
-          <div class=" gap-2 relative">
-            <app-input [inputFormControl]="getFormArray('expectedResults').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('expectedResults').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="my-4 relative bg-background text-muted-foreground p-8 rounded-lg ">
-      <div class="flex justify-between">
-        <h3 class="text-md font-bold text-foreground">วิธีการติดตามประเมินผล</h3>
-        <app-button (click)="getFormArray('evaluates').push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่ม </app-button>
-      </div>
-      <div *ngFor="let  pIndex of getIndexArray(getFormArray('evaluates').controls)">
-        <div class="w-full relative">
-          <div class=" gap-2 relative">
-            <app-input [inputFormControl]="getFormArray('evaluates').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('evaluates').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center"> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-end mt-4">
-      <app-button (click)="onSubmit()" class="self-center " full impact="bold" tone="primary" shape="rounded" size="medium">เสนอโครงการ</app-button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

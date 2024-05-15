@@ -35,7 +35,6 @@ export interface IUser {
 export class User {
   id = new FormControl(null)
   email = new FormControl(null,Validators.required)
-  password = new FormControl(null)
   type = new FormControl<TypeUser | null>(null)
   roleId = new FormControl(null)
   role = new FormGroup(new Role())
@@ -55,7 +54,7 @@ export interface IRole {
 
 export class Role {
   id = new FormControl(null)
-  permission = new FormControl<Permission>(Permission.Empty)
+  permission = new FormControl(null)
   organizationId = new FormControl(null)
   organization = new FormGroup(new Organization())
   positionId = new FormControl(null)

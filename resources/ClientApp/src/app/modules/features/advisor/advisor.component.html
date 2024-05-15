@@ -24,17 +24,17 @@
         <tbody>
         <tr *ngFor="let obj of projects; index as i">
           <td class="py-2 pl-2 text-left">
-            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].projectName }} </span>
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.projectName }} </span>
           </td>
           <td class="py-2 pl-2 text-right">
-            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].activityGroupName }} </span>
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.activityGroupName }} </span>
           </td>
           <td class="py-2 pl-2 text-right">
           <span
             class="text-sm font-semibold text-muted-foreground">{{ obj.projectType}}</span>
           </td>
           <td class="py-2 pl-2 text-right">
-            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetails[i].location }}</span>
+            <span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.location }}</span>
           </td>
           <td class="py-2 pl-2 text-right">
             <div class="flex justify-end">

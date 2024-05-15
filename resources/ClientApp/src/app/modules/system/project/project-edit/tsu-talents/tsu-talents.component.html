@@ -1,0 +1,10 @@
+<div class="my-4 relative  bg-background text-muted-foreground  p-8 rounded-lg">
+  <h3 class="text-md font-bold text-foreground"> ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน (กรณีขอเทียบกิจกรรมพัฒนานิสิตนอกชั้นเรียน โปรดระบุ)</h3>
+  <div class="ms-5" *ngFor="let tsuTalent of data">
+    <label class="block mb-2 ">{{ tsuTalent.name }}</label>
+    <div class="ms-6" *ngFor="let detail of tsuTalent?.talentDetails; index as i">
+      <input type="checkbox" (click)="setTsuTalent(detail.id, i)" [checked]="detail.id" class=" w-5 h-5s checked:bg-primary-500"/>
+      <label class="ml-3">{{ detail.name }}</label>
+    </div>
+  </div>
+</div>

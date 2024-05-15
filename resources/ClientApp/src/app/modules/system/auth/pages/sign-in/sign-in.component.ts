@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
-import {NgClass, NgIf} from '@angular/common';
-import {ButtonComponent} from "../../../../../shared/components/button/button.component";
-import {AuthService} from "../../../../../core/services/auth.service";
-import {AlertService} from "../../../../../shared/components/alert/alert.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
+import { ButtonComponent } from "../../../../../shared/components/button/button.component";
+import { AuthService } from "../../../../../core/services/auth.service";
+import { AlertService } from "../../../../../shared/components/alert/alert.service";
 import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
@@ -18,11 +18,10 @@ export class SignInComponent implements OnInit {
   submitted = false;
   passwordTextType!: boolean;
 
-  constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router, private authService: AuthService, private alertService: AlertService, private vcr: ViewContainerRef) {
+  constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router, private authService: AuthService, private alertService: AlertService) {
   }
 
   ngOnInit(): void {
-    this.alertService.setVCR(this.vcr)
     this.checkUserAuthentication()
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -31,9 +30,7 @@ export class SignInComponent implements OnInit {
   }
 
   checkUserAuthentication() {
-    if (this.authService.getJWT()) {
-      this._router.navigateByUrl('')
-    }
+    if (this.authService.getJWT()) this._router.navigateByUrl('')
   }
 
   get f() {

@@ -1,8 +1,8 @@
-import {Component, OnInit } from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {ResponsiveHelperComponent} from "./shared/components/responsive-helper/responsive-helper.component";
-import {ThemeService} from "./core/services/theme.service";
-import {AuthService} from "./core/services/auth.service";
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { ResponsiveHelperComponent } from "./shared/components/responsive-helper/responsive-helper.component";
+import { AuthService } from "./core/services/auth.service";
+import { AlertService } from "./shared/components/alert/alert.service";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,9 @@ import {AuthService} from "./core/services/auth.service";
 })
 export class AppComponent implements OnInit {
   title = 'ClientApp';
-  constructor(private authService: AuthService, themeService: ThemeService) {
+
+  constructor(private authService: AuthService,  asv: AlertService, VCR: ViewContainerRef) {
+    asv.setVCR(VCR)
   }
 
   ngOnInit(): void {
@@ -23,4 +25,5 @@ export class AppComponent implements OnInit {
     next: u => u ? u : this.authService.logout(),
     error: _ => this.authService.logout()
   });
+  viewDate: Date = new Date();
 }
