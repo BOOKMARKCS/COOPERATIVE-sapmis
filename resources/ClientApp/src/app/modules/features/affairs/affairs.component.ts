@@ -28,10 +28,10 @@ export class AffairsComponent {
 
   constructor(usv: UserService, psv: ProjectService) {
     usv.get().subscribe(u => this.users = u)
-    psv.get().subscribe(p => {
-      this.projects = p
-      console.log({p})
-    })
+    // psv.get().subscribe(p => {
+      // this.projects = p
+      // console.log({p})
+    // })
   }
 
 }

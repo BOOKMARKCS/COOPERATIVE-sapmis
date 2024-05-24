@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="relative overflow-x-auto">
-      <app-button *ngIf="!form?.at(0)?.get(['user','id'])?.value && !newUser?.get(['user','id'])?.value" (click)="setNewUser(null)" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">ไม่มีข้อมูลผู้รับผิดชอบโครงการ</app-button>
+      <app-button *ngIf="!form?.at(0)?.value?.user?.id && !newUser.value.user?.id" (click)="setNewUser(null)" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">ไม่มีข้อมูลผู้รับผิดชอบโครงการ</app-button>
       <table class="w-full table-auto">
         <thead class="text-xs uppercase text-muted-foreground" *ngIf="form?.at(0)?.value?.user?.id">
         <tr>

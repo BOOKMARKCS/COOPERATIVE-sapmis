@@ -1,11 +1,11 @@
-<div class="my-4 relative  bg-background text-muted-foreground  p-8 rounded-lg">
+<div class="my-4 relative bg-background text-muted-foreground p-8 rounded-lg">
   <h3 class="text-md font-bold text-foreground">ความสอดคล้องกับการพัฒนาอัตลักษณ์นิสิต</h3>
-  <p>เสริมสร้างอัตลักษณ์นิสิต จำนวน {{count?.length}} ด้าน ดังนี้</p>
+  <p>เสริมสร้างอัตลักษณ์นิสิต จำนวน {{getCount}} ด้าน ดังนี้</p>
   <div class="ms-5" *ngFor="let obj of data; index as key">
-    <input type="checkbox" disabled [checked]="count[key]?.length" class="w-5 h-5s checked:bg-primary-500"/>
-    <label class="ml-3  font-semibold">{{ obj.name }}</label>
+    <input type="checkbox" disabled [checked]="hasMatch(obj.congruenceIdentityDetail)" class="w-5 h-5s checked:bg-primary-500"/>
+    <label class="ml-3 font-semibold">{{ obj.name }}</label>
     <div class="ms-6" *ngFor="let detail of obj.congruenceIdentityDetail; index as i">
-      <input type="checkbox" (click)="setCongruenceIdentity(detail.id.toString(), key)" class=" w-5 h-5s checked:bg-primary-500"/>
+      <input type="checkbox" (click)="setCongruenceIdentity(detail.id, key)" [checked]="inputFormControl.value.includes(detail.id)" class=" w-5 h-5s checked:bg-primary-500"/>
       <label class="ml-3">{{ detail.name }}</label>
     </div>
   </div>

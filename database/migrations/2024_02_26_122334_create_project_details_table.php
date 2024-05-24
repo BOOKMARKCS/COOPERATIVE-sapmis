@@ -26,8 +26,7 @@ return new class extends Migration {
             $table->json('objectives');
             $table->json('activity_formats');
             $table->string('location')->nullable();
-            $table->date('duration_start');
-            $table->date('duration_end');
+            $table->json('duration');
             $table->json('operations');
             $table->json('expected_results');
             $table->json('evaluates');

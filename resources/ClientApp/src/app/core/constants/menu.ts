@@ -43,6 +43,11 @@ export class Menu {
         label: 'หน้าหลัก',
         route: '/responsible',
       },
+      {
+        icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+        label: 'รายละเอียดโปรเจ็ค',
+        route: '/responsible/project-detail',
+      },
     ],
   }]
   public static endorser: MenuItem[] = [{

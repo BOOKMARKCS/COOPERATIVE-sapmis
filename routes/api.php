@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UsersController;
+use App\Models\Organization;
+use App\Models\Project;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +25,17 @@ use Illuminate\Support\Facades\Route;
 Route::resource('user', UsersController::class);
 Route::resource('project', ProjectController::class);
 Route::put('project/{id}', [ProjectController::class, 'update']);
-Route::post('project-temp', [ProjectController::class, 'storeTempData']);
-Route::get('project-get-temp', [ProjectController::class, 'getTempData']);
-Route::get('master-project', [ProjectController::class,'master']);
+Route::get('master-project', [ProjectController::class, 'master']);
+//Route::get('project/detail', [ProjectController::class, 'detail']);
+
+Route::get('organizations', function () {
+    return Organization::pluck('name', 'id')->map(function ($name, $id) {
+        return compact('id', 'name');
+    })->values();
+});
 Route::post('login', [AuthController::class, 'login']);
 Route::get('refresh', [AuthController::class, 'refresh']);
 Route::get('roles', fn() => Role::pluck('name'));
 Route::get('master-user', [UsersController::class, 'master']);
 Route::post('logout', [AuthController::class, 'logout']);
-Route::get('test', [UsersController::class, 'test']);
+Route::get('test', fn() =>  Project::join('project_details','project_details.project_id',''));

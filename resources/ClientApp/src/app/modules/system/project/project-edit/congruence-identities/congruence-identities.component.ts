@@ -1,7 +1,7 @@
-import { Component, Input, NgIterable } from '@angular/core';
-import {FormArray, FormControl} from "@angular/forms";
-import {JsonPipe, NgForOf} from "@angular/common";
-import { ICongruenceIdentity, ICongruenceIdentityGroupDetails } from "../../../../../core/models/projectDetail/project-detail.model";
+import { Component, Input } from '@angular/core';
+import { FormArray, FormControl } from "@angular/forms";
+import { NgForOf } from "@angular/common";
+import { ICongruenceIdentityGroupDetails } from "../../../../../core/models/projectDetail/project-detail.model";
 
 interface CongruenceIdentityDetail {
   id: number;
@@ -11,24 +11,27 @@ interface CongruenceIdentityDetail {
   updatedAt: string;
 }
 
-interface CongruenceIdentity {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  congruenceIdentityDetail: CongruenceIdentityDetail[];
-}
 
 @Component({
   selector: 'app-congruence-identities',
   standalone: true,
-  imports: [NgForOf, JsonPipe],
+  imports: [NgForOf],
   templateUrl: './congruence-identities.component.html',
 })
 export class CongruenceIdentitiesComponent {
-  @Input() inputFormControl: any;
+  @Input() inputFormControl: any
   @Input() data: ICongruenceIdentityGroupDetails[] = []
   count: any = []
+
+  get getCount() {
+    return this.inputFormControl.value.length
+  }
+
+  hasMatch(data: any): boolean {
+    let detailId: any = []
+    data.map((obj: any) => detailId.push(obj.id))
+    return detailId.some((item: any) => this.inputFormControl?.value.includes(item))
+  }
 
   setCongruenceIdentity(id: string, key: number) {
     if (!this.count) this.count = [];
@@ -44,6 +47,4 @@ export class CongruenceIdentitiesComponent {
       idIndex !== -1 ? congruenceIdentityDetailIdFormArray.removeAt(idIndex) : congruenceIdentityDetailIdFormArray.push(new FormControl(id));
     }
   }
-
-  protected readonly parseInt = parseInt;
 }

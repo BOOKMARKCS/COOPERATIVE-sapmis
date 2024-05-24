@@ -1,17 +1,13 @@
 <div [formGroup]="inputFormControl">
-  <div class="my-4 bg-background text-muted-foreground p-8 rounded-lg" formGroupName="projectDetail">
+  <div class="my-4 bg-background text-muted-foreground p-8 rounded-lg">
     <h3 class="text-md font-bold text-foreground">ผู้เข้าร่วมโครงการ</h3>
-    <div class="p-2" formGroupName="projectParticipant">
+    <div class="p-2">
       <div *ngFor="let obj of [{label:'ที่ปรึกษา', formArray:'advisor'}, {label:'นิสิต', formArray:'student'}, {label:'อื่นๆ', formArray:'other'}]" class="flex justify-between align-middle m-2">
         <span>{{ obj.label }}</span>
-        <div class="flex flex-wrap" [formArrayName]="obj.formArray">
-          <div class="flex">
-            <span class="m-2">ชาย</span><input [formControlName]="0" type="number" [min]="0"><span class="m-2">คน</span>
-          </div>
-          <div class="flex">
-            <span class="m-2">หญิง</span><input [formControlName]="1" type="number" [min]="0"><span class="m-2">คน</span>
-          </div>
-          <p class="m-2 self-center">รวม {{ sumArray(inputFormControl.get(['projectDetail','projectParticipant', obj.formArray])?.value) }}
+        <div class="flex flex-wrap" formArrayName="advisor">
+          <div class="flex"> <span class="m-2">ชาย</span><input [formControl]="inputFormControl.get(obj.formArray).at(0)"  type="number" [min]="0"><span class="m-2">คน</span> </div>
+          <div class="flex"> <span class="m-2">หญิง</span><input [formControl]="inputFormControl.get(obj.formArray).at(1)" type="number" [min]="0"><span class="m-2">คน</span> </div>
+          <p class="m-2 self-center">รวม {{ sumArray(inputFormControl.get(obj.formArray)?.value) }}
         </div>
       </div>
       <p class="m-4 self-center text-end">รวม {{ sumProjectParticipant() }} คน</p>

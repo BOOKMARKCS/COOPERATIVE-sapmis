@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignUlid('project_detail_id')->constrained('project_details')->onUpdate('cascade')->onDelete('cascade');
             $table->json('advisor');
             $table->json('student');
-            $table->json('teacher');
+            $table->json('teacher')->nullable();
             $table->json('other');
             $table->timestamps();
         });

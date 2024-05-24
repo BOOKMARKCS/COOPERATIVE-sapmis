@@ -1,1 +1,8 @@
-<p-calendar [(ngModel)]="dates" selectionMode="multiple" [readonlyInput]="true"/>
+<p-calendar
+  (click)="processSortedDates()"
+  [(ngModel)]="dates"
+  [showIcon]="true"
+  [showOnFocus]="false"
+  dateFormat="dd/mm/yy"
+  selectionMode="multiple"
+  styleClass="w-full"/>

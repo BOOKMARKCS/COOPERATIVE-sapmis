@@ -17,5 +17,5 @@ export class Project {
   academicYear = new FormControl(null)
   status = new FormControl(null)
   projectType = new FormControl(null)
-  projectDetail = new FormGroup(new ProjectDetail())
+  projectDetail = new FormGroup<ProjectDetail>(new ProjectDetail())
 }

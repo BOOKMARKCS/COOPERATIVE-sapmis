@@ -13,5 +13,5 @@ export class ProjectParticipantComponent {
 
   sumArray = (arr: any[]): number => arr.reduce((acc, val) => acc + (+val || 0), 0);
 
-  sumProjectParticipant = (): number => ['advisor', 'student', 'other'].reduce((acc, key) => acc + this.sumArray(this.inputFormControl.get(['projectDetail', 'projectParticipant', key]).value), 0);
+  sumProjectParticipant = (): number => ['advisor', 'student', 'other'].reduce((acc, key) => acc + this.sumArray(this.inputFormControl.get(key).value), 0);
 }

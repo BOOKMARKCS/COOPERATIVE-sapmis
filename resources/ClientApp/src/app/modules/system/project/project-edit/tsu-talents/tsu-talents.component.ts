@@ -1,23 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { JsonPipe, NgForOf } from "@angular/common";
-import { FormArray, FormControl } from "@angular/forms";
+import {  FormArray, FormControl } from "@angular/forms";
 import { ITsuTalentGroupDetails } from "../../../../../core/models/projectDetail/project-detail.model";
-
-interface TalentDetail {
-  id: number;
-  name: string;
-  tsuTalentGroupId: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface TsuTalent {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  talentDetails: TalentDetail[];
-}
 
 @Component({
   selector: 'app-tsu-talents',
@@ -26,10 +10,10 @@ interface TsuTalent {
   templateUrl: './tsu-talents.component.html',
 })
 export class TsuTalentsComponent {
-  @Input() inputFormControl: any;
-  @Input() data : ITsuTalentGroupDetails[] = []
+  @Input() inputFormControl: any
+  @Input() data: ITsuTalentGroupDetails[] = []
 
-  setTsuTalent(id: string, index: number) {
+  setTsuTalent(id: string) {
     const tsuTalentDetailIdFormArray = this.inputFormControl as FormArray;
     if (tsuTalentDetailIdFormArray) {
       const idIndex = tsuTalentDetailIdFormArray.value.indexOf(id);

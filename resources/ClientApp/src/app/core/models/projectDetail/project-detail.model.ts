@@ -39,7 +39,7 @@ export interface IProjectDetail {
   activityFormats: string[]; // เปลี่ยนเป็น array
   projectParticipant: IProjectParticipant;
   location: string;
-  duration: string[];
+  duration: Date[];
   operations: string[]; // เปลี่ยนเป็น array
   budget: IBudget;
   expectedResults: string[]; // เปลี่ยนเป็น array
@@ -54,22 +54,22 @@ export class ProjectDetail {
   projectId = new FormControl(null)
   projectName = new FormControl(null, Validators.required)
   activityGroupName = new FormControl(null)
-  responsibleStudents = new FormArray([new FormGroup(new ResponsibleStudent())], Validators.required);
-  projectAdvisors = new FormArray([new FormGroup(new ProjectAdvisor())], Validators.required)
+  responsibleStudents = new FormArray<FormGroup<ResponsibleStudent>>([], Validators.required);
+  projectAdvisors = new FormArray<FormGroup<ProjectAdvisor>>([], Validators.required)
   tsuTalent = new FormGroup(new TsuTalent())
-  strategicTalent = new FormGroup(new StrategicTalent())
-  congruenceIdentity = new FormGroup(new CongruenceIdentity())
+  strategicTalent = new FormGroup<StrategicTalent>(new StrategicTalent())
+  congruenceIdentity = new FormGroup<CongruenceIdentity>(new CongruenceIdentity())
   background = new FormControl(null)
-  objectives = new FormArray([new FormControl(null)])
-  activityFormats = new FormArray([new FormControl(null)])
-  projectParticipant = new FormGroup(new ProjectParticipant())
+  objectives = new FormArray<FormControl<string>>([])
+  activityFormats = new FormArray<FormControl<string>>([])
+  projectParticipant = new FormGroup<ProjectParticipant>(new ProjectParticipant())
   location = new FormControl(null)
-  duration = new FormArray([new FormControl(new Date())])
-  operations = new FormArray([new FormControl(null)])
-  budget = new FormGroup(new Budget())
-  expectedResults = new FormArray([new FormControl(null)])
+  duration = new FormArray([])
+  operations = new FormArray<FormControl<string>>([])
+  budget = new FormGroup<Budget>(new Budget())
+  expectedResults = new FormArray<FormControl<string>>([])
   kpi = new FormGroup(new Kpi())
-  evaluates = new FormArray([new FormControl(null)])
+  evaluates = new FormArray<FormControl<string>>([])
   createdAt = new FormControl(null)
 }
 
@@ -77,6 +77,8 @@ export class ProjectDetail {
 export interface IResponsibleStudent {
   id: string
   projectDetailId: string
+  studentId : string
+  userId : string
   user: IUser
   status: string
 }
@@ -85,7 +87,7 @@ export class ResponsibleStudent {
   id = new FormControl(null)
   projectDetailId = new FormControl(null)
   status = new FormControl(false)
-  student_id = new FormControl(null)
+  studentId = new FormControl(null)
   userId = new FormControl(null)
   user = new FormGroup(new User(), Validators.required)
 }
@@ -124,24 +126,22 @@ export interface ITsuTalent {
 
 export class TsuTalent {
   projectDetailId = new FormControl(null)
-  tsuTalentDetailId = new FormArray([])
+  tsuTalentDetailId = new FormArray<FormControl<string>>([])
 }
 
 export interface IStrategicTalent {
-  id: string
   projectDetailId: string
   strategicTalentDetailId: Array<string>
 }
 
 export class StrategicTalent {
-  id = new FormControl(null)
   projectDetailId = new FormControl(null)
   strategicTalentDetailId = new FormArray([])
 }
 export interface ICongruenceIdentityDetail {
   id : string
   name : string
-  congruenceIdentityGroupId  : string
+  congruenceIdentityGroupId  : string[]
 }
 
 export interface ICongruenceIdentityGroupDetails {
@@ -150,13 +150,11 @@ export interface ICongruenceIdentityGroupDetails {
   congruenceIdentityDetail : ICongruenceIdentityDetail[]
 }
 export interface ICongruenceIdentity {
-  id: string,
   projectDetailId: string
   congruenceIdentityDetailId: Array<string>
 }
 
 export class CongruenceIdentity {
-  id = new FormControl(null)
   projectDetailId = new FormControl(null)
   congruenceIdentityDetailId = new FormArray([])
 }

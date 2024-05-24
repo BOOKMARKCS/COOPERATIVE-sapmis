@@ -7,7 +7,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AlertService } from "../../../../shared/components/alert/alert.service";
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
 import { DatepickerComponent } from "../../layout/navbar/inputs/datepicker/datepicker.component";
-import {  FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputComponent } from "../../../../shared/components/inputs/input/input.component";
 import { JsonPipe, NgForOf, NgIf } from "@angular/common";
 import { ICongruenceIdentityGroupDetails, IMaster, ITsuTalentGroupDetails } from "../../../../core/models/projectDetail/project-detail.model";
@@ -23,14 +23,16 @@ import { INameId } from "../../../../shared/models/common";
 import { IUser } from "../../../../core/models/auth/user.model";
 import { lastValueFrom } from "rxjs";
 import { DurationsComponent } from "./durations/durations.component";
+import { EditorComponent } from "@tinymce/tinymce-angular";
+import { InputTextareaComponent } from "../../../../shared/components/inputs/input-textarea/input-textarea.component";
 
 @Component({
   selector: 'app-project-edit',
   standalone: true,
-  imports: [HeaderComponent, ProjectListComponent, BudgetComponent, ButtonComponent, CongruenceIdentitiesComponent, DatepickerComponent, FormsModule, InputComponent, NgForOf, ProjectAdvisorComponent, ProjectParticipantComponent, ResponsibleStudentsComponent, StrategicTalentsComponent, SvgIconComponent, TsuTalentsComponent, ReactiveFormsModule, NgIf, JsonPipe, DurationsComponent],
+  imports: [HeaderComponent, ProjectListComponent, BudgetComponent, ButtonComponent, CongruenceIdentitiesComponent, DatepickerComponent, FormsModule, InputComponent, NgForOf, ProjectAdvisorComponent, ProjectParticipantComponent, ResponsibleStudentsComponent, StrategicTalentsComponent, SvgIconComponent, TsuTalentsComponent, ReactiveFormsModule, NgIf, JsonPipe, DurationsComponent, EditorComponent, InputTextareaComponent],
   templateUrl: './project-edit.component.html',
 })
-export class ProjectEditComponent implements OnInit {
+export class ProjectEditComponent  {
   project: IProject | undefined
   form: FormGroup
   tsuTalents: ITsuTalentGroupDetails[] = []
@@ -39,14 +41,10 @@ export class ProjectEditComponent implements OnInit {
   responsibleStudents: IUser[] = [];
   projectAdvisors: IUser[] = [];
 
-  constructor(private fb: FormBuilder, private psv: ProjectService, private route: ActivatedRoute, alertService: AlertService) {
+  constructor(private fb: FormBuilder, private psv: ProjectService, private route: ActivatedRoute, private asv: AlertService) {
     Object.assign(this, route.snapshot.data['master'] as IMaster)
     this.form = this.fb.group(new Project());
-  }
-
-  async ngOnInit() {
-    let project: IProject = await lastValueFrom(this.psv.show(this.route.snapshot.params['id']));
-    this.psv.patchValue(this.form, project)
+    this.psv.show(this.route.snapshot.params['id']).subscribe(project => this.psv.patchValue(this.form, project))
   }
 
   getIndexArray = (controls: any) => Array.from({length: controls.length}, (_, i) => i);
@@ -60,7 +58,9 @@ export class ProjectEditComponent implements OnInit {
   onSubmit() {
     // this.form.get('status')?.setValue(this.psv.getProjectStatus(this.form.get('projectType')?.value,this.form.get('status')?.value)?.id)
     console.log({form: this.form.getRawValue()})
-    this.psv.update(this.form.getRawValue(), this.route.snapshot.params['id']).subscribe(console.log)
+    this.psv.update(this.form.getRawValue(), this.route.snapshot.params['id']).subscribe({next: () => {
+      this.asv.success('บันทึกข้อมูลสำเร็จ')
+        window.location.href = '/'
+      }, error: () => this.asv.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล') })
   }
-
 }

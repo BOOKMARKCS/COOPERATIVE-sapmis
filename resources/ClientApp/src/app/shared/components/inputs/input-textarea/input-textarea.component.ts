@@ -1,13 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ReactiveFormsModule} from "@angular/forms";
+import { Component, Input, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-  selector: 'app-input',
+  selector: 'app-input-textarea',
   standalone: true,
-  imports: [ ReactiveFormsModule ],
-  templateUrl: './input.component.html',
+    imports: [
+        ReactiveFormsModule
+    ],
+  templateUrl: './input-textarea.component.html',
+  styleUrl: './input-textarea.component.sass'
 })
-export class InputComponent implements OnInit{
+export class InputTextareaComponent implements OnInit{
   @Input() label : string = ''
   @Input() inputFormControl: any;
   @Input() value : any = '';

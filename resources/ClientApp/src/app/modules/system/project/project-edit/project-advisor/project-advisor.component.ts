@@ -17,7 +17,7 @@ import { IUser } from "../../../../../core/models/auth/user.model";
 export class ProjectAdvisorComponent {
   @Input() form: FormArray<FormGroup<ProjectAdvisor>> = new FormArray<FormGroup<ProjectAdvisor>>([])
   newUser: FormGroup<ProjectAdvisor> = this.fb.group(new ProjectAdvisor())
-  @Input() users: (IUser | null)[] = [];
+  @Input() users: any = [];
   addToggle: boolean = false;
 
   constructor(private fb: FormBuilder) {

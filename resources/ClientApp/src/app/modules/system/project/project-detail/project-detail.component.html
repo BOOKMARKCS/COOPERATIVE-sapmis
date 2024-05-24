@@ -1,1 +1,58 @@
-<p>project-detail works!</p>
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-semibold mb-4">แบบขออนุมัติโครงการกิจกรรมนิสิต</h2>
+    <div class="p-10">
+      <h1 class="text-3xl font-bold mb-6">แบบขออนุมัติโครงการกิจกรรมนิสิต</h1>
+
+      <!-- 1. ชื่อโครงการ -->
+      <div class="flex gap-4">
+        <h2 class="font-bold">1. ชื่อโครงการ</h2>
+        <p>{{ projectData?.projectDetail?.projectName }}</p>
+      </div>
+
+
+      <div class="flex gap-4">
+        <h2 class="font-bold">2. ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ</h2>
+        <p>{{ projectData?.projectDetail?.activityGroupName }}</p>
+      </div>
+
+      <div class="">
+        <h2 class="font-bold">3. รายชื่อนิสิตผู้รับผิดชอบโครงการ</h2>
+        <div class="flex flex-row pl-8" *ngFor="let obj of projectData?.projectDetail?.responsibleStudents; index as i">
+          <p>3.{{ i + 1 }} {{ obj.user.student.name }} รหัสประจำตัวนิสิต {{ obj.studentId }} หมายเลขโทรศัพท์ {{ obj.user.student.phoneNumber }}</p>
+        </div>
+      </div>
+
+
+      <!--      &lt;!&ndash; 3. รายชื่อนิสิตผู้รับผิดชอบโครงการ &ndash;&gt;-->
+      <!--      <div class="mb-6">-->
+      <!--        <h2 class="font-bold">3. รายชื่อนิสิตผู้รับผิดชอบโครงการ</h2>-->
+      <!--        <ul>-->
+      <!--          <li *ngFor="let student of projectData.projectDetail.studentResponsibilities">-->
+      <!--            {{ student.name }} - รหัสประจำตัว: {{ student.studentId }} | เบอร์โทร: {{ student.phone }}-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+
+      <!--      &lt;!&ndash; 4. รายชื่อที่ปรึกษาโครงการ &ndash;&gt;-->
+      <!--      <div class="mb-6">-->
+      <!--        <h2 class="font-bold">4. รายชื่อที่ปรึกษาโครงการ</h2>-->
+      <!--        <ul>-->
+      <!--          <li *ngFor="let advisor of projectData.projectDetail.advisorNames">-->
+      <!--            {{ advisor.name }} | เบอร์โทร: {{ advisor.phone }}-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+
+      <!--      &lt;!&ndash; 5. ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน &ndash;&gt;-->
+      <!--      <div class="mb-6">-->
+      <!--        <h2 class="font-bold">5. ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน</h2>-->
+      <!--        <ul>-->
+      <!--          <li *ngFor="let activity of projectData.projectDetail.activities">{{ activity }}</li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+    </div>
+  </div>
+</div>

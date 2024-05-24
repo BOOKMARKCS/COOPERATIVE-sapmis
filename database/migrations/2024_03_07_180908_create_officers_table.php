@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone_number', 15);
             $table->string('signature')->nullable();
             $table->string('profile')->default('/images/profile_default.png');
+            $table->integer('academic_year')->nullable();
             $table->timestamps();
         });
     }

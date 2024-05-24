@@ -16,11 +16,12 @@ import { IUser } from "../../../../../core/models/auth/user.model";
 })
 export class ResponsibleStudentsComponent implements OnInit {
   @Input() form: FormArray<FormGroup<ResponsibleStudent>> = new FormArray<FormGroup<ResponsibleStudent>>([]);
-  @Input() users: IUser[] = [];
+  @Input() users: any = [];
   newUser: FormGroup<ResponsibleStudent> = this.fb.group(new ResponsibleStudent())
   addToggle: boolean = false
 
   constructor(private fb: FormBuilder) {
+    console.log({user:this.users})
   }
 
   ngOnInit(): void {

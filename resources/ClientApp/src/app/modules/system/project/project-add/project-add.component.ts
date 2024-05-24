@@ -3,7 +3,7 @@ import { ButtonComponent } from "../../../../shared/components/button/button.com
 import { DatepickerComponent } from "../../layout/navbar/inputs/datepicker/datepicker.component";
 import { HeaderComponent } from "../../layout/components/header/header.component";
 import { InputComponent } from "../../../../shared/components/inputs/input/input.component";
-import { NgForOf, NgIf } from "@angular/common";
+import { JsonPipe, NgForOf, NgIf } from "@angular/common";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { IProjectAdvisor, IResponsibleStudent, ProjectDetail } from "../../../../core/models/projectDetail/project-detail.model";
 import { ProjectService } from "../project.service";
@@ -18,7 +18,7 @@ import { ProjectAdvisorComponent } from "../project-edit/project-advisor/project
 @Component({
   selector: 'app-project-add',
   standalone: true,
-  imports: [ButtonComponent, DatepickerComponent, HeaderComponent, InputComponent, NgForOf, ReactiveFormsModule, InputPeerComponent, ResponsibleStudentsComponent, ProjectAdvisorComponent, NgIf],
+  imports: [ButtonComponent, DatepickerComponent, HeaderComponent, InputComponent, NgForOf, ReactiveFormsModule, InputPeerComponent, ResponsibleStudentsComponent, ProjectAdvisorComponent, NgIf, JsonPipe],
   templateUrl: './project-add.component.html',
 })
 export class ProjectAddComponent {

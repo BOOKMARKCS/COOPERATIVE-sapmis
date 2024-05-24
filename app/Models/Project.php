@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static create(array $convertToSnakeCase)
@@ -21,21 +21,11 @@ class Project extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected static function boot()
     {
         parent::boot();
-
-//        static::saving(function ($model) {
-//            $rules = ['academic_year' => 'required|integer|min:1900|max:' . ((integer)date('Y') + 1),];
-//            $messages = [
-//                'academic_year.required' => 'กรุณาระบุปีการศึกษา',
-//                'academic_year.integer' => 'ปีการศึกษาต้องเป็นตัวเลขเท่านั้น',
-//                'academic_year.min' => 'ปีการศึกษาต้องไม่ต่ำกว่า 1900',
-//                'academic_year.max' => 'ปีการศึกษาต้องไม่มากกว่า ' . ((integer)date('Y') + 1),
-//            ];
-//            $validator = Validator::make($model->toArray(), $rules, $messages);
-//            if ($validator->fails()) throw new ValidationException($validator);
-//        });
 
         static::creating(function ($project) {
             $project->user_id = auth()->id();
@@ -50,8 +40,12 @@ class Project extends Model
         return Project::create($request)->latest()->first();
     }
 
-    public function projectDetails(): HasMany
+//    public function projectDetail(): HasMany
+//    {
+//        return $this->hasMany(ProjectDetail::class, 'project_id', 'id')->with(['projectAdvisors','tsuTalent','strategicTalent','congruenceIdentity','projectParticipant','budget','kpi'])->orderByDesc('created_at')->take(1);
+//    }
+    public function projectDetail(): HasOne
     {
-        return $this->hasMany(ProjectDetail::class, 'project_id', 'id')->orderByDesc('created_at');
+        return $this->hasOne(ProjectDetail::class, 'project_id', 'id') ->with(['projectAdvisors', 'tsuTalent', 'strategicTalent', 'congruenceIdentity', 'projectParticipant', 'budget', 'kpi'])->orderByDesc('created_at')->take(1);
     }
 }

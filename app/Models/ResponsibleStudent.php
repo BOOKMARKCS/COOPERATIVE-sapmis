@@ -20,5 +20,10 @@ class ResponsibleStudent extends Model
         array_map(fn($req) => ResponsibleStudent::create([ 'student_id' => $req['user']['student']['id'], 'project_detail_id' => $projectDetailId, 'user_id' => $req['user']['id'] ]), $requests);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }
