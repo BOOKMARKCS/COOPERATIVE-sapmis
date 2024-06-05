@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mobile-submenu.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgFor, NgClass, NgTemplateOutlet, NgIf } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {NavbarMobileSubmenuComponent} from '../navbar-mobile-submenu/navbar-mobile-submenu.component';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {NgClass, NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
 import {MenuService} from "../../../services/menu.service";
 import {SubMenuItem} from "../../../../../../core/models/menu.model";
-import { SvgIconComponent } from "../../../../../../shared/components/svg-icon/svg-icon.component";
+import {SvgIconComponent} from "../../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
     selector: 'app-navbar-mobile-menu',

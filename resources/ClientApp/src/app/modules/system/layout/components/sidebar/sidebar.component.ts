@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../services/menu.service';
-import { RouterLink } from '@angular/router';
-import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
-import { NgClass, NgIf } from '@angular/common';
-import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+import {Component, OnInit} from '@angular/core';
+import {MenuService} from '../../services/menu.service';
+import {RouterLink} from '@angular/router';
+import {SidebarMenuComponent} from './sidebar-menu/sidebar-menu.component';
+import {NgClass, NgIf} from '@angular/common';
+import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-sidebar',

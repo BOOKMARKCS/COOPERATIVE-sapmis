@@ -1,8 +1,21 @@
-import { ChangeDetectorRef, Component, DoCheck, ElementRef, Input, KeyValueChangeRecord, KeyValueChanges, KeyValueDiffer, KeyValueDiffers, OnDestroy, OnInit, Renderer2 } from '@angular/core'
-import { Subscription } from 'rxjs'
-import { SvgIconRegistryService } from './svg-icon-registry.service'
-import { CommonModule } from '@angular/common'
-import { SvgLoader } from "./svg-loader"
+import {
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  ElementRef,
+  Input,
+  KeyValueChangeRecord,
+  KeyValueChanges,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnDestroy,
+  OnInit,
+  Renderer2
+} from '@angular/core'
+import {Subscription} from 'rxjs'
+import {SvgIconRegistryService} from './svg-icon-registry.service'
+import {CommonModule} from '@angular/common'
+import {SvgLoader} from "./svg-loader"
 
 @Component({
   selector: 'svg-icon',

@@ -1,5 +1,5 @@
-import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
-import { AlertComponent } from './alert.component';
+import {ComponentRef, Injectable, ViewContainerRef} from '@angular/core';
+import {AlertComponent} from './alert.component';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {

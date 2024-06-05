@@ -1,6 +1,14 @@
-import { AfterContentChecked, AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { CalendarModule } from "primeng/calendar";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
+import {CalendarModule} from "primeng/calendar";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-durations',
@@ -35,7 +43,6 @@ export class DurationsComponent implements AfterContentChecked,  OnInit, OnChang
         });
         this.cdRef.detectChanges(); // Trigger change detection
       }
-      console.log('OnInit', this.inputFormControl.value);
     }, 0);
   }
 

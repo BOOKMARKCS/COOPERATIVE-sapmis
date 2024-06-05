@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { IProject } from "../../../core/models/project/project.model";
-import { AuthService } from "../../../core/services/auth.service";
-import { ProjectStatus, ProjectStatusItem, ProjectType } from "../../../core/models/project/project.enum";
-import { IMaster } from "../../../core/models/projectDetail/project-detail.model";
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from "@angular/forms";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {IProject} from "../../../core/models/project/project.model";
+import {AuthService} from "../../../core/services/auth.service";
+import {ProjectStatus, ProjectType} from "../../../core/models/project/project.enum";
+import {IMaster} from "../../../core/models/projectDetail/project-detail.model";
+import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'

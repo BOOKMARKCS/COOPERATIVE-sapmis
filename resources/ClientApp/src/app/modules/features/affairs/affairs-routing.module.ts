@@ -1,8 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AffairsComponent} from "./affairs.component";
-import {AddUserComponent} from "./users/add-user/add-user.component";
-import {UsersComponent} from "./users/users.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AffairsComponent } from "./affairs.component";
+import { AddUserComponent } from "./users/add-user/add-user.component";
+import { UsersComponent } from "./users/users.component";
+import { ProjectDetailComponent } from "../../system/project/project-detail/project-detail.component";
 
 const routes: Routes = [
   {path: '', component: AffairsComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
       {path: 'add', component: AddUserComponent}
     ]
   },
+  {path: 'project-detail', component: ProjectDetailComponent}
 ];
 
 @NgModule({

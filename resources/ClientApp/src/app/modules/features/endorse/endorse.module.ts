@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { EndorseRoutingModule } from './endorse-routing.module';
+import {EndorseRoutingModule} from './endorse-routing.module';
 
 
 @NgModule({

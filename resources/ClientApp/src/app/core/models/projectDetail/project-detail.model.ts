@@ -1,5 +1,5 @@
-import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { IUser, User } from "../auth/user.model";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {IUser, User} from "../auth/user.model";
 
 // export interface IProjectDetail {
 //   id : string
@@ -121,7 +121,7 @@ export interface ITsuTalentGroupDetails {
 export interface ITsuTalent {
   id: string,
   projectDetailId: string,
-  tsuTalentDetailId: Array<string>
+  tsuTalentDetailId: string[]
 }
 
 export class TsuTalent {
@@ -151,7 +151,7 @@ export interface ICongruenceIdentityGroupDetails {
 }
 export interface ICongruenceIdentity {
   projectDetailId: string
-  congruenceIdentityDetailId: Array<string>
+  congruenceIdentityDetailId: string[]
 }
 
 export class CongruenceIdentity {
@@ -178,12 +178,12 @@ export interface IBudget {
   id: string;
   projectDetailId: string;
   costDetails: string[]; // เปลี่ยนเป็น array
-  costAmounts: string[]; // เปลี่ยนเป็น array
+  costAmounts: number[]; // เปลี่ยนเป็น array
   remunerationDetails: string[]; // เปลี่ยนเป็น array
-  remunerationAmounts: string[]; // เปลี่ยนเป็น array
+  remunerationAmounts: number[]; // เปลี่ยนเป็น array
   equipmentCostDetails: string[]; // เปลี่ยนเป็น array
-  equipmentCostAmounts: string[]; // เปลี่ยนเป็น array
-  other: string;
+  equipmentCostAmounts: number[]; // เปลี่ยนเป็น array
+  other: number;
 }
 export class Budget {
   id = new FormControl(null)

@@ -1,14 +1,13 @@
-import { Component, NgIterable, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ActivatedRoute, Router, RouterLink, } from "@angular/router";
-import { AffairsService } from "../../affairs.service";
-import { JsonPipe, NgClass, NgForOf, NgIf } from "@angular/common";
-import { IOrganization, IRole, TypeUser, User } from "../../../../../core/models/auth/user.model";
-import { lastValueFrom, map } from "rxjs";
-import { ButtonComponent } from "../../../../../shared/components/button/button.component";
-import { UserService } from "../../../../system/user/user.service";
-import { HeaderComponent } from "../../../../system/layout/components/header/header.component";
-import { UserAddComponent } from "../../../../system/user/user-add/user-add.component";
+import {Component, NgIterable, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ActivatedRoute, Router, RouterLink,} from "@angular/router";
+import {JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {IOrganization, IRole, TypeUser, User} from "../../../../../core/models/auth/user.model";
+import {lastValueFrom} from "rxjs";
+import {ButtonComponent} from "../../../../../shared/components/button/button.component";
+import {UserService} from "../../../../system/user/user.service";
+import {HeaderComponent} from "../../../../system/layout/components/header/header.component";
+import {UserAddComponent} from "../../../../system/user/user-add/user-add.component";
 
 @Component({
   selector: 'app-add-user',

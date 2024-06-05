@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NavbarSubmenuComponent } from '../navbar-submenu/navbar-submenu.component';
-import { NgFor, NgClass } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {NavbarSubmenuComponent} from '../navbar-submenu/navbar-submenu.component';
+import {NgClass, NgFor} from '@angular/common';
 import {MenuItem} from "../../../../../core/models/menu.model";
-import { MenuService } from "../../services/menu.service";
+import {MenuService} from "../../services/menu.service";
 
 @Component({
     selector: 'app-navbar-menu',

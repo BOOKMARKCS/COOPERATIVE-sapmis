@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { JsonPipe, NgForOf } from "@angular/common";
-import {  FormArray, FormControl } from "@angular/forms";
-import { ITsuTalentGroupDetails } from "../../../../../core/models/projectDetail/project-detail.model";
+import {Component, Input} from '@angular/core';
+import {JsonPipe, NgForOf} from "@angular/common";
+import {FormArray, FormControl} from "@angular/forms";
+import {ITsuTalentGroupDetails} from "../../../../../core/models/projectDetail/project-detail.model";
 
 @Component({
   selector: 'app-tsu-talents',

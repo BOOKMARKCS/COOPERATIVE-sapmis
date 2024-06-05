@@ -2,89 +2,55 @@
   <div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row">
     <div class="mb-4 flex items-center justify-between">
       <div class="flex-col items-center"><h3 class="text-md font-bold text-foreground whitespace-nowrap"> งบประมาณ</h3></div>
-      <div class="flex justify-end w-full">
-        <div class="relative flex align-middle text-center  p-2 w-full" *ngIf="addToggle">
-          <select #input [(ngModel)]="input.value" (change)="add(input.value)" class="form-input focus:outline-none bg-card block w-full  py-2 px-3 rounded-md shadow-sm text-muted-foreground">
-            <option selected value="">เลือกผู้รับผิดชอบโครงการ</option>
-            <option *ngFor="let obj of users; index as i" [value]="i">{{ obj.student?.name }}</option>
-          </select>
-          <app-button (click)="add('')" class="self-center mx-4" full impact="bold" tone="primary" shape="rounded" size="medium">เลือก</app-button>
-        </div>
-      </div>
     </div>
-    <div class="relative overflow-x-auto">
-      <div class="bg-white text-gray-700 shadow-md rounded my-6">
-        <table class="w-full border border-gray-300">
-          <thead>
+    <div class="relative overflow-x-auto rounded-lg">
+      <div class="bg-white text-gray-700 shadow-md  rounded-lg my-6">
+        <table class="w-full rounded-2xl">
+          <thead class="rounded-2xl">
           <tr class="border-b bg-gray-50 text-sm text-gray-600">
-            <th class="py-3 px-6 text-center">รายการ</th>
-            <th class="py-3 px-6 text-center">จำนวนเงิน (บาท)</th>
+            <th class="py-3 px-6 text-center rounded-tl-lg">รายการ</th>
+            <th class="py-3 px-6 text-center rounded-tr-lg">จำนวนเงิน (บาท)</th>
           </tr>
           </thead>
           <tbody class="text-sm font-light">
+          <ng-container *ngFor="let section of sections; let  i = index ">
+            <tr class="bg-gray-100">
+              <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
+                <div class="flex justify-between">
+                  <p class="align-middle self-center font-semibold text-gray-800">15.{{ i + 1 }}.{{ section.name }}</p>
+                  <app-button *ngIf="section.addButtonLabel" (click)="getFormArray(section.item).push(newFormControl('')); getFormArray(section.amount).push(newFormControl(0))" class="self-center w-40" full impact="bold" tone="primary" shape="rounded" size="medium"> {{ section.addButtonLabel }} </app-button>
+                </div>
+              </td>
+            </tr>
+            <tr [ngClass]="{'hover:bg-gray-50 group': true, 'border-b border-dashed border-gray-300': !last}" *ngFor="let fIndex of getIndexArray(getFormArray(section.item).controls);  let last = last">
+              <td class="py-3 px-12 flex">
+                <span class="self-center">15.{{ i + 1 }}.{{ fIndex + 1 }}</span>
+                <span class="ml-3 w-full"> <input type="text" [formControl]="setFormControl(getFormArray(section.item).controls[fIndex])" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full text-black" placeholder="รายการ"> </span>
+              </td>
+              <td class="py-3 px-6 text-right">
+                <div class="w-full flex gap-4">
+                  <input type="number" [formControl]="setFormControl(getFormArray(section.amount).controls[fIndex])" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full text-black" placeholder="จำนวนเงิน (บาท)">
+                  <span (click)="getFormArray(section.item).removeAt(fIndex); getFormArray(section.amount).removeAt(fIndex)" class="self-center p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow shadow-red-500"><svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-5 w-5 text-night-700 hover:text-red-700'"></svg-icon></span>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
           <tr class="bg-gray-100">
-            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
-              <div class="flex justify-between">
-                <p class="align-middle self-center font-semibold text-gray-800">15.1 หมวดค่าใช้สอย</p>
-                <app-button (click)="getFormArray('costDetails').push(newFormControl('')); getFormArray('costAmounts').push(newFormControl(0))" class="self-center w-40" full impact="bold" tone="primary" shape="rounded" size="medium">เพิ่มค่าใช้สอย</app-button>
-              </div>
-            </td>
-          </tr>
-          <tr class="hover:bg-gray-50" *ngFor="let cIndex of getIndexArray(getFormArray('costDetails').controls)">
-            <td class="py-3 px-12 flex">
-              <span class="self-center">15.1.{{cIndex + 1}}</span>
-              <span class="ml-3 w-full"> <input type="text" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="รายการ"> </span>
-              <span (click)="getFormArray('costDetails').removeAt(cIndex); getFormArray('costAmounts').removeAt(cIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
-            </td>
-            <td class="py-3 px-6 text-right">
-              <input type="number" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="จำนวนเงิน (บาท)">
-            </td>
-          </tr>
-          <tr class="bg-gray-100">
-            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
-              <div class="flex justify-between">
-                <p class="align-middle self-center font-semibold text-gray-800">15.2 หมวดค่าตอบแทน</p>
-                <app-button (click)="add('')" class="self-center w-40" full impact="bold" tone="primary" shape="rounded" size="medium">เพิ่มค่าตอบแทน</app-button>
-              </div>
-            </td>
+            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-blue-50"><p class="align-middle self-center font-semibold text-gray-800">15.4.ค่าอื่น ๆ</p></td>
           </tr>
           <tr class="hover:bg-gray-50">
-            <td class="py-3 px-12 flex">
-              <span class="self-center">15.2.1</span>
-              <span class="ml-3 w-full"> <input type="text" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="รายการ"> </span>
+            <td class="py-3 px-12">
+              <span class="self-center">15.4.1 ค่าอื่นๆ </span>
             </td>
             <td class="py-3 px-6 text-right">
-              <input type="number" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="จำนวนเงิน (บาท)">
-            </td>
-          </tr>
-          <tr class="bg-gray-100">
-            <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
-              <div class="flex justify-between">
-                <p class="align-middle self-center font-semibold text-gray-800">15.3 หมวดค่าวัสดุอุปกรณ์</p>
-                <app-button (click)="add('')" class="self-center w-40" full impact="bold" tone="primary" shape="rounded" size="medium">เพิ่มค่าวัสดุอุปกรณ</app-button>
+              <div class="w-full flex gap-4">
+                <input type="number" [formControl]="inputFormControl.get('other')" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full text-black mr-12" placeholder="จำนวนเงิน (บาท)">
               </div>
             </td>
           </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-12 flex">
-              <span class="self-center"> 15.3.1 </span>
-              <span class="ml-3 w-full"> <input type="text" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="รายการ"> </span>
-            </td>
-            <td class="py-3 px-6 text-right">
-              <input type="number" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="จำนวนเงิน (บาท)">
-            </td>
-          </tr>
-          <tr class="bg-gray-100">
-            <td class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
-              <p class="align-middle self-center font-semibold text-gray-800">15.4 ค่าอื่น ๆ</p>
-            </td>
-            <td class="py-3 px-6 text-left whitespace-nowrap bg-blue-50">
-              <input type="number" class="form-input border border-gray-300 rounded-md px-2 py-2 w-full" placeholder="จำนวนเงิน (บาท)">
-            </td>
-          </tr>
-          <tr class="bg-gray-200 font-bold text-gray-700">
-            <td class="py-3 px-6 text-center">รวม</td>
-            <td class="py-3 px-6 text-center">0 บาท</td>
+          <tr class="bg-gray-200 font-bold text-gray-700 ">
+            <td class="py-3 px-6 text-center rounded-bl-lg">รวม</td>
+            <td class="py-3 text-center rounded-br-lg">{{ calculateTotal() }} &nbsp; &nbsp; &nbsp; บาท</td>
           </tr>
           </tbody>
         </table>

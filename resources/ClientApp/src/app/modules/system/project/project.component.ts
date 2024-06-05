@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { HeaderComponent } from "../layout/components/header/header.component";
-import { NgForOf, NgIf } from "@angular/common";
-import { ProjectService } from "./project.service";
-import { IProject } from "../../../core/models/project/project.model";
+import {Component} from '@angular/core';
+import {HeaderComponent} from "../layout/components/header/header.component";
+import {NgForOf, NgIf} from "@angular/common";
+import {ProjectService} from "./project.service";
+import {IProject} from "../../../core/models/project/project.model";
 
 @Component({
   selector: 'app-project',

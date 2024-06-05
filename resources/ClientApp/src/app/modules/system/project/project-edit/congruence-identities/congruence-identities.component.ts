@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { FormArray, FormControl } from "@angular/forms";
-import { NgForOf } from "@angular/common";
-import { ICongruenceIdentityGroupDetails } from "../../../../../core/models/projectDetail/project-detail.model";
+import {Component, Input} from '@angular/core';
+import {FormArray, FormControl} from "@angular/forms";
+import {NgForOf} from "@angular/common";
+import {ICongruenceIdentityGroupDetails} from "../../../../../core/models/projectDetail/project-detail.model";
 
 interface CongruenceIdentityDetail {
   id: number;

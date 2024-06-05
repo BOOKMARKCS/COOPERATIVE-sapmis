@@ -5,7 +5,7 @@ import {UserService} from "../../system/user/user.service";
 import {ProjectService} from "../../system/project/project.service";
 import {HeaderComponent} from "../../system/layout/components/header/header.component";
 import {ProjectComponent} from "../../system/project/project.component";
-import { ProjectListComponent } from "../../system/project/project-list/project-list.component";
+import {ProjectListComponent} from "../../system/project/project-list/project-list.component";
 
 @Component({
   selector: 'app-affairs',

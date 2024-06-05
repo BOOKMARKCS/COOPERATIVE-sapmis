@@ -1,8 +1,8 @@
-import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core'
-import { Observable, of, throwError } from 'rxjs'
-import { catchError, finalize, map, share, tap } from 'rxjs/operators'
-import { DOCUMENT } from '@angular/common'
-import { SvgLoader } from "./svg-loader"
+import {Inject, Injectable, Optional, PLATFORM_ID} from '@angular/core'
+import {Observable, of, throwError} from 'rxjs'
+import {catchError, finalize, map, share, tap} from 'rxjs/operators'
+import {DOCUMENT} from '@angular/common'
+import {SvgLoader} from "./svg-loader"
 
 @Injectable()
 export class SvgIconRegistryService {

@@ -1,6 +1,7 @@
 import {HttpInterceptorFn} from '@angular/common/http';
-import {Inject, inject} from "@angular/core";
+import {inject} from "@angular/core";
 import {AuthService} from "../services/auth.service";
+
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token: any = inject(AuthService).getJWT();
   if (token && !req.url.includes('assets')) {

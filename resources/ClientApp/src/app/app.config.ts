@@ -1,13 +1,13 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
-import { environment } from "../environments/environment";
-import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
-import { apiPrefixInterceptor } from "./core/interceptor/api-prefix.interceptor";
-import { authInterceptor } from "./core/interceptor/auth.interceptor";
-import { errorHandlerInterceptor } from "./core/interceptor/error-handler.interceptor";
-import { provideAnimations } from "@angular/platform-browser/animations";
+import {routes} from './app.routes';
+import {environment} from "../environments/environment";
+import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
+import {apiPrefixInterceptor} from "./core/interceptor/api-prefix.interceptor";
+import {authInterceptor} from "./core/interceptor/auth.interceptor";
+import {errorHandlerInterceptor} from "./core/interceptor/error-handler.interceptor";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 export function removeSlash(url: string) {
   const last = url.charAt(url.length - 1);

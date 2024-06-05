@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {NgIf} from '@angular/common';
 import {environment} from "../../../../environments/environment";
 
 @Component({

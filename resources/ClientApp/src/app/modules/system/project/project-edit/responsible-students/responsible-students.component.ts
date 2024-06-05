@@ -1,12 +1,11 @@
-import { Component, Input, NgIterable, OnInit } from '@angular/core';
-import { JsonPipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InputComponent } from "../../../../../shared/components/inputs/input/input.component";
-import { ButtonComponent } from "../../../../../shared/components/button/button.component";
-import { IResponsibleStudent, ResponsibleStudent } from "../../../../../core/models/projectDetail/project-detail.model";
-import { environment } from '../../../../../../environments/environment';
-import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
-import { IUser } from "../../../../../core/models/auth/user.model";
+import {Component, Input, NgIterable, OnInit} from '@angular/core';
+import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputComponent} from "../../../../../shared/components/inputs/input/input.component";
+import {ButtonComponent} from "../../../../../shared/components/button/button.component";
+import {IResponsibleStudent, ResponsibleStudent} from "../../../../../core/models/projectDetail/project-detail.model";
+import {environment} from '../../../../../../environments/environment';
+import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-responsible-students',
@@ -21,13 +20,9 @@ export class ResponsibleStudentsComponent implements OnInit {
   addToggle: boolean = false
 
   constructor(private fb: FormBuilder) {
-    console.log({user:this.users})
   }
 
   ngOnInit(): void {
-
-    console.log({users: this.users})
-    console.log({formResponsible: this.form.value})
 
   }
 

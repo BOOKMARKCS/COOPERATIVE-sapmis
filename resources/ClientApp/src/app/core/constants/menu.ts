@@ -44,9 +44,10 @@ export class Menu {
         route: '/responsible',
       },
       {
-        icon: 'assets/icons/heroicons/outline/chart-pie.svg',
-        label: 'รายละเอียดโปรเจ็ค',
-        route: '/responsible/project-detail',
+        icon: 'assets/icons/heroicons/outline/document.svg',
+        label: 'โครงการ',
+        route: '/responsible/projects',
+        children: [ {label: 'โครงการทั้งหมด', route: '/responsible/projects/list'} ]
       },
     ],
   }]

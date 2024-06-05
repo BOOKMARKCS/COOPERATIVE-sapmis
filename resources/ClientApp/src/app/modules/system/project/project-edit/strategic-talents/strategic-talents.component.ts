@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {JsonPipe, NgForOf} from "@angular/common";
 import {FormArray, FormControl} from "@angular/forms";
-import { IStrategicTalent } from "../../../../../core/models/projectDetail/project-detail.model";
-import { INameId } from "../../../../../shared/models/common";
+import {INameId} from "../../../../../shared/models/common";
 
 interface StrategicTalent {
   id: number;

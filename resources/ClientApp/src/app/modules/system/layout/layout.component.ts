@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet, Event} from '@angular/router';
+import {Event, NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {AuthService} from "../../../core/services/auth.service";

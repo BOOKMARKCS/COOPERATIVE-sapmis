@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { format } from 'date-fns';
-import { th, uk } from "date-fns/locale";
+import {format} from 'date-fns';
+import {th, uk} from "date-fns/locale";
 import {NgClass, NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 

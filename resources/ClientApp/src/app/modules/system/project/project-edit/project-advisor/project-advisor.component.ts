@@ -1,12 +1,11 @@
-import { Component, Input, NgIterable } from '@angular/core';
-import { JsonPipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
-import { FormArray, FormBuilder, FormGroup, FormsModule } from "@angular/forms";
-import { InputComponent } from "../../../../../shared/components/inputs/input/input.component";
-import { ButtonComponent } from "../../../../../shared/components/button/button.component";
-import { IProjectAdvisor, ProjectAdvisor } from "../../../../../core/models/projectDetail/project-detail.model";
-import { environment } from '../../../../../../environments/environment';
-import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
-import { IUser } from "../../../../../core/models/auth/user.model";
+import {Component, Input, NgIterable} from '@angular/core';
+import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {FormArray, FormBuilder, FormGroup, FormsModule} from "@angular/forms";
+import {InputComponent} from "../../../../../shared/components/inputs/input/input.component";
+import {ButtonComponent} from "../../../../../shared/components/button/button.component";
+import {IProjectAdvisor, ProjectAdvisor} from "../../../../../core/models/projectDetail/project-detail.model";
+import {environment} from '../../../../../../environments/environment';
+import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-project-advisor',

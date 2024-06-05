@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { IGroupUser, IOrganization, User } from "../../../core/models/auth/user.model";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {IGroupUser, IOrganization} from "../../../core/models/auth/user.model";
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MenuService } from '../../../services/menu.service';
-import { RouterLinkActive, RouterLink } from '@angular/router';
-import { NgClass, NgFor, NgTemplateOutlet } from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
+import {MenuService} from '../../../services/menu.service';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {NgClass, NgFor, NgTemplateOutlet} from '@angular/common';
 import {SubMenuItem} from "../../../../../../core/models/menu.model";
-import { SvgIconComponent } from "../../../../../../shared/components/svg-icon/svg-icon.component";
+import {SvgIconComponent} from "../../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
     selector: 'app-sidebar-submenu',

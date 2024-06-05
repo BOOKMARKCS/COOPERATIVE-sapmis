@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { NgForOf } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import {Component, Input} from '@angular/core';
+import {NgForOf} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-project-participant',

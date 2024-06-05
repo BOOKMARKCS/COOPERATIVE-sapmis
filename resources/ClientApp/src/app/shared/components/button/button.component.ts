@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, input, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { cx } from '../../utils/ckassnames';
+import {Component, EventEmitter, input, Input, OnInit, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {cx} from '../../utils/ckassnames';
 
 type ButtonProps = {
   impact: 'bold' | 'light' | 'none';
@@ -35,7 +35,7 @@ export class ButtonComponent implements OnInit {
 
   impactClasses: Record<ButtonProps['tone'], Record<ButtonProps['impact'], string>> = {
     primary: {
-      bold: 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 focus-visible:ring-primary',
+      bold: 'bg-primary text-white shadow-md hover:bg-primary/90 focus-visible:ring-primary',
       light: 'bg-primary/20 text-primary hover:bg-primary/30 focus-visible:ring-primary',
       none: 'bg-transparent text-primary hover:bg-primary/10 focus-visible:ring-primary',
     },

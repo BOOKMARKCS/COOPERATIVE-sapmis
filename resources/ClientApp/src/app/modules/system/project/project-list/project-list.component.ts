@@ -1,16 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ProjectService } from "../project.service";
-import { SvgIconComponent } from "../../../../shared/components/svg-icon/svg-icon.component";
-import { IProject } from "../../../../core/models/project/project.model";
-import { ButtonComponent } from "../../../../shared/components/button/button.component";
-import { RouterLink } from "@angular/router";
-import { ProjectStatus } from "../../../../core/models/project/project.enum";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {ProjectService} from "../project.service";
+import {SvgIconComponent} from "../../../../shared/components/svg-icon/svg-icon.component";
+import {IProject} from "../../../../core/models/project/project.model";
+import {ButtonComponent} from "../../../../shared/components/button/button.component";
+import {RouterLink} from "@angular/router";
+import {ProjectStatus} from "../../../../core/models/project/project.enum";
+import { HeaderComponent } from "../../layout/components/header/header.component";
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [NgForOf, NgIf, SvgIconComponent, ButtonComponent, RouterLink, JsonPipe],
+    imports: [NgForOf, NgIf, SvgIconComponent, ButtonComponent, RouterLink, JsonPipe, HeaderComponent],
   templateUrl: './project-list.component.html',
 })
 export class ProjectListComponent {

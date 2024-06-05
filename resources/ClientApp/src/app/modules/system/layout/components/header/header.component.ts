@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { JsonPipe, NgIf, TitleCasePipe } from "@angular/common";
-import { MenuService } from "../../services/menu.service";
-import { Router } from "@angular/router";
+import {Component} from '@angular/core';
+import {JsonPipe, NgIf, TitleCasePipe} from "@angular/common";
+import {MenuService} from "../../services/menu.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',

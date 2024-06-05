@@ -1,4 +1,4 @@
-import { Component, NgIterable, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, NgIterable, OnInit } from '@angular/core';
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
 import { HeaderComponent } from "../../layout/components/header/header.component";
 import { JsonPipe, NgClass, NgForOf, NgIf, NgTemplateOutlet } from "@angular/common";
@@ -32,10 +32,6 @@ export class UserAddComponent implements OnInit {
     auth.user$.subscribe(u => this.auth = u)
   }
 
-  get getTypeUser() {
-    return this.typeUser
-  }
-
   async ngOnInit() {
     Object.assign(this, await lastValueFrom(this.usv.master()));
   }
@@ -60,10 +56,7 @@ export class UserAddComponent implements OnInit {
         this.alertService.success('บันทึกข้อมูลผู้ใช้สำเร็จ')
         this.form.reset()
       },
-      error: (err) => {
-        this.alertService.error('บันทึกข้อมูลผู้ใช้ไม่สำเร็จ')
-        console.log({err})
-      }
+      error: () => this.alertService.error('บันทึกข้อมูลผู้ใช้ไม่สำเร็จ')
     })
   }
 

@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
-import { ButtonComponent } from "../../../../shared/components/button/button.component";
-import { DatepickerComponent } from "../../layout/navbar/inputs/datepicker/datepicker.component";
-import { HeaderComponent } from "../../layout/components/header/header.component";
-import { InputComponent } from "../../../../shared/components/inputs/input/input.component";
-import { JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { IProjectAdvisor, IResponsibleStudent, ProjectDetail } from "../../../../core/models/projectDetail/project-detail.model";
-import { ProjectService } from "../project.service";
-import { ActivatedRoute } from "@angular/router";
-import { Project } from "../../../../core/models/project/project.model";
-import { ProjectStatus } from "../../../../core/models/project/project.enum";
-import { AlertService } from "../../../../shared/components/alert/alert.service";
-import { InputPeerComponent } from "../../../../shared/components/inputs/input-peer/input-peer.component";
-import { ResponsibleStudentsComponent } from "../project-edit/responsible-students/responsible-students.component";
-import { ProjectAdvisorComponent } from "../project-edit/project-advisor/project-advisor.component";
+import {Component} from '@angular/core';
+import {ButtonComponent} from "../../../../shared/components/button/button.component";
+import {DatepickerComponent} from "../../layout/navbar/inputs/datepicker/datepicker.component";
+import {HeaderComponent} from "../../layout/components/header/header.component";
+import {InputComponent} from "../../../../shared/components/inputs/input/input.component";
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {
+  IProjectAdvisor,
+  IResponsibleStudent,
+  ProjectDetail
+} from "../../../../core/models/projectDetail/project-detail.model";
+import {ProjectService} from "../project.service";
+import {ActivatedRoute} from "@angular/router";
+import {Project} from "../../../../core/models/project/project.model";
+import {AlertService} from "../../../../shared/components/alert/alert.service";
+import {InputPeerComponent} from "../../../../shared/components/inputs/input-peer/input-peer.component";
+import {ResponsibleStudentsComponent} from "../project-edit/responsible-students/responsible-students.component";
+import {ProjectAdvisorComponent} from "../project-edit/project-advisor/project-advisor.component";
 
 @Component({
   selector: 'app-project-add',

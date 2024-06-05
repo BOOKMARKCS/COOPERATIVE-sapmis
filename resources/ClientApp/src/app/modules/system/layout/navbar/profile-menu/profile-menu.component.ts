@@ -1,11 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { NgClass, NgIf, NgOptimizedImage, TitleCasePipe } from '@angular/common';
-import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
-import { ThemeService } from '../../../../../core/services/theme.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AuthService } from "../../../../../core/services/auth.service";
-import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {NgClass, NgIf, NgOptimizedImage, TitleCasePipe} from '@angular/common';
+import {ClickOutsideDirective} from '../../../../../shared/directives/click-outside.directive';
+import {ThemeService} from '../../../../../core/services/theme.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {AuthService} from "../../../../../core/services/auth.service";
+import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-profile-menu',

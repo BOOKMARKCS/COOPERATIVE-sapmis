@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../services/menu.service';
-import { NavbarMobileMenuComponent } from './navbar-mobile-menu/navbar-mobile-menu.component';
-import { NgClass } from '@angular/common';
-import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+import {Component, OnInit} from '@angular/core';
+import {MenuService} from '../../services/menu.service';
+import {NavbarMobileMenuComponent} from './navbar-mobile-menu/navbar-mobile-menu.component';
+import {NgClass} from '@angular/common';
+import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
 
 @Component({
     selector: 'app-navbar-mobile',

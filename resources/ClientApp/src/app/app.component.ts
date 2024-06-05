@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ResponsiveHelperComponent } from "./shared/components/responsive-helper/responsive-helper.component";
-import { AuthService } from "./core/services/auth.service";
-import { AlertService } from "./shared/components/alert/alert.service";
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {ResponsiveHelperComponent} from "./shared/components/responsive-helper/responsive-helper.component";
+import {AuthService} from "./core/services/auth.service";
+import {AlertService} from "./shared/components/alert/alert.service";
 
 @Component({
   selector: 'app-root',

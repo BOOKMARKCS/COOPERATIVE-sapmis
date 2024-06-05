@@ -1,37 +1,40 @@
-<div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row text-muted-foreground">
-  <div class="mb-4 flex items-center justify-between">
-    <div class="flex-col items-center">
-      <h3 class="text-md font-bold text-foreground">รายการโครงการ</h3>
-      <!--      <span class="text-sm text-gray-400 dark:text-night-300">Updated 37 minutes ago</span>-->
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <app-header></app-header>
+  <div class="flex-col rounded-lg bg-background px-8 py-8 sm:flex-row text-muted-foreground">
+    <div class="mb-4 flex items-center justify-between">
+      <div class="flex-col items-center">
+        <h3 class="text-md font-bold text-foreground">รายการโครงการ</h3>
+        <!--      <span class="text-sm text-gray-400 dark:text-night-300">Updated 37 minutes ago</span>-->
+      </div>
     </div>
-  </div>
 
-  <div class="relative overflow-x-auto">
-    <table class="w-full table-auto" *ngIf="projects">
-      <!--Table head-->
-      <thead class="text-xs uppercase text-muted-foreground">
-      <tr class="bg-background">
-        <th class="py-3 text-left">รหัสโครงการ</th>
-        <th class="py-3 text-right">ชื่อ</th>
-        <th class="py-3 text-right">องค์กร</th>
-        <th class="py-3 text-right">สถานะโครงการ</th>
-        <th class="py-3"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="py-2 pl-2 text-left rounded" *ngFor="let obj of projects; index as i">
-        <td class="py-2 pl-2 text-left  first:rounded-lg"><span class="text-sm font-semibold text-muted-foreground">{{ obj.id }}</span></td>
-        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.projectName }}</span></td>
-        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.activityGroupName }}</span></td>
-        <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ ProjectStatus[obj.projectType][obj.status].statusName }}</span></td>
-        <td class="py-2 pl-2 text-right flex justify-center">
-          <app-button *ngFor="let subObj of ProjectStatus[obj.projectType][obj.status].actions" full impact="bold" [tone]="subObj.tone" shape="rounded" size="medium" [routerLink]="[subObj.route,{id:obj.id}]">
-            <svg-icon src="assets/icons/heroicons/outline/dots-horizontal.svg" [svgClass]="'h-5 w-5 mr-3'"></svg-icon>
-            <span class="whitespace-nowrap">{{ subObj.actionName }}</span>
-          </app-button>
-        </td>
-      </tr>
-    </table>
-    <div class="w-full text-center" *ngIf="!projects?.length"> ไม่พบข้อมูลโครงการ</div>
+    <div class="relative overflow-x-auto">
+      <table class="w-full table-auto" *ngIf="projects">
+        <!--Table head-->
+        <thead class="text-xs uppercase text-muted-foreground">
+        <tr class="bg-background">
+          <th class="py-3 text-left">รหัสโครงการ</th>
+          <th class="py-3 text-right">ชื่อ</th>
+          <th class="py-3 text-right">องค์กร</th>
+          <th class="py-3 text-right">สถานะโครงการ</th>
+          <th class="py-3"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="py-2 pl-2 text-left rounded" *ngFor="let obj of projects; index as i">
+          <td class="py-2 pl-2 text-left  first:rounded-lg"><span class="text-sm font-semibold text-muted-foreground">{{ obj.id }}</span></td>
+          <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.projectName }}</span></td>
+          <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.activityGroupName }}</span></td>
+          <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ ProjectStatus[obj.projectType][obj.status].statusName }}</span></td>
+          <td class="py-2 pl-2 text-right flex justify-center">
+            <app-button *ngFor="let subObj of ProjectStatus[obj.projectType][obj.status].actions" full impact="bold" [tone]="subObj.tone" shape="rounded" size="medium" [routerLink]="[subObj.route,{id:obj.id}]">
+              <svg-icon src="assets/icons/heroicons/outline/dots-horizontal.svg" [svgClass]="'h-5 w-5 mr-3'"></svg-icon>
+              <span class="whitespace-nowrap">{{ subObj.actionName }}</span>
+            </app-button>
+          </td>
+        </tr>
+      </table>
+      <div class="w-full text-center" *ngIf="!projects?.length"> ไม่พบข้อมูลโครงการ</div>
+    </div>
   </div>
 </div>
