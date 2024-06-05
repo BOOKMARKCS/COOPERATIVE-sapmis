@@ -85,7 +85,7 @@
           }
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-builders/karma:run",
           "options": {
             "tsConfig": "tsconfig.spec.json",
             "assets": [
