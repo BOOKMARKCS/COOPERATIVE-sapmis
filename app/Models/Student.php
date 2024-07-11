@@ -10,10 +10,21 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'id', 'user_id', 'name', 'phone_number', 'signature', 'profile', 'academic_year', 'faculty_id', 'club_id', ];
 
-    public function user(): BelongsTo { return $this->belongsTo(User::class); }
+    protected $fillable = ['id', 'user_id', 'name', 'phone_number', 'signature', 'profile', 'academic_year', 'faculty_id', 'club_id',];
 
-    public function faculty(): HasOne { return $this->hasOne(Faculty::class,'id','faculty_id'); }
+    protected $attributes = [
+        'profile' => '/images/profile_default.png',
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function faculty(): HasOne
+    {
+        return $this->hasOne(Faculty::class, 'id', 'faculty_id');
+    }
 
 }

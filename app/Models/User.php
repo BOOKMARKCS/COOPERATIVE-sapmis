@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -54,6 +55,8 @@ class User extends Authenticatable implements JWTSubject
         return User::where('email', $user->email)->first();
     }
 
+    // Rest omitted for brevity
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -76,7 +79,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function getUser()
     {
-        return CaseConverter::convertToCamelCase(User::with(auth()->user()->type ,'role')->where('id',auth()->id())->first());
+        $type = auth()->check() ? auth()->user()->{'type'} : '';
+        return CaseConverter::convertToCamelCase(User::with([$type, 'role'])->where('id', auth()->id())->first());
     }
 
     public function officer(): HasOne
@@ -104,4 +108,3 @@ class User extends Authenticatable implements JWTSubject
     }
 
 }
-

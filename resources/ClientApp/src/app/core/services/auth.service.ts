@@ -1,48 +1,40 @@
-import {Injectable} from '@angular/core';
-import {map, of, ReplaySubject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {Login} from "../models/auth/login.model";
-import {environment} from "../../../environments/environment";
+import { Injectable, signal } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { ILogin } from "../models/auth/login.model";
+import { environment } from "../../../environments/environment";
+import { map } from "rxjs/operators";
+import { lastValueFrom } from "rxjs";
+import { IUser } from "../models/auth/user.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  userSource = new ReplaySubject<any>(1);
-  user$ = this.userSource.asObservable()
+  user = signal<IUser | any>(null);
 
   constructor(private http: HttpClient, public router: Router) {
   }
 
-  refreshUser(jwt: string | null) {
-    if (jwt === null) {
-      this.userSource.next(null);
-      return of(undefined)
-    }
-    return this.http.get<any>(`refresh`).pipe(map((u: any) => !!u && this.setUser(u)))
+  refreshUser = () => this.http.get(`refresh`).pipe(map((u: any) => !!u && this.setUser(u)));
+  // else if (this.user()) this.refreshUser().subscribe({next: u => u ? u : this.logout(), error: _ => this.logout()});
+
+  login = (obj: ILogin) => this.http.post(`login`, obj).pipe(map((u: any) => this.setUser(u)));
+
+  logout = () => this.router.navigateByUrl('/auth/sign-in').then(() => localStorage.removeItem(environment.userKey));
+
+  me = () => this.http.get<IUser>('me')
+
+  token = () => localStorage.getItem(environment.userKey)
+
+  async loadUserFromLocalStorage() {
+    if (this.token()) this.user.set(await lastValueFrom(this.me()))
   }
 
-  login = (obj: Login) => this.http.post<any>(`login`, obj).pipe(map((u: any) => this.setUser(u)));
-
-  logout() {
-    localStorage.removeItem(environment.userKey);
-    this.userSource.next(null)
-    this.router.navigateByUrl('auth/')
-  }
-
-  getJWT() {
-    let key
-    if (localStorage) key = localStorage.getItem(environment.userKey);
-    if (key) {
-      return JSON.parse(key).jwt;
-    } else return null;
-  }
-
-  private setUser(user: any) {
-    localStorage.setItem(environment.userKey, JSON.stringify(user));
-    this.userSource.next(user);
-    return user
+  private async setUser(token: any) {
+    localStorage.setItem(environment.userKey, JSON.stringify(token));
+    this.user.set(await lastValueFrom(this.me()))
+    return token;
   }
 }

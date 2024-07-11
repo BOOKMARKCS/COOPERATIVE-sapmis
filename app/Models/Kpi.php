@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kpi extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'id',
+        'id', 'project_detail_id', 'quantity', 'quality'
     ];
 }

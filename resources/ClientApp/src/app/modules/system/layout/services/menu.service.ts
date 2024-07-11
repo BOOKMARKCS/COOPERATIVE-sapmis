@@ -1,9 +1,9 @@
-import {Injectable, OnDestroy, signal} from '@angular/core'
-import {NavigationEnd, Router} from '@angular/router'
-import {Subscription} from 'rxjs'
-import {AuthService} from "../../../../core/services/auth.service"
-import {Menu} from "../../../../core/constants/menu"
-import {MenuItem, SubMenuItem} from "../../../../core/models/menu.model"
+import { Injectable, OnDestroy, signal } from '@angular/core'
+import { NavigationEnd, Router } from '@angular/router'
+import { Subscription } from 'rxjs'
+import { AuthService } from "../../../../core/services/auth.service"
+import { Menu } from "../../../../core/constants/menu"
+import { MenuItem, SubMenuItem } from "../../../../core/models/menu.model"
 
 @Injectable({providedIn: 'root'})
 export class MenuService implements OnDestroy {
@@ -13,7 +13,7 @@ export class MenuService implements OnDestroy {
   private _subscription = new Subscription()
 
   constructor(private router: Router, authService: AuthService) {
-    authService.user$.subscribe(u => u ? this._pagesMenu.set((Menu as any)[u.user.role.permission.toLocaleLowerCase()]) : 'proposer')
+    this._pagesMenu.set((Menu as any)[authService.user()?.role.permission.toLocaleLowerCase() ?? 'empty'])
     let sub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this._pagesMenu().forEach((menu) => {
@@ -31,15 +31,25 @@ export class MenuService implements OnDestroy {
     this._subscription.add(sub)
   }
 
-  get showSideBar() { return this._showSidebar() }
+  get showSideBar() {
+    return this._showSidebar()
+  }
 
-  get showMobileMenu() { return this._showMobileMenu() }
+  get showMobileMenu() {
+    return this._showMobileMenu()
+  }
 
-  get pagesMenu() { return this._pagesMenu() }
+  get pagesMenu() {
+    return this._pagesMenu()
+  }
 
-  set showSideBar(value: boolean) { this._showSidebar.set(value) }
+  set showSideBar(value: boolean) {
+    this._showSidebar.set(value)
+  }
 
-  set showMobileMenu(value: boolean) { this._showMobileMenu.set(value) }
+  set showMobileMenu(value: boolean) {
+    this._showMobileMenu.set(value)
+  }
 
   public toggleSidebar = () => this._showSidebar.set(!this._showSidebar())
 
@@ -63,5 +73,7 @@ export class MenuService implements OnDestroy {
     paths: 'exact', queryParams: 'subset', fragment: 'ignored', matrixParams: 'ignored',
   })
 
-  ngOnDestroy(): void { this._subscription.unsubscribe() }
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
+  }
 }

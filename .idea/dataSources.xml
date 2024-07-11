@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sapmis@localhost" uuid="ffc8e788-da30-44b4-8f4a-6c6d99dc1189">
+    <data-source source="LOCAL" name="SAPMIS@localhost" uuid="78c07b9b-07b7-4f2f-8678-fe3eb9937703">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/sapmis</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/SAPMIS</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

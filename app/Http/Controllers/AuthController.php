@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection ALL */
+
+/** @noinspection PhpUndefinedMethodInspection */
 
 namespace App\Http\Controllers;
 
@@ -8,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Laravel\Sanctum\Sanctum;
 
 class AuthController extends Controller
 {
@@ -29,11 +32,7 @@ class AuthController extends Controller
     public function login(): JsonResponse
     {
         $credentials = request(['email', 'password']);
-
-        if (!($token = auth()->attempt($credentials))) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-//
+        if (!($token = auth()->attempt($credentials))) return response()->json(['error' => 'Unauthorized'], 401);
         return $this->respondWithToken($token);
     }
 
@@ -69,14 +68,18 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Get the authenticated User.
-     *
-     * @return JsonResponse
-     */
     public function me(): JsonResponse
     {
-        return response()->json(auth()->user());
+        if (auth()->guard('api')->check()) {
+            return response()->json((new User())->getUser());
+        } else {
+            // ตรวจสอบว่าเป็นกรณีของการหมดเวลาหรือโทเค็นไม่ถูกต้อง
+            if (auth()->guard('api')->guest()) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            } else {
+                return response()->json(['error' => 'Authentication Timeout'], 419);
+            }
+        }
     }
 
     /**
@@ -95,6 +98,7 @@ class AuthController extends Controller
      * Refresh a token.
      *
      * @return JsonResponse
+     * @noinspection PhpParamsInspection
      */
     public function refresh(): JsonResponse
     {
@@ -110,7 +114,10 @@ class AuthController extends Controller
      */
     protected function respondWithToken(string $token): JsonResponse
     {
-        $user = new User();
-        return response()->json(['jwt' => $token, 'user' => $user->getUser()]);
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }

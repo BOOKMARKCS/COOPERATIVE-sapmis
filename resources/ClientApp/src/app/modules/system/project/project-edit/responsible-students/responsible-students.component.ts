@@ -1,11 +1,16 @@
-import {Component, Input, NgIterable, OnInit} from '@angular/core';
-import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InputComponent} from "../../../../../shared/components/inputs/input/input.component";
-import {ButtonComponent} from "../../../../../shared/components/button/button.component";
-import {IResponsibleStudent, ResponsibleStudent} from "../../../../../core/models/projectDetail/project-detail.model";
-import {environment} from '../../../../../../environments/environment';
-import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
+import { Component, Input, NgIterable, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { InputComponent } from "../../../../../shared/components/inputs/input/input.component";
+import { ButtonComponent } from "../../../../../shared/components/button/button.component";
+import { IResponsibleStudent, ResponsibleStudent } from "../../../../../core/models/projectDetail/project-detail.model";
+import { environment } from '../../../../../../environments/environment';
+import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+import { JsonPipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
+
+export enum ResponsibleListMode {
+  ReadOnly = 'readonly',
+  Editable = 'editable'
+}
 
 @Component({
   selector: 'app-responsible-students',
@@ -16,6 +21,7 @@ import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-ic
 export class ResponsibleStudentsComponent implements OnInit {
   @Input() form: FormArray<FormGroup<ResponsibleStudent>> = new FormArray<FormGroup<ResponsibleStudent>>([]);
   @Input() users: any = [];
+  @Input({transform: (value: 'ReadOnly' | 'Editable') => ResponsibleListMode[value]}) mode: ResponsibleListMode = ResponsibleListMode.ReadOnly;
   newUser: FormGroup<ResponsibleStudent> = this.fb.group(new ResponsibleStudent())
   addToggle: boolean = false
 
@@ -23,7 +29,6 @@ export class ResponsibleStudentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   get f(): NgIterable<IResponsibleStudent> {
@@ -33,6 +38,7 @@ export class ResponsibleStudentsComponent implements OnInit {
   add(input: string) {
     this.newUser = this.fb.group<ResponsibleStudent>(new ResponsibleStudent())
     this.newUser.get('user')?.patchValue(this.users[parseInt(input)] as any)
+    this.setNewUser(input)
   }
 
 
@@ -49,4 +55,5 @@ export class ResponsibleStudentsComponent implements OnInit {
   }
 
   protected readonly environment = environment;
+  protected readonly ResponsibleListMode = ResponsibleListMode;
 }

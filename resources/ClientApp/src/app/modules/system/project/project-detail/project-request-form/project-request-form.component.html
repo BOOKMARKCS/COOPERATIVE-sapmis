@@ -1,0 +1,367 @@
+<h1 class="text-xl text-center font-bold mb-6">แบบขออนุมัติโครงการกิจกรรมนิสิต</h1>
+
+<div class="mb-4 flex gap-2">
+  <h2 class="font-bold">1. ชื่อโครงการ</h2>
+  <p>{{ data?.projectDetail?.projectName || '........................................................................................' }}</p>
+</div>
+
+<div class="mb-4 flex gap-2">
+  <h2 class="font-bold">2. ชื่อกลุ่มกิจกรรมนิสิตที่รับผิดชอบโครงการ</h2>
+  <p>{{ data?.projectDetail?.activityGroupName || '........................................................................................' }}</p>
+</div>
+
+<div class="mb-4 w-fit">
+  <h2 class="font-bold">3. รายชื่อนิสิตผู้รับผิดชอบโครงการ</h2>
+  <div class="ml-9">
+    <ng-container *ngFor="let obj of data?.projectDetail?.responsibleStudents; let i = index">
+      <p class="flex gap-4 items-center">3.{{ i + 1 }} {{ obj.user.student.name }}
+        <span class="ml-auto">รหัสประจำตัวนิสิต {{ obj.studentId }}</span>
+        <span class="ml-auto">หมายเลขโทรศัพท์ {{ obj.user.student.phoneNumber }}</span>
+      </p>
+    </ng-container>
+  </div>
+</div>
+
+<div class="mb-4 w-fit">
+  <h2 class="font-bold">4. รายชื่อที่ปรึกษาโครงการ</h2>
+  <div class="ml-9" *ngFor="let obj of data?.projectDetail?.projectAdvisors; let i = index">
+    <p class="flex gap-4 items-center">4.{{ i + 1 }} {{ obj.user.advisor.name }}
+      <span class="ml-auto">หมายเลขโทรศัพท์ {{ obj.user.advisor.phoneNumber }}</span>
+    </p>
+  </div>
+</div>
+
+
+<div class="mb-4">
+  <p class="flex font-bold"><span>5.</span><span>ประเภทกิจกรรมพัฒนานิสิตนอกชั้นเรียน (กรณีขอเทียบกิจกรรมพัฒนานิสิตนอกชั้นเรียน โปรดระบุ)</span></p>
+  <div class="ml-9">
+    <p class="font-bold">TSU Glocal Talent</p>
+    <ul class="ml-9">
+
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมเกี่ยวกับการคิด วิจารณญาณ และการแก้ปัญหา</span>
+      </li>
+
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมเกี่ยวกับการบริหารจัดการตนเอง</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมเกี่ยวกับการทำงานร่วมกับผู้อื่น</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมเกี่ยวกับความรู้ ความเข้าใจ และการใช้เทคโนโลยีดิจิทัล</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรม TSU Good ได้แก่ กิจกรรมจิตอาสา บำเพ็ญประโยชน์ และสิ่งแวดล้อม<</span>
+      </li>
+    </ul>
+    <p class="font-bold">TSU Communication Talent</p>
+    <ul class="ml-9">
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมเกี่ยวกับการใช้ภาษาเพื่อการสื่อสารในชีวิตประจำวัน</span>
+      </li>
+    </ul>
+    <p class="font-bold">กิจกรรม TSU Social Innovation/Entrepreneurship Talent</p>
+    <ul class="ml-9">
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('7')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('7')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมด้านการสร้างนวัตกรรมสังคม</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('8')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.tsuTalent?.tsuTalentDetailId)?.includes('8')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กลุ่มกิจกรรมด้านการเป็นผู้ประกอบการ</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">6. ความสอดคล้องกับยุทธศาสตร์ของมหาวิทยาลัย</h2>
+  <div class="ml-9">
+    <ul>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมเสริมสร้างนิสิตให้มีคุณลักษณะตามอัตลักษณ์ของมหาวิทยาลัย</span></li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมพัฒนานิสิตให้มีทักษะการเรียนรู้ในศตวรรษที่ 21</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมนิสิตระหว่างประเทศ</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมพหุวัฒนธรรม ศิลปวัฒนธรรม และแลกเปลี่ยนวัฒนธรรม</span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมกีฬา นันทนาการ และสุขภาพ </span>
+      </li>
+      <li>
+        <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+        <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+        <span class="ml-2">กิจกรรมจิตอาสาทั้งภายในและชุมชนโดยรอบมหาวิทยาลัยทักษิณ</span></li>
+    </ul>
+  </div>
+</div>
+
+<!--          <div class="mb-4">-->
+<!--            <h2 class="font-bold">7. ความสอดคล้องกับการพัฒนาอัตลักษณ์นิสิต</h2>-->
+<!--            <div>-->
+<!--              <p>เสริมสร้างอัตลักษณ์นิสิต จำนวน............ด้าน ดังนี้</p>-->
+<!--              <ul>-->
+<!--                <li> รับผิดชอบ</li>-->
+<!--                <li> การบริหารจัดการตนเอง</li>-->
+<!--                <li> การมีจิตสำนึกและตระหนักในการเป็นพลเมืองไทยและพลเมืองโลก</li>-->
+<!--                <li> รอบรู้</li>-->
+<!--                <li> สู้งาน</li>-->
+<!--                <li> มีประสบการณ์เชิงปฏิบัติ</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<div class="my-4">
+  <h3 class="font-bold">ความสอดคล้องกับการพัฒนาอัตลักษณ์นิสิต</h3>
+  <p>เสริมสร้างอัตลักษณ์นิสิต จำนวน............ด้าน ดังนี้</p>
+  <div class="ml-9">
+    <input *ngIf="hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['1', '2', '3'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+    <input *ngIf="!hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['1', '2', '3'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+    <label class="ml-2 font-semibold">รับผิดชอบ</label>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('1')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">การรับผิดชอบต่อหน้าที่</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('2')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">การบริหารจัดการตนเอง</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('3')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">การมีจิตสำนึกและตระหนักในการเป็นพลเมืองไทยและพลเมืองโลก</label>
+    </div>
+  </div>
+  <div class="ms-9">
+    <input *ngIf="hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['4', '5', '6', '7'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+    <input *ngIf="!hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['4', '5', '6', '7'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+    <label class="ml-2 font-semibold">รอบรู้</label>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('4')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">การมีรู้ ทักษะ ความสามารถตามบริบทของอาชีพ</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('5')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">มีความรู้ ความเข้าใจ และทักษะการใช้เทคโนโลยีดิจิทัลและเครื่องมือสื่อสารอย่างเหมาะสม</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('6')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">ความสามารถใช้ภาษาไทยและภาษาต่างประเทศเพื่อการสื่อสาร</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('7')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('7')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">มีทักษะการเรียนรู้ การไม่ยึดติดกับสิ่งที่เคยเรียนรู้มา และการเรียนรู้สิ่งที่เคยรู้ด้วยมุมมองใหม่ตลอดชีวิต</label>
+    </div>
+  </div>
+  <div class="ms-9">
+    <input *ngIf="hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['8', '9', '10'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+    <input *ngIf="!hasCommonElement(data?.projectDetail?.congruenceIdentity?.congruenceIdentityDetailId,['8', '9', '10'])" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+    <label class="ml-2 font-semibold">สู้งาน</label>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('8')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('8')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">การมีความมุ่งมั่น อดทนเพื่อทำงานที่ท้าทายโดยไม่ล้มเลิก</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('9')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('9')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">มีความสามารถในการปรับตัวและยืดหยุ่น</label>
+    </div>
+    <div class="ml-9">
+      <input *ngIf="String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('10')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" checked disabled>
+      <input *ngIf="!String(data?.projectDetail?.strategicTalent?.strategicTalentDetailId)?.includes('10')" type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" disabled>
+      <label class="ml-9">ทำงานเป็นทีม ความร่วมมือ การเป็นผู้นำการเปลี่ยนแปลง</label>
+    </div>
+  </div>
+</div>
+
+
+<div class="mb-4">
+  <h2 class="font-bold">8. หลักการและเหตุผล</h2>
+  <p class="ml-9"> {{ data?.projectDetail?.background }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">9. วัตถุประสงค์ของโครงการ</h2>
+  <p class="ml-9" *ngFor="let objective of data?.projectDetail?.objectives; index as i">9.{{ i + 1 }} {{ objective }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">10. รูปแบบกิจกรรม</h2>
+  <p class="ml-9" *ngFor="let activityFormat of data?.projectDetail?.activityFormats; index as i">10.{{ i + 1 }} {{ activityFormat }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">11. ผู้เข้าร่วมโครงการ</h2>
+  <div class="ml-9">
+    <p>11.1 ที่ปรึกษา ชาย ... คน</p>
+    <p>11.2 นิสิต ... คน</p>
+    <p>11.3 อื่น ๆ ... คน</p>
+    <p>รวม ... คน</p>
+  </div>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">12. สถานที่ปฏิบัติงาน</h2>
+  <p class="ml-9">{{ data?.projectDetail.location ?? '....................................................................................................................................................' }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">13. ระยะเวลาการปฏิบัติงาน</h2>
+  <p
+    class="ml-9">{{ data?.projectDetail.duration.length ? data?.projectDetail.duration : '....................................................................................................................................................' }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">14. วิธีการดำเนินงาน</h2>
+  <p class="ml-9" *ngFor="let method of data?.projectDetail?.operations; index as i">14.{{ i + 1 }} {{ method }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">15. งบประมาณ</h2>
+  <table class="w-full m-2 border ">
+    <thead>
+    <tr class="border-b bg-white text-sm">
+      <th class="py-3 px-6 text-center">รายการ</th>
+      <th class="py-3 px-6 text-center">จำนวนเงิน (บาท)</th>
+    </tr>
+    </thead>
+    <tbody class="text-sm font-light">
+    <ng-container>
+      <tr class="bg-white">
+        <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap border">
+          <div class="flex justify-between">
+            <p class="align-middle self-center font-semibold">15.1 หมวดค่าใช้สอย</p>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let cDetail of data?.projectDetail?.budget?.costDetails; index as i let last = last">
+        <td class="py-3 px-12 flex border">
+          <span class="self-center">15.1.{{ i + 1 }}</span>
+          <span class="ml-3 w-full"> {{ cDetail }} </span>
+        </td>
+        <td class="py-3 px-6 text-right border">
+          <div class="w-full flex gap-4">
+            {{ data!.projectDetail.budget.costAmounts[i] }}
+          </div>
+        </td>
+      </tr>
+      <tr class="bg-white">
+        <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-white border">
+          <div class="flex justify-between">
+            <p class="align-middle self-center font-semibold ">15.2 หมวดค่าตอบแทน</p>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let rDetail of data?.projectDetail?.budget?.remunerationDetails; index as i let last = last">
+        <td class="py-3 px-12 flex border">
+          <span class="self-center">15.2.{{ i + 1 }}</span>
+          <span class="ml-3 w-full"> {{ rDetail }} </span>
+        </td>
+        <td class="py-3 px-6 text-right border">
+          <div class="w-full flex gap-4">
+            {{ data!.projectDetail.budget.remunerationAmounts[i] }}
+          </div>
+        </td>
+      </tr>
+      <tr class="bg-white">
+        <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-white border">
+          <div class="flex justify-between">
+            <p class="align-middle self-center font-semibold">15.3 หมวดค่าวัสดุอุปกรณ์</p>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let eDetail of data?.projectDetail?.budget?.equipmentCostDetails; index as i let last = last">
+        <td class="py-3 px-12 flex border">
+          <span class="self-center">15.3.{{ i + 1 }}</span>
+          <span class="ml-3 w-full"> {{ eDetail }} </span>
+        </td>
+        <td class="py-3 px-6 text-right border">
+          <div class="w-full flex gap-4">
+            {{ data!.projectDetail.budget.equipmentCostAmounts[i] }}
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    <tr class="bg-white">
+      <td colspan="2" class="py-3 px-6 text-left whitespace-nowrap bg-white border"><p class="align-middle self-center font-semibold">15.4.ค่าอื่น ๆ</p></td>
+    </tr>
+    <tr>
+      <td class="py-3 px-12 border">
+        <span class="self-center">15.4.1 ค่าอื่นๆ </span>
+      </td>
+      <td class="py-3 px-6 text-right border">
+        <div class="w-full flex gap-4">
+          {{ data?.projectDetail?.budget?.other }}
+        </div>
+      </td>
+    </tr>
+    <tr class=" font-bold">
+      <td class="py-3 px-6 text-center border">รวม</td>
+      <td class="py-3 text-center border">{{ total() }} &nbsp; &nbsp; &nbsp; บาท</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p>หมายเหตุ ขอถัวจ่ายทุกรายการ</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">16. ผลที่คาดว่าจะได้รับ</h2>
+  <p class="ml-9" *ngFor="let result of data?.projectDetail?.expectedResults; index as i">16.{{ i + 1 }} {{ result }}</p>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">17. เป้าหมาย / ตัวบ่งชี้ความสำเร็จ</h2>
+  <div class="ml-9">
+    <h3 class="font-bold">ด้านปริมาณ</h3>
+    <div class="ml-9">
+      {{ data?.projectDetail.kpi.quality }}
+      <p *ngFor="let obj of data?.projectDetail.kpi.quality; index as i">17.{{ i + 1 }} {{ obj }}
+      <p>
+    </div>
+    <h3 class="font-bold">ด้านคุณภาพ</h3>
+    <div>
+      <p *ngFor="let obj of data?.projectDetail.kpi.quantity; index as i" class="ml-9">17.{{ i + data?.projectDetail.kpi.quality?.length + 1 }} {{ obj }}
+      <p>
+    </div>
+  </div>
+</div>
+
+<div class="mb-4">
+  <h2 class="font-bold">18. วิธีการติดตามประเมินผล</h2>
+  <p class="ml-9" *ngFor="let result of data?.projectDetail?.evaluates; index as i">18.{{ i + 1 }} {{ result }}</p>
+</div>

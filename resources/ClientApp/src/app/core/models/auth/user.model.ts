@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 export enum TypeUser {
@@ -46,6 +48,7 @@ export class User {
 export interface IRole {
   id: string
   permission: string
+  type: TypeUser
   organizationId: string
   organization: IOrganization
   positionId: string
@@ -55,6 +58,7 @@ export interface IRole {
 export class Role {
   id = new FormControl(null)
   permission = new FormControl(null)
+  type = new FormControl<TypeUser | null>(null)
   organizationId = new FormControl(null)
   organization = new FormGroup(new Organization())
   positionId = new FormControl(null)
@@ -104,6 +108,7 @@ export interface IStudent {
   name: string
   id: string
   phoneNumber: string
+  signature : string
   profile: string
   academicYear: string
   facultyId: string

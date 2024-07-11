@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../../layout/components/header/header.component";
 import { ProjectListComponent } from "../project-list/project-list.component";
 import { ProjectService } from "../project.service";
@@ -29,7 +29,16 @@ import { IUser } from "../../../../core/models/auth/user.model";
 import { DurationsComponent } from "./durations/durations.component";
 import { EditorComponent } from "@tinymce/tinymce-angular";
 import { InputTextareaComponent } from "../../../../shared/components/inputs/input-textarea/input-textarea.component";
-import { ProjectStatus, ProjectType } from "../../../../core/models/project/project.enum";
+import { AuthService } from "../../../../core/services/auth.service";
+
+interface IFile {
+  data: string | ArrayBuffer | null | undefined
+  lastModified: number
+  name: string
+  webkitRelativePath: string
+  size: number
+  type: string
+}
 
 @Component({
   selector: 'app-project-edit',
@@ -38,6 +47,9 @@ import { ProjectStatus, ProjectType } from "../../../../core/models/project/proj
   templateUrl: './project-edit.component.html',
 })
 export class ProjectEditComponent {
+  @ViewChild('fileInput', {static: false}) fileInput?: ElementRef;
+  // selectedFile: IFile | undefined;
+  selectedFile: any;
   project: IProject | undefined
   form: FormGroup
   tsuTalents: ITsuTalentGroupDetails[] = []
@@ -48,14 +60,14 @@ export class ProjectEditComponent {
   initialBudget: Budget | undefined;
 
 
-  constructor(private fb: FormBuilder, private psv: ProjectService, private route: ActivatedRoute, private asv: AlertService) {
+  constructor(private fb: FormBuilder, private psv: ProjectService, private route: ActivatedRoute, public asv: AuthService, private alertService: AlertService) {
     Object.assign(this, route.snapshot.data['master'] as IMaster)
     this.form = this.fb.group(new Project());
     this.psv.show(this.route.snapshot.params['id']).subscribe(project => {
+      this.project = project
       this.psv.patchValue(this.form, project)
       this.initialBudget = this.form.get('projectDetail.budget')?.value;
     })
-
   }
 
   getIndexArray = (controls: any) => Array.from({length: controls.length}, (_, i) => i);
@@ -67,7 +79,8 @@ export class ProjectEditComponent {
   newFormControl = (value: string) => new FormControl(value)
 
   onSubmit() {
-    if (this.form.get('preStatus')?.value) {
+    console.log("preStatus", this.form.get('preStatus')?.value)
+    if (this.form.get('preStatus')?.value && this.form.get('preStatus')?.value > this.form.get('status')?.value) {
       const currentBudget = this.form.get('projectDetail.budget')?.value;
       if (JSON.stringify(this.initialBudget) !== JSON.stringify(currentBudget)) this.form.get('status')?.setValue(1002)
       else this.form.get('status')?.setValue(this.form.get('preStatus')?.value)
@@ -75,11 +88,70 @@ export class ProjectEditComponent {
       this.form.get('preStatus')?.setValue(null)
       this.form.get('status')?.setValue(this.psv.getProjectStatus(this.form.get('projectType')?.value, this.form.get('status')?.value)?.id)
     }
-    this.psv.update(this.form.getRawValue(), this.route.snapshot.params['id']).subscribe({
-      next: () => {
-        this.asv.success('บันทึกข้อมูลสำเร็จ')
-        window.location.href = '/'
-      }, error: () => this.asv.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล')
+    const formData = new FormData();
+    if (this.selectedFile && this.selectedFile.length > 0) {
+      formData.append('file', this.selectedFile[0]);
+      console.log({formData:formData.get('file')})
+    }
+    this.psv.update(formData, this.route.snapshot.params['id'], formData.get('file')).subscribe({
+      next: (r) => {
+        // this.alertService.success('บันทึกข้อมูลสำเร็จ')
+        window.alert({r})
+        console.log({r})
+      }, error: () => this.alertService.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล')
     })
   }
+
+  triggerFileInput() {
+    this.fileInput?.nativeElement.click();
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0]; // Get only the first file
+      this.readFile(file);
+    }
+  }
+  // onFileSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files.length > 0) {
+  //     this.selectedFile = input.files;
+  //   }
+  // }
+
+  readFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.selectedFile = {
+        lastModified: file.lastModified,
+        name: file.name,
+        webkitRelativePath: file.webkitRelativePath,
+        size: file.size,
+        type: file.type,
+        data: e.target?.result,
+      };
+    }
+    reader.readAsDataURL(file);
+  }
+
+  removeFile() {
+    this.selectedFile = undefined;
+    if (this.fileInput && this.fileInput.nativeElement) this.fileInput.nativeElement.value = '';
+  }
+
+  getFileSize(size: number): string {
+    const KB = 1024;
+    const MB = KB * 1024;
+    if (size < KB) {
+      return size + ' bytes';
+    } else if (size < MB) {
+      return (size / KB).toFixed(2) + ' KB';
+    } else {
+      return (size / MB).toFixed(2) + ' MB';
+    }
+  }
+
+  protected readonly Project = Project;
+  public me: any;
 }

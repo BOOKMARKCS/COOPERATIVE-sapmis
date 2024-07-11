@@ -1,4 +1,4 @@
-import {MenuItem} from '../models/menu.model';
+import { MenuItem } from '../models/menu.model';
 
 export class Menu {
   public static affairs: MenuItem[] = [{
@@ -14,8 +14,14 @@ export class Menu {
         icon: 'assets/icons/heroicons/outline/users.svg',
         label: 'จัดการผู้ใช้',
         route: '/affairs/users',
-        children: [ {label: 'รายชื่อผู้ใช้', route: '/affairs/users'}, {label: 'เพิ่มผู้ใช้', route: '/affairs/users/add'} ],
+        children: [{label: 'รายชื่อผู้ใช้', route: '/affairs/users'}, {label: 'เพิ่มผู้ใช้', route: '/affairs/users/add'}],
       },
+      {
+        icon: 'assets/icons/google-font-icons/outline/apartment.svg',
+        label: 'ตั้งค่าองค์กร',
+        route: '/affairs/organization-settings',
+        children: [{label: 'องค์กร', route: '/affairs/organization-settings/organization'}, {label: 'ตำแหน่ง', route: '/affairs/organization-settings/position'},{label: 'ชมรม', route: '/affairs/organization-settings/club'}]
+      }
     ],
   }]
   public static proposer: MenuItem[] = [{
@@ -47,7 +53,7 @@ export class Menu {
         icon: 'assets/icons/heroicons/outline/document.svg',
         label: 'โครงการ',
         route: '/responsible/projects',
-        children: [ {label: 'โครงการทั้งหมด', route: '/responsible/projects/list'} ]
+        children: [{label: 'โครงการทั้งหมด', route: '/responsible/projects/list'}]
       },
     ],
   }]
@@ -64,14 +70,14 @@ export class Menu {
         icon: 'assets/icons/heroicons/outline/users.svg',
         label: 'จัดการผู้ใช้',
         route: '/endorser/users',
-        children: [ {label: 'รายชื่อผู้ใช้', route: '/endorser/users/list'}, {label: 'เพิ่มผู้ใช้', route: '/endorser/users/add'} ],
+        children: [{label: 'รายชื่อผู้ใช้', route: '/endorser/users/list'}, {label: 'เพิ่มผู้ใช้', route: '/endorser/users/add'}],
       },
       {
         icon: 'assets/icons/heroicons/outline/document.svg',
         label: 'โครงการ',
         route: '/endorser/projects',
-        children: [ {label: 'โครงการทั้งหมด', route: '/endorser/projects/list'}, {label: 'เพิ่มโครงการ', route: '/endorser/projects/add'} ]
-      },
+        children: [{label: 'โครงการทั้งหมด', route: '/endorser/projects/list'}, {label: 'เพิ่มโครงการ', route: '/endorser/projects/add'}]
+      }
     ]
   }]
   public static advisor: MenuItem[] = [{
@@ -89,5 +95,10 @@ export class Menu {
         route: '/advisor/project',
       },
     ],
+  }]
+  public static empty: MenuItem[] = [{
+    group: 'เมนู',
+    separator: false,
+    items: [],
   }]
 }

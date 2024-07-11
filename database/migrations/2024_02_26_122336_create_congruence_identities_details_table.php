@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('congruence_identity_details', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
-            $table->foreignUlid('congruence_identity_group_id')->constrained('congruence_identity_groups','id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignUlid('congruence_identity_group_id')->constrained('congruence_identity_groups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
         $this->createTrigger('congruence_identity_details');

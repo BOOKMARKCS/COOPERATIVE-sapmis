@@ -6,7 +6,7 @@ export interface IProject {
   id: string
   userId: string
   academicYear: string
-  preStatus : number | undefined
+  preStatus : number
   status: number
   projectType: ProjectType
   projectDetail: IProjectDetail
@@ -16,7 +16,7 @@ export class Project {
   id = new FormControl(null)
   userId = new FormControl(null)
   academicYear = new FormControl(null)
-  preStatus = new FormControl<number | null>(null)
+  preStatus = new FormControl<number>(0)
   status = new FormControl<number>(0)
   projectType = new FormControl(null)
   projectDetail = new FormGroup<ProjectDetail>(new ProjectDetail())

@@ -12,10 +12,10 @@ import {
   OnInit,
   Renderer2
 } from '@angular/core'
-import {Subscription} from 'rxjs'
-import {SvgIconRegistryService} from './svg-icon-registry.service'
-import {CommonModule} from '@angular/common'
-import {SvgLoader} from "./svg-loader"
+import { Subscription } from 'rxjs'
+import { SvgIconRegistryService } from './svg-icon-registry.service'
+import { CommonModule } from '@angular/common'
+import { SvgLoader } from "./svg-loader"
 
 @Component({
   selector: 'svg-icon',
@@ -43,9 +43,13 @@ export class SvgIconComponent implements OnInit, OnDestroy, DoCheck {
 
   constructor(private element: ElementRef, private differs: KeyValueDiffers, private renderer: Renderer2, private iconReg: SvgIconRegistryService, private cdr: ChangeDetectorRef) { }
 
-  ngOnInit() { this.init() }
+  ngOnInit() {
+    this.init()
+  }
 
-  ngOnDestroy() { this.helper.icnSub.unsubscribe() }
+  ngOnDestroy() {
+    this.helper.icnSub.unsubscribe()
+  }
 
   ngDoCheck() {
     if (this.helper.svg && this.helper.differ) {
@@ -72,7 +76,9 @@ export class SvgIconComponent implements OnInit, OnDestroy, DoCheck {
     }
   }
 
-  private resetDiffer() { if (this._svgStyle && !this.helper.differ) this.helper.differ = this.differs.find(this._svgStyle).create() }
+  private resetDiffer() {
+    if (this._svgStyle && !this.helper.differ) this.helper.differ = this.differs.find(this._svgStyle).create()
+  }
 
   private setSvg(svg: SVGElement) {
     if (this.helper.loaded || !svg) return
@@ -89,8 +95,7 @@ export class SvgIconComponent implements OnInit, OnDestroy, DoCheck {
       const w = icon.getAttribute('width')
       const h = icon.getAttribute('height')
       if (this.viewBox === 'auto' && h && w) {
-        const vb = `0 0 ${w} ${h}`
-        this.renderer.setAttribute(icon, 'viewBox', vb)
+        this.renderer.setAttribute(icon, 'viewBox', `0 0 ${w} ${h}`)
       } else if (this.viewBox !== '') this.renderer.setAttribute(icon, 'viewBox', this.viewBox)
     }
     this.stylize()
@@ -113,22 +118,15 @@ export class SvgIconComponent implements OnInit, OnDestroy, DoCheck {
 
   private setStyle(nameAndUnit: string, value: string | number | null | undefined) {
     const [name, unit] = nameAndUnit.split('.')
-    value = value !== null && unit ? `${value}${unit}` : value
     const svg = this.element.nativeElement.firstChild
-    if (value !== null) this.renderer.setStyle(svg, name, value as string)
+    if ((value !== null && unit ? `${value}${unit}` : value) !== null) this.renderer.setStyle(svg, name, value as string)
     else this.renderer.removeStyle(svg, name)
   }
 
   private setClass(target: HTMLElement | SVGSVGElement, previous: string | string[] | null, current: string | string[] | null) {
     if (target) {
-      if (previous) {
-        const klasses = (Array.isArray(previous) ? previous : previous.split(' ')).filter((klass) => klass)
-        for (const k of klasses) this.renderer.removeClass(target, k)
-      }
-      if (current) {
-        const klasses = (Array.isArray(current) ? current : current.split(' ')).filter((klass) => klass)
-        for (const k of klasses) this.renderer.addClass(target, k)
-      }
+      if (previous) for (const k of (Array.isArray(previous) ? previous : previous.split(' ')).filter((klass) => klass)) this.renderer.removeClass(target, k)
+      if (current) for (const k of (Array.isArray(current) ? current : current.split(' ')).filter((klass) => klass)) this.renderer.addClass(target, k)
     }
   }
 }

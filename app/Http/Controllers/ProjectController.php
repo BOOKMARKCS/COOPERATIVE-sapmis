@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
@@ -24,20 +24,23 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api');
+    }
     public function index()
     {
-        return CaseConverter::convertToCamelCase(
-            json_decode(
-                Project::with('projectDetail')
-                    ->orWhereHas('projectDetail', fn($query) => $query->where('user_id', auth()->id())->orWhereHas('projectApprovals'))
-                    ->orWhereHas('projectDetail', fn($query) => $query->where('user_id', auth()->id())->orWhereHas('projectAdvisors'))
-                    ->orWhereHas('projectDetail', fn($query) => $query->where('user_id', auth()->id())->orWhereHas('responsibleStudents'))
-//                    ->where('academic_year', auth()->user()->getUser()[auth()->user()->type]['academic_year'])
-                    ->get()
-                    ->toJson()
-            ),
-        );
+        $authUserId = auth()->id();
+        $projects = Project::with('projectDetail')
+            ->whereHas('projectDetail', function ($query) use ($authUserId) {
+                $query->where('user_id', $authUserId)
+                    ->orWhereHas('projectApprovals', fn($subQuery) => $subQuery->where('user_id', $authUserId))
+                    ->orWhereHas('projectAdvisors', fn($subQuery) => $subQuery->where('user_id', $authUserId))
+                    ->orWhereHas('responsibleStudents', fn($subQuery) => $subQuery->where('user_id', $authUserId));
+            })->get();
+        return CaseConverter::convertToCamelCase(json_decode($projects->toJson(), true));
     }
+
 
     public function create()
     {
@@ -45,19 +48,16 @@ class ProjectController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $request->validate(
-            ['project' => 'required|array', 'projectDetail' => 'required|array', 'projectDetail.responsibleStudents' => 'required|array', 'projectDetail.projectAdvisors' => 'required|array'],
-            ['project.required' => 'โปรดระบุข้อมูลโปรเจค', 'projectDetail.required' => 'โปรดระบุข้อมูลรายละเอียดโปรเจค', 'projectDetail.responsibleStudents.required' => 'โปรดระบุข้อมูลนักศึกษาที่รับผิดชอบ', 'projectDetail.projectAdvisors.required' => 'โปรดระบุข้อมูลที่ปรึกษาโปรเจค']
-        );
+//        $request->validate(
+//            ['project' => 'required|array', 'projectDetail' => 'required|array', 'projectDetail.responsibleStudents' => 'required|array', 'projectDetail.projectAdvisors' => 'required|array'],
+//            ['project.required' => 'โปรดระบุข้อมูลโปรเจค', 'projectDetail.required' => 'โปรดระบุข้อมูลรายละเอียดโปรเจค', 'projectDetail.responsibleStudents.required' => 'โปรดระบุข้อมูลนักศึกษาที่รับผิดชอบ', 'projectDetail.projectAdvisors.required' => 'โปรดระบุข้อมูลที่ปรึกษาโปรเจค']
+//        );
         DB::beginTransaction();
         try {
             $project = Project::create(CaseConverter::convertToSnakeCase($request->project))->latest()->first();
             $projectDetail = ProjectDetail::store(CaseConverter::convertToSnakeCase($request['projectDetail']), $project->id);
             ResponsibleStudent::store($request->projectDetail['responsibleStudents'], $projectDetail->id);
             ProjectAdvisor::store($request->projectDetail['projectAdvisors'], $projectDetail->id);
-//            TsuTalents::store($request['projectDetail']['tsuTalent']['tsuTalentDetailId'], $projectDetail->id);
-//            StrategicTalents::store($request->projectDetail['strategicTalent']['strategicTalentDetailId'], $projectDetail->id);
-//            CongruenceIdentity::store($request->projectDetail['congruenceIdentity']['congruenceIdentityDetailId'], $projectDetail-();
             DB::commit();
             return response()->json('บันทึกข้อมูลโครงการสำเร็จ', 201);
         } catch (Exception $e) {
@@ -90,6 +90,10 @@ class ProjectController extends Controller
                                                         WHEN 'officer' THEN officer.profile
                                                         WHEN 'advisor' THEN advisor.profile
                                                         WHEN 'student' THEN student.profile END,
+                                                    'signature', CASE users.type
+                                                        WHEN 'officer' THEN officer.signature
+                                                        WHEN 'advisor' THEN advisor.signature
+                                                        WHEN 'student' THEN student.signature END,
                                                     'student_id', CASE users.type WHEN 'student' THEN student.id END)) AS user"))
             ->join('roles as r', 'users.role_id', '=', 'r.id')
             ->join('organizations as o', 'r.organization_id', '=', 'o.id')
@@ -136,12 +140,12 @@ class ProjectController extends Controller
         $w_budgets = Budget::select(DB::raw("JSON_OBJECT('id',id,
                                  'project_detail_id',project_detail_id,
                                  'cost_details',cost_details,
-                                 'cost_amount',cost_amount,
-                                 'equipment_cost_detail',equipment_cost_detail,
-                                 'equipment_cost_amount',equipment_cost_amount,
+                                 'cost_amounts',cost_amounts,
+                                 'equipment_cost_details',equipment_cost_details,
+                                 'equipment_cost_amounts',equipment_cost_amounts,
                                  'remuneration_details',remuneration_details,
-                                 'remuneration_amount',remuneration_amount,
-                                 'others',others) as budget"));
+                                 'remuneration_amounts',remuneration_amounts,
+                                 'other',other) as budget"));
 
         $w_kpi = Kpi::select(DB::raw("JSON_OBJECT('id',id,
                              'project_detail_id',project_detail_id,
@@ -152,8 +156,8 @@ class ProjectController extends Controller
                                           'project_id', project_id,
                                           'project_name', project_name,
                                           'activity_group_name', activity_group_name,
-                                          'responsible_students', JSON_ARRAYAGG(DISTINCT rs.responsible_students),
-                                          'project_advisors', JSON_ARRAYAGG(DISTINCT pa.project_advisor),
+                                          'responsible_students', CONCAT('[', GROUP_CONCAT(DISTINCT rs.responsible_students), ']'),
+                                          'project_advisors', CONCAT('[', GROUP_CONCAT(DISTINCT  pa.project_advisor), ']'),
                                           'tsu_talent', tt.tsu_talent,
                                           'strategic_talent', st.strategic_talent,
                                           'congruence_identity', ci.congruenceIdentity,
@@ -185,15 +189,52 @@ class ProjectController extends Controller
             ->orderBy(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(pd.project_detail, '$.created_at'))"), 'DESC')
             ->first();
 
+//        if ($project) {
+//            $project->project_detail = json_decode($project->project_detail);
+//            foreach (['tsu_talent', 'strategic_talent', 'congruence_identity'] as $attribute) if (isset($project->project_detail->$attribute->{$attribute . '_detail_id'})) $project->project_detail->$attribute->{$attribute . '_detail_id'} = json_decode($project->project_detail->$attribute->{$attribute . '_detail_id'});
+//            foreach (['responsible_students', 'project_advisors'] as $attribute) $project->project_detail->$attribute = $project->project_detail->$attribute[0] ?? null;
+//            return CaseConverter::convertToCamelCase($project);
+//        } else return response()->json(['message' => 'ไม่พบโครงการที่ระบุ'], 400);
         if ($project) {
             $project->project_detail = json_decode($project->project_detail);
-            if($project->project_detail->tsu_talent->tsu_talent_detail_id)$project->project_detail->tsu_talent->tsu_talent_detail_id = json_decode($project->project_detail->tsu_talent->tsu_talent_detail_id);
-            if($project->project_detail->strategic_talent->strategic_talent_detail_id)$project->project_detail->strategic_talent->strategic_talent_detail_id = json_decode($project->project_detail->strategic_talent->strategic_talent_detail_id);
-            $project->project_detail->congruence_identity->congruence_identity_detail_id = json_decode($project->project_detail->congruence_identity->congruence_identity_detail_id);
-            $project->project_detail->responsible_students = $project->project_detail->responsible_students[0];
-            $project->project_detail->project_advisors = $project->project_detail->project_advisors[0];
+            if (isset($project->project_detail->tsu_talent)) {
+                $project->project_detail->tsu_talent = json_decode($project->project_detail->tsu_talent);
+                $project->project_detail->tsu_talent->tsu_talent_detail_id = json_decode($project->project_detail->tsu_talent->tsu_talent_detail_id);
+            }
+            if (isset($project->project_detail->strategic_talent)) {
+                $project->project_detail->strategic_talent = json_decode($project->project_detail->strategic_talent);
+                $project->project_detail->strategic_talent->strategic_talent_detail_id = json_decode($project->project_detail->strategic_talent->strategic_talent_detail_id);
+            }
+            if (isset($project->project_detail->congruence_identity)) {
+                $project->project_detail->congruence_identity = json_decode($project->project_detail->congruence_identity);
+                $project->project_detail->congruence_identity->congruence_identity_detail_id = json_decode($project->project_detail->congruence_identity->congruence_identity_detail_id);
+            }
+            if (isset($project->project_detail->project_participant)) {
+                $project->project_detail->project_participant = json_decode($project->project_detail->project_participant);
+                $project->project_detail->project_participant->advisor = json_decode($project->project_detail->project_participant->advisor);
+                $project->project_detail->project_participant->other = json_decode($project->project_detail->project_participant->other);
+                $project->project_detail->project_participant->student = json_decode($project->project_detail->project_participant->student);
+                $project->project_detail->project_participant->teacher = json_decode($project->project_detail->project_participant->teacher);
+            }
+            if (isset($project->project_detail->kpi)) {
+                $project->project_detail->kpi = json_decode($project->project_detail->kpi);
+                $project->project_detail->kpi->quality = json_decode($project->project_detail->kpi->quality);
+                $project->project_detail->kpi->quantity = json_decode($project->project_detail->kpi->quantity);
+            }
+            if (isset($project->project_detail->budget)) {
+                $project->project_detail->budget = json_decode($project->project_detail->budget);
+                $project->project_detail->budget->cost_details = json_decode($project->project_detail->budget->cost_details);
+                $project->project_detail->budget->cost_amounts = json_decode($project->project_detail->budget->cost_amounts);
+                $project->project_detail->budget->equipment_cost_details = json_decode($project->project_detail->budget->equipment_cost_details);
+                $project->project_detail->budget->equipment_cost_amounts = json_decode($project->project_detail->budget->equipment_cost_amounts);
+                $project->project_detail->budget->remuneration_details = json_decode($project->project_detail->budget->remuneration_details);
+                $project->project_detail->budget->remuneration_amounts = json_decode($project->project_detail->budget->remuneration_amounts);
+            }
+
+            foreach (['objectives', 'activity_formats', 'operations', 'evaluates', 'expected_results', 'duration', 'project_advisors', 'responsible_students'] as $attribute) $project->project_detail->{$attribute} = json_decode($project->project_detail->{$attribute});
             return CaseConverter::convertToCamelCase($project);
         } else return response()->json(['message' => 'ไม่พบโครงการที่ระบุ'], 400);
+
     }
 
     /**
@@ -218,7 +259,7 @@ class ProjectController extends Controller
         $requestData = $request->input();
 
         // อัปเดตข้อมูลโปรเจค
-        $project->update($requestData);
+        $project->update(CaseConverter::convertToSnakeCase($requestData));
 
         $projectDetail = ProjectDetail::find($requestData['projectDetail']['id']);
         $updated = $projectDetail->update(CaseConverter::convertToSnakeCase($requestData['projectDetail']));
@@ -246,6 +287,39 @@ class ProjectController extends Controller
         $participantData['project_detail_id'] = $projectDetail->id;
         ProjectParticipant::updateOrCreate(['project_detail_id' => $participantData['project_detail_id']], $participantData);
 
+        if (isset($requestData['projectDetail']['kpi'])) {
+            $kpiData = $requestData['projectDetail']['kpi'];
+            $kpiData['project_detail_id'] = $projectDetail->id;
+
+            Kpi::updateOrCreate(
+                ['project_detail_id' => $projectDetail->id],
+                [
+                    'quantity' => json_encode($kpiData['quantity']),
+                    'quality' => json_encode($kpiData['quality']),
+                ]
+            );
+        }
+
+        if (isset($requestData['projectDetail']['budget'])) {
+            $budgetData = CaseConverter::convertToSnakeCase($requestData['projectDetail']['budget']);
+            $budgetData['project_detail_id'] = $projectDetail->id;
+
+            Budget::updateOrCreate(
+                ['id' => $budgetData['id'], 'project_detail_id' => $projectDetail->id],
+                [
+                    'cost_details' => json_encode($budgetData['cost_details']),
+                    'cost_amount' => json_encode($budgetData['cost_amounts']),
+                    'remuneration_details' => json_encode($budgetData['remuneration_details']),
+                    'remuneration_amounts' => json_encode($budgetData['remuneration_amounts']),
+                    'equipment_cost_details' => json_encode($budgetData['equipment_cost_details']),
+                    'equipment_cost_amounts' => json_encode($budgetData['equipment_cost_amounts']),
+                    'other' => json_encode($budgetData['other']),
+                ]
+            );
+        }
+
+
+
 //        $ProjectParticipant = ProjectParticipant::find($requestData['projectDetail']['projectParticipant']['id']);
         // ตรวจสอบว่าอัปเดตข้อมูลสำเร็จหรือไม่
 //        if ($updated) {
@@ -253,11 +327,23 @@ class ProjectController extends Controller
 //        } else {
 //            return response()->json(['error' => 'Failed to update project'], 500);
 //        }
-        if ($updated) {
-            return response()->json(['success' => 'Project updated successfully', 'projectDetail' => $requestData['projectDetail'], 'duration'=> $projectDetail], 200);
-        } else {
-            return response()->json(['error' => 'Failed to update project'], 500);
-        }
+//        if ($updated) {
+//            return response()->json(['success' => 'Project updated successfully', 'projectDetail' => $requestData['projectDetail'], 'duration' => $projectDetail], 200);
+            if ($request->hasFile('file')) {
+                // Handle file upload here
+                // Example: Save the file to a storage directory
+//                $file = $request->file('file');
+//                $file->move(storage_path('app/public/uploads'), $file->getClientOriginalName());
+
+                // Respond with success message
+                return response()->json(['success' => 'File uploaded successfully']);
+            } else {
+                // Handle case where no file is uploaded
+                return response()->json(['error' => 'No file uploaded']);
+            }
+//        } else {
+//            return response()->json(['error' => 'Failed to update project'], 500);
+//        }
     }
 
 
@@ -278,7 +364,7 @@ class ProjectController extends Controller
     public
     function master()
     {
-        $organizationId = auth()->user()->role->organization_id;
+        $organizationId = auth()->user()->{'role'}->organization_id;
         return CaseConverter::convertToCamelCase([
             'tsuTalents' => TsuTalentGroup::with(['talentDetails'])->get(),
             'strategicTalents' => $this->mapToNameId(StrategicTalentDetails::pluck('name', 'id')),
@@ -289,23 +375,26 @@ class ProjectController extends Controller
 //                               'user', u.user,
 //                               'status', status,
 //                               'student_id', student_id) AS responsible_students"))
-            'responsibleStudents' => User::with('role')
-                ->whereRelation('role', 'permission', '=', 'Responsible')->get()
-                ->map(fn($user) => $user->load($user->type)),
-//            'responsibleStudents' => User::with(['role', 'organization'])
-//                ->whereHas('role', function ($query) {
-//                    $query->where('permission', '=', 'Responsible');
-//                })
-//                ->whereHas('role.organization_id', function ($query) use ($organizationId) {
-//                    $query->where('id', '=', $organizationId);
-//                })
-//                ->get()
+//            'responsibleStudents' => User::with('role')
+//                ->whereRelation('role', 'permission', '=', 'Responsible')->get()
 //                ->map(fn($user) => $user->load($user->type)),
-
+            'responsibleStudents' => User::with('role')
+                ->whereHas('role', function ($query) use ($organizationId) {
+                    $query->where('permission', '=', 'Responsible')
+                        ->where('organization_id', $organizationId); // กรองด้วย organization_id ในตาราง roles
+                })
+                ->get()
+                ->map(fn($user) => $user->load($user->type)),
             'projectAdvisors' => User::with('role')
+                ->whereHas('role', function ($query) use ($organizationId) {
+                    $query->where('permission', '=', 'ProjectAdvisor')
+                        ->where('organization_id', $organizationId); // กรองด้วย organization_id ในตาราง roles
+                })
+                ->get()
+                ->map(fn($user) => $user->load($user->type)),
 //                ->whereRelation('advisor', 'faculty_id', '=', (new User())->getUser()[auth()->user()->type]['facultyId'])
-                ->where('type', 'advisor')->get()
-                ->map(fn($user) => $user->load($user->type))
+//                ->where('type', 'advisor')->get()
+//                ->map(fn($user) => $user->load($user->type))
         ]);
     }
 }

@@ -1,18 +1,12 @@
 <?php
 
-use App\Models\Budget;
-use App\Models\CongruenceIdentity;
-use App\Models\Kpi;
-use App\Models\ProjectParticipant;
-use App\Models\StrategicTalents;
-use App\Models\TsuTalents;
+use App\Traits\TriggerManagementTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    use \App\Traits\TriggerManagementTrait;
+    use TriggerManagementTrait;
     /**
      * Run the migrations.
      */

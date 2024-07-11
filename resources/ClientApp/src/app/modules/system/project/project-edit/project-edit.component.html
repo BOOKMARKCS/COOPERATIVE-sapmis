@@ -19,7 +19,8 @@
         <div class="w-full relative">
           <div class=" gap-2 relative">
             <app-input [inputFormControl]="getFormArray('objectives').controls.at(pIndex)" [placeholder]="' '" class="w-full"></app-input>
-            <span (click)="getFormArray('objectives').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 "> <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
+            <span (click)="getFormArray('objectives').removeAt(pIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 "> <svg-icon src="assets/icons/heroicons/outline/x.svg"
+                                                                                                                                                                                     [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon> </span>
           </div>
         </div>
       </div>
@@ -78,6 +79,45 @@
         </div>
       </div>
     </div>
+
+    <div class="my-4 relative bg-background text-muted-foreground p-8 rounded-lg">
+      <h3 class="text-md font-bold text-foreground">ผลที่คาดว่าจะได้รับ</h3>
+      <div class="m-3 p-2 px-6">
+        <div>
+          <div class="flex justify-between mb-1">
+            <label class="text-md font-bold text-foreground"> ด้านปริมาณ</label>
+            <app-button (click)="getFormArray(['kpi','quantity']).push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่มข้อมูลด้านปริมาณ</app-button>
+          </div>
+          <div *ngFor="let kIndex of getIndexArray(getFormControl(['kpi','quantity']))" class="flex items-center gap-2">
+            <div class="w-full relative">
+              <div class=" gap-2 relative">
+                <app-input [inputFormControl]="getFormArray(['kpi','quantity']).controls.at(kIndex)" [placeholder]="'kpi ด้านปริมาณ'" class="w-full"></app-input>
+                <span (click)="getFormArray('objectives').removeAt(kIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 ">
+                  <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-3 p-2 px-6">
+        <div class="flex justify-between mb-1">
+          <label class="text-md font-bold text-foreground"> ด้านคุณภาพ</label>
+          <app-button (click)="getFormArray(['kpi','quality']).push(newFormControl(''))" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">เพิ่มข้อมูลด้านคุณภาพ</app-button>
+        </div>
+        <div *ngFor="let kIndex of (getIndexArray(getFormControl(['kpi','quality'])))" class="flex items-center gap-2">
+          <div class="w-full relative">
+            <div class=" gap-2 relative">
+              <app-input [inputFormControl]="getFormArray(['kpi','quality']).controls.at(kIndex)" [placeholder]="'kpi ด้านคุณภาพ'" class="w-full"></app-input>
+              <span (click)="getFormArray('objectives').removeAt(kIndex)" class=" cursor-pointer absolute  inset-y-0 end-0 grid w-10  place-content-center  text-gray-500 ">
+                <svg-icon src="assets/icons/heroicons/outline/x.svg" [svgClass]="'h-8 w-8 mr-3 text-night-700 hover:text-red-700'"></svg-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="my-4 relative bg-background text-muted-foreground p-8 rounded-lg ">
       <div class="flex justify-between">
         <h3 class="text-md font-bold text-foreground">วิธีการติดตามประเมินผล</h3>
@@ -93,6 +133,72 @@
         </div>
       </div>
     </div>
+
+    <!-- component -->
+    <main class="w-full h-full">
+      <!-- file upload modal -->
+      <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md">
+        <!-- scroll area -->
+        <section class="overflow-auto p-8 w-full h-full flex flex-col">
+          <header *ngIf="!asv.user().student.signature" class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+            <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+              <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
+            </p>
+            <input id="hidden-input" type="file" multiple #fileInput class="hidden" (change)="onFileSelected($event)"/>
+            <button
+              id="button"
+              class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
+              (click)="triggerFileInput()"
+            >
+              Upload a file
+            </button>
+
+          </header>
+
+          <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+            To Upload
+          </h1>
+
+          <ul class="flex flex-wrap overflow-auto">
+            <li *ngFor="let obj of  getFormArray('responsibleStudents').value; index as i" class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8">
+              <div class="max-w-xs bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+                <div class="px-3 py-2">
+                  <h2 class="text-xl font-bold mb-2">{{ obj.user.student.name }}</h2>
+                  <div *ngIf="!obj.status && (asv.user().student.id == obj.studentId ?  !selectedFile : true )" class="text-gray-600 text-center">
+                    <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
+                      <li id="empty" class="h-full w-full text-center flex flex-col justify-center items-center">
+                        <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data"/>
+                        <span class="text-small text-gray-500">ยังไม่แนบรายเซ็น</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <img *ngIf="obj.status" src="{{obj.user.student.signature}}" alt="Signature" class="mt-4 w-full h-32 object-cover rounded-md bg-fixed">
+
+<!--                  <img  [src]="selectedFile?.data" alt="Signature" class="mt-4 w-full h-32 object-cover rounded-md bg-fixed">-->
+                  <article *ngIf="!obj.user.student.signature && selectedFile && asv.user().student.id == obj.studentId" tabindex="0"
+                           class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-black ">
+                    <img *ngIf="selectedFile.data" [src]="selectedFile.data" alt="upload preview" class="img-preview w-full h-full object-cover rounded-md bg-fixed"/>
+                    <section class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                      <h1 class="flex-1">{{ selectedFile.name }}</h1>
+                      <div class="flex items-center">
+                        <span class="p-1"> <i> <svg class="text-black w-4 h-4 ml-auto pt-" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"> <path
+                          d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z"/> </svg> </i> </span>
+                        <p class="p-1 size text-xs text-black">{{ getFileSize(selectedFile.size) }}</p>
+                        <button (click)="removeFile()" class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md">
+                          <svg class="pointer-events-none text-black w-4 h-4 ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path class="pointer-events-none" d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </section>
+                  </article>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </article>
+    </main>
 
     <div class="flex justify-end mt-4">
       <app-button (click)="onSubmit()" class="self-center " full impact="bold" tone="primary" shape="rounded" size="medium">เสนอโครงการ</app-button>

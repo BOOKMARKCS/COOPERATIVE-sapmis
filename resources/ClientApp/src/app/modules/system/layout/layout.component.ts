@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Event, NavigationEnd, Router, RouterOutlet} from '@angular/router';
-import {NavbarComponent} from './navbar/navbar.component';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
-import {AuthService} from "../../../core/services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +15,7 @@ export class LayoutComponent implements OnInit {
   user: any;
 
   constructor(authService: AuthService, private router: Router) {
-    authService.user$.subscribe(u => this.user = u?.user)
+    this.user = authService.user()
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) if (this.mainContent) this.mainContent!.scrollTop = 0;
     });

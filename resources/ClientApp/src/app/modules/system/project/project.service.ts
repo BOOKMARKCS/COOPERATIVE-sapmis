@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {IProject} from "../../../core/models/project/project.model";
-import {AuthService} from "../../../core/services/auth.service";
-import {ProjectStatus, ProjectType} from "../../../core/models/project/project.enum";
-import {IMaster} from "../../../core/models/projectDetail/project-detail.model";
-import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { IProject } from "../../../core/models/project/project.model";
+import { AuthService } from "../../../core/services/auth.service";
+import { ProjectStatus, ProjectType } from "../../../core/models/project/project.enum";
+import { IMaster } from "../../../core/models/projectDetail/project-detail.model";
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,15 @@ export class ProjectService {
 
   show = (projectId: string) => this.http.get<IProject>(`project/${projectId}`)
 
-  update = (project: any, projectId: any) => this.http.put(`project/${projectId}`, project)
+  update = (project: any, projectId: any, file: any = null) => this.http.put(`project/${projectId}`, {project, file}, {headers: new HttpHeaders({ 'Content-Type': 'application/form-data' })})
+  // update = (project: any, projectId: any, signature: any = null) => {
+  //   const formData = new FormData();
+  //   formData.append('project', JSON.stringify(project)); // Convert project to JSON string and append to FormData
+  //   formData.append('file', signature); // Append file (signature) to FormData
+  //
+  //   return this.http.put(`project/${projectId}`, formData);
+  // }
+
 
   master = () => this.http.get<IMaster>('master-project')
 
@@ -32,7 +40,7 @@ export class ProjectService {
 
     if (currentIndex >= 0 && currentIndex < statusKeys.length - 1) {
       const nextStatusKey = statusKeys[currentIndex + 1];
-      return { id: nextStatusKey, status: statuses[nextStatusKey] };
+      return {id: nextStatusKey, status: statuses[nextStatusKey]};
     }
     return null;
   }
@@ -70,7 +78,7 @@ export class ProjectService {
     const patchForm = (data: any, formControl: AbstractControl) => {
       if (Array.isArray(data) && formControl instanceof FormArray) {
         setFormArrayValue(data, formControl);
-    } else if (data instanceof Object && formControl instanceof FormGroup) {
+      } else if (data instanceof Object && formControl instanceof FormGroup) {
         Object.entries(data).forEach(([key, value]) => {
           const subFormControl = formControl.get(key);
           if (Array.isArray(value) && subFormControl instanceof FormArray) {
@@ -85,9 +93,8 @@ export class ProjectService {
     });
 
     form.patchValue(project);
-    console.log({ form: form.getRawValue(), project: project });
+    console.log({form: form.getRawValue(), project: project});
   }
-
 
 
 }

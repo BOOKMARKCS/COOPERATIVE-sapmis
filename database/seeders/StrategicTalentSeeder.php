@@ -2,12 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcademicYear;
-use App\Models\Project;
-use App\Models\ProjectDetail;
 use App\Models\StrategicTalentDetails;
-use App\Models\StrategicTalents;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class StrategicTalentSeeder extends Seeder

@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @method static where(string[] $array)
+ * @method static pluck(string $string)
+ */
 class Role extends Model
 {
     use HasFactory;
@@ -14,6 +17,7 @@ class Role extends Model
     protected $fillable = [
         'id',
         'permission',
+        'type',
         'organization_id',
         'position_id',
     ];

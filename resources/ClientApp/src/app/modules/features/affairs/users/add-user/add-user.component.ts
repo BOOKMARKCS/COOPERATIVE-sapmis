@@ -1,18 +1,18 @@
-import {Component, NgIterable, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ActivatedRoute, Router, RouterLink,} from "@angular/router";
-import {JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {IOrganization, IRole, TypeUser, User} from "../../../../../core/models/auth/user.model";
-import {lastValueFrom} from "rxjs";
-import {ButtonComponent} from "../../../../../shared/components/button/button.component";
-import {UserService} from "../../../../system/user/user.service";
-import {HeaderComponent} from "../../../../system/layout/components/header/header.component";
-import {UserAddComponent} from "../../../../system/user/user-add/user-add.component";
+import { Component, NgIterable, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterLink } from "@angular/router";
+import { JsonPipe, NgClass, NgForOf, NgIf } from "@angular/common";
+import { IOrganization, IRole, TypeUser, User } from "../../../../../core/models/auth/user.model";
+import { lastValueFrom } from "rxjs";
+import { ButtonComponent } from "../../../../../shared/components/button/button.component";
+import { UserService } from "../../../../system/user/user.service";
+import { HeaderComponent } from "../../../../system/layout/components/header/header.component";
+import { UserAddComponent } from "../../../../system/user/user-add/user-add.component";
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ NgClass, FormsModule, ReactiveFormsModule, NgForOf, NgIf, JsonPipe, HeaderComponent, ButtonComponent, RouterLink, UserAddComponent ],
+  imports: [NgClass, FormsModule, ReactiveFormsModule, NgForOf, NgIf, JsonPipe, HeaderComponent, ButtonComponent, RouterLink, UserAddComponent],
   templateUrl: './add-user.component.html',
 })
 export class AddUserComponent implements OnInit {
@@ -22,16 +22,12 @@ export class AddUserComponent implements OnInit {
   typeUser: string = '';
   protected faculties: any;
 
-  constructor(private usv: UserService, fb: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private usv: UserService, fb: FormBuilder) {
     this.form = fb.group(new User())
   }
 
   get getTypeUser() {
     return this.typeUser
-  }
-
-  get getOrganizationId() {
-    return this.form.get(['role', 'organizationId'])?.value
   }
 
   async ngOnInit() {
@@ -63,19 +59,4 @@ export class AddUserComponent implements OnInit {
     return role.id
   }
 
-  // get getOrganizationValue() {
-  //   return this.organizations.find(o => o.id === this.form.get('organizationId')?.value)
-  // };
-
-  // get getPositionValue() {
-  //   // return this.getOrganizationValue?.name ? this.positions[this.getOrganizationValue.name].find((p: any) => p.id === this.form.get('positionId')?.value) : null;
-  // }
-  // get getTypeUser() {
-  //   console.log({form:this.form.get(['role','organizationId'])?.value})
-  //   console.log({role: this.roles?.[this.form.get(['role','organizationId'])?.value]});
-  //   return 'officer';
-  // }
-
-
-  protected readonly TypeUser = TypeUser;
 }

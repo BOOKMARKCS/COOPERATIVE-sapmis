@@ -13,7 +13,12 @@ class Advisor extends Model
 
     protected $fillable = [ 'user_id', 'name', 'phone_number', 'signature', 'profile', 'academic_year', 'faculty_id', 'club_id' ];
 
-    public function user() { return $this->belongsTo(User::class); }
+    protected $attributes = [
+        'profile' => '/images/profile_default.png',
+    ];
+
+    public function user(): BelongsTo
+    { return $this->belongsTo(User::class); }
 
     public function faculty(): HasOne { return $this->hasOne(Faculty::class,'id','faculty_id'); }
 

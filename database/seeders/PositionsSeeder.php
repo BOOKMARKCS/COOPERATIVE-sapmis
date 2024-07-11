@@ -1,13 +1,9 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace Database\Seeders;
 
-use App\Models\Organization;
 use App\Models\Position;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use function Termwind\terminal;
 
 class PositionsSeeder extends Seeder
 {

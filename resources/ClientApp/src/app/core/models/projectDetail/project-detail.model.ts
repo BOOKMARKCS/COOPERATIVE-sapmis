@@ -1,29 +1,6 @@
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IUser, User} from "../auth/user.model";
 
-// export interface IProjectDetail {
-//   id : string
-//   projectId : string
-//   projectName : string
-//   activityGroupName : string
-//   responsibleStudents : string
-//   projectAdvisors : string
-//   tsuTalent : string
-//   strategicTalent : string
-//   congruenceIdentity : string
-//   background : string
-//   objectives : string
-//   activityFormats : string
-//   projectParticipant : string
-//   location : string
-//   duration : string
-//   operations : string
-//   budget : string
-//   expectedResults : string
-//   kpi : string
-//   evaluates : string
-//   createdAt : string
-// }
 export interface IProjectDetail {
   id: string;
   projectId: string;
@@ -54,11 +31,11 @@ export class ProjectDetail {
   projectId = new FormControl(null)
   projectName = new FormControl(null, Validators.required)
   activityGroupName = new FormControl(null)
-  responsibleStudents = new FormArray<FormGroup<ResponsibleStudent>>([], Validators.required);
-  projectAdvisors = new FormArray<FormGroup<ProjectAdvisor>>([], Validators.required)
-  tsuTalent = new FormGroup(new TsuTalent())
-  strategicTalent = new FormGroup<StrategicTalent>(new StrategicTalent())
-  congruenceIdentity = new FormGroup<CongruenceIdentity>(new CongruenceIdentity())
+  responsibleStudents = new FormArray([], Validators.required);
+  projectAdvisors = new FormArray([], Validators.required)
+  tsuTalent = new FormGroup<any>(new TsuTalent())
+  strategicTalent = new FormGroup<any>(new StrategicTalent())
+  congruenceIdentity = new FormGroup<any>(new CongruenceIdentity())
   background = new FormControl(null)
   objectives = new FormArray<FormControl<string>>([])
   activityFormats = new FormArray<FormControl<string>>([])

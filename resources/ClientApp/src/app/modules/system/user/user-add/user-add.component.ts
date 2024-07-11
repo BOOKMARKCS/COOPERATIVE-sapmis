@@ -27,41 +27,51 @@ export class UserAddComponent implements OnInit {
   auth: any;
   protected faculties: any;
 
-  constructor(private usv: UserService, auth: AuthService, fb: FormBuilder, private readonly alertService: AlertService) {
-    this.form = fb.group(new User())
-    auth.user$.subscribe(u => this.auth = u)
+  constructor(private usv: UserService, authService: AuthService, private fb: FormBuilder, private readonly alertService: AlertService) {
+    this.form = this.fb.group(new User())
+    this.auth = authService.user()
   }
 
   async ngOnInit() {
     Object.assign(this, await lastValueFrom(this.usv.master()));
   }
 
+
   get getOrganizationId() {
     return this.form.get(['role', 'organizationId'])?.value
   }
 
+  get getPositionId() {
+    return this.form.get(['role', 'positionId'])?.value
+  }
+
   submit() {
-    if (this.auth.user.role.organizationId !== '1') {
-      this.form.get('roleId')?.setValue(this.setRole().id)
-      this.form.get(['type'])?.setValue(this.auth.user.type)
-      this.form.get([this.typeUser, 'academicYear'])?.setValue(this.auth.user[this.auth.user.type].academicYear)
-      this.form.get([this.typeUser, 'facultyId'])?.setValue(this.auth.user[this.auth.user.type].facultyId)
+    if (this.auth.role.organizationId !== '1') {
+      this.form.get('roleId')?.setValue(this.getRole.id)
+      console.log({formPermission: this.form.get(['roleId', 'permission'])?.setValue(this.setRole().permission)})
+      this.form.get(['type'])?.setValue(this.getRole.type)
+      this.form.get([this.typeUser, 'academicYear'])?.setValue(this.auth[this.auth.type].academicYear)
+      this.form.get([this.typeUser, 'facultyId'])?.setValue(this.auth[this.auth.type].facultyId)
     } else {
-      this.form.get(['type'])?.setValue(this.typeUser)
+      this.form.get(['type'])?.setValue(this.getRole.type)
       this.form.get([this.typeUser, 'academicYear'])?.setValue(2566)
     }
     console.log({form: this.form.value})
-    this.usv.store(this.form.value).subscribe({
+    this.usv.store(this.form.getRawValue()).subscribe({
       next: () => {
         this.alertService.success('บันทึกข้อมูลผู้ใช้สำเร็จ')
-        this.form.reset()
+        this.form = this.fb.group(new User())
       },
       error: () => this.alertService.error('บันทึกข้อมูลผู้ใช้ไม่สำเร็จ')
     })
   }
 
+  get getRole() {
+    return Object.values(this.roles[this.getOrganizationId]).find(r => r.positionId === this.getPositionId)
+  }
+
   setRole() {
-    const role = Object.values(this.roles[this.auth.user.type === TypeUser.Student ? this.auth.user.role.organizationId : this.getOrganizationId] || {}).find(r => r.positionId === (this.auth.user.type === TypeUser.Student ? '14' : this.form.get(['role', 'positionId'])?.value));
+    const role = Object.values(this.roles[this.auth.type === TypeUser.Student ? this.auth.role.organizationId : this.getOrganizationId] || {}).find(r => r.positionId === (this.auth.type === TypeUser.Student ? '14' : this.form.get(['role', 'positionId'])?.value));
     const permissionMap: RolePermissionMap = {'Affairs': TypeUser.Officer, 'OrganizationAdvisor': TypeUser.Advisor, 'ProjectAdvisor': TypeUser.Advisor};
     this.typeUser = permissionMap[role?.permission] || TypeUser.Student;
     this.form.get('roleId')?.setValue(role.id)

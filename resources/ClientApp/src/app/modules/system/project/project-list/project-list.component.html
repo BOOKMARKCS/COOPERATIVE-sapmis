@@ -9,7 +9,7 @@
     </div>
 
     <div class="relative overflow-x-auto">
-      <table class="w-full table-auto" *ngIf="projects">
+      <table class="w-full table-auto" *ngIf="projects?.length; else noData">
         <!--Table head-->
         <thead class="text-xs uppercase text-muted-foreground">
         <tr class="bg-background">
@@ -27,14 +27,17 @@
           <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.projectDetail.activityGroupName }}</span></td>
           <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ ProjectStatus[obj.projectType][obj.status].statusName }}</span></td>
           <td class="py-2 pl-2 text-right flex justify-center">
-            <app-button *ngFor="let subObj of ProjectStatus[obj.projectType][obj.status].actions" full impact="bold" [tone]="subObj.tone" shape="rounded" size="medium" [routerLink]="[subObj.route,{id:obj.id}]">
-              <svg-icon src="assets/icons/heroicons/outline/dots-horizontal.svg" [svgClass]="'h-5 w-5 mr-3'"></svg-icon>
+            <app-button *ngFor="let subObj of ProjectStatus[obj.projectType][obj.status][owner ? 'proposerActions' : 'officerActions']" full impact="bold" [tone]="subObj.tone" shape="rounded" size="medium"
+                        [routerLink]="[subObj.route,{id:obj.id}]">
+              <svg-icon src="{{subObj.icon}}" [svgClass]="'h-5 w-5 mr-3'"></svg-icon>
               <span class="whitespace-nowrap">{{ subObj.actionName }}</span>
             </app-button>
           </td>
         </tr>
       </table>
-      <div class="w-full text-center" *ngIf="!projects?.length"> ไม่พบข้อมูลโครงการ</div>
+      <ng-template #noData>
+        <div class="text-center  py-2"> ไม่พบข้อมูลโครงการ</div>
+      </ng-template>
     </div>
   </div>
 </div>

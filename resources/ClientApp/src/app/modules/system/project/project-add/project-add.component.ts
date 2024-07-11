@@ -39,12 +39,13 @@ export class ProjectAddComponent {
   getFormControl = (formControlName: string | string[]) => this.form.get(['projectDetail', ...(Array.isArray(formControlName) ? formControlName : [formControlName])]);
 
   onSubmit() {
-    if (this.form.valid) {
-      this.form.get(['project', 'status'])?.setValue(this.psv.getProjectStatus(this.form.get('projectType')?.value,this.form.get('status')?.value))
+    // if (this.form.valid) {
+    //   this.form.get(['project', 'status'])?.setValue(this.psv.getProjectStatus(this.form.get('projectType')?.value,this.form.get('status')?.value))
+    this.form.get(['project', 'status'])?.setValue(1001)
       this.psv.store(this.form.getRawValue()).subscribe({
         next: (res: any) => this.asv.success(res), error: err => this.asv.error(err.error)
       })
-    } else this.markFormGroupTouched(this.form);
+    // } else this.markFormGroupTouched(this.form);
   }
 
   markFormGroupTouched = (formGroup: FormGroup | FormArray): void => Object.values(formGroup.controls).forEach(control => control instanceof FormGroup || control instanceof FormArray ? this.markFormGroupTouched(control) : control.markAsTouched());

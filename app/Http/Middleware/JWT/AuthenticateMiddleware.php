@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpDeprecationInspection */
 
 namespace App\Http\Middleware\JWT;
 
@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 class AuthenticateMiddleware extends BaseMiddleware
@@ -23,11 +22,11 @@ class AuthenticateMiddleware extends BaseMiddleware
         return $next($request);
     }
 
-    public function authenticate($request)
+    public function authenticate($request): void
     {
         try {
             $this->auth->parseToken()->authenticate();
-        } catch (Throwable $e) {
+        } catch (Throwable) {
         }
     }
 }

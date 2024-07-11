@@ -5,13 +5,13 @@ namespace App\Helpers;
 
 class CaseConverter
 {
-    public static function convertToSnakeCase($properties)
+    public static function convertToSnakeCase($properties): array
     {
         return collect($properties)->mapWithKeys(fn($value, $key) => [strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $key)) => is_array($value) ? self::convertToSnakeCase($value) : $value])->all();
     }
 
 
-
+    /** @noinspection PhpUnusedLocalVariableInspection */
     public static function convertToCamelCase($properties)
     {
         return collect($properties)->map(function ($value, $key) {

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Models;
 
@@ -13,21 +13,10 @@ class ProjectDetail extends Model
 
     protected $fillable = ['id', 'project_id', 'project_name', 'activity_group_name', 'background', 'objectives', 'activity_formats', 'tsu_talent_id', 'strategic_talent_id', 'congruence_identity_id',  'project_participant_id', 'location', 'duration', 'operations', 'budget_id', 'expected_results', 'kpi_id', 'evaluates'];
 
-    protected $casts = [
-        'objectives' => 'array',
-        'activity_formats' => 'array',
-        'operations' => 'array',
-        'expected_results' => 'array',
-        'duration' => 'array'
-    ];
-
-
     public static function store($request, $projectId)
     {
-        $request['duration_start'] = date('Y-m-d', strtotime($request['duration_start']));
-        $request['duration_end'] = date('Y-m-d', strtotime($request['duration_end']));
         $request['project_id'] = $projectId;
-        $request['activity_group_name'] = auth()->user()->getUser()['role']['organization']['name'] . 'คณะ' . auth()->user()->getUser()[auth()->user()->type]['faculty']['name'];
+        $request['activity_group_name'] = auth()->user()->getUser()['role']['organization']['name'] . 'คณะ' . auth()->user()->getUser()[auth()->user()->{'type'}]['faculty']['name'];
         return ProjectDetail::where('project_id', ProjectDetail::create(array_map(fn($v) => is_array($v) ? json_encode($v, JSON_UNESCAPED_UNICODE) : $v, (array)$request))->project_id)->latest()->first();
     }
 

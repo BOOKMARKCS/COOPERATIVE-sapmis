@@ -1,10 +1,9 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace Database\Seeders;
 
 use App\Models\CongruenceIdentityDetail;
 use App\Models\CongruenceIdentityGroup;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CongruenceIdentityDetailsSeeder extends Seeder

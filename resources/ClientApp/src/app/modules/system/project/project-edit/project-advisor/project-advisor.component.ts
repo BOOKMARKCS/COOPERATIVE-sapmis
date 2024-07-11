@@ -1,25 +1,33 @@
-import {Component, Input, NgIterable} from '@angular/core';
-import {JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {FormArray, FormBuilder, FormGroup, FormsModule} from "@angular/forms";
-import {InputComponent} from "../../../../../shared/components/inputs/input/input.component";
-import {ButtonComponent} from "../../../../../shared/components/button/button.component";
-import {IProjectAdvisor, ProjectAdvisor} from "../../../../../core/models/projectDetail/project-detail.model";
-import {environment} from '../../../../../../environments/environment';
-import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
-
+import { Component, Input, NgIterable, OnInit } from '@angular/core';
+import { JsonPipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
+import { FormArray, FormBuilder, FormGroup, FormsModule } from "@angular/forms";
+import { InputComponent } from "../../../../../shared/components/inputs/input/input.component";
+import { ButtonComponent } from "../../../../../shared/components/button/button.component";
+import { IProjectAdvisor, ProjectAdvisor } from "../../../../../core/models/projectDetail/project-detail.model";
+import { environment } from '../../../../../../environments/environment';
+import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+export enum ProjectAdvisorListMode {
+  ReadOnly = 'readonly',
+  Editable = 'editable'
+}
 @Component({
   selector: 'app-project-advisor',
   standalone: true,
   imports: [InputComponent, NgForOf, ButtonComponent, FormsModule, NgIf, NgOptimizedImage, JsonPipe, SvgIconComponent, SvgIconComponent],
   templateUrl: './project-advisor.component.html',
 })
-export class ProjectAdvisorComponent {
+export class ProjectAdvisorComponent implements OnInit {
   @Input() form: FormArray<FormGroup<ProjectAdvisor>> = new FormArray<FormGroup<ProjectAdvisor>>([])
-  newUser: FormGroup<ProjectAdvisor> = this.fb.group(new ProjectAdvisor())
+  @Input({transform: (value: 'ReadOnly' | 'Editable') => ProjectAdvisorListMode[value]}) mode: ProjectAdvisorListMode = ProjectAdvisorListMode.ReadOnly;
   @Input() users: any = [];
   addToggle: boolean = false;
+  newUser: FormGroup<ProjectAdvisor> = this.fb.group(new ProjectAdvisor())
 
   constructor(private fb: FormBuilder) {
+  }
+
+  ngOnInit() {
+    console.log({projectAdvisor: this.users})
   }
 
   get f(): NgIterable<IProjectAdvisor> {
@@ -27,8 +35,10 @@ export class ProjectAdvisorComponent {
   }
 
   add(input: string) {
+    console.log(input)
     this.newUser = this.fb.group<ProjectAdvisor>(new ProjectAdvisor())
     this.newUser.get('user')?.patchValue(this.users[parseInt(input)] as any)
+    this.setNewUser(input)
   }
 
 
@@ -45,4 +55,6 @@ export class ProjectAdvisorComponent {
   }
 
   protected readonly environment = environment;
+  protected readonly ProjectAdvisor = ProjectAdvisor;
+  protected readonly ProjectAdvisorListMode = ProjectAdvisorListMode;
 }

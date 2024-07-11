@@ -8,7 +8,6 @@
             <option selected value="">เลือกผู้รับผิดชอบโครงการ</option>
             <option *ngFor="let obj of users; index as i" [value]="i">{{ obj.student.name }}</option>
           </select>
-          <app-button (click)="setNewUser(input.value)" class="self-center mx-4" full impact="bold" tone="primary" shape="rounded" size="medium">เลือก</app-button>
         </div>
         <app-button (click)="setNewUser(null)" class="self-center " full impact="bold" tone="card" shape="rounded" size="medium">{{ addToggle ? 'ยกเลิก' : 'เพิ่ม' }}</app-button>
       </div>
@@ -22,7 +21,7 @@
           <th class="py-3 text-right">องค์กร</th>
           <th class="py-3 text-right">ตำแหน่ง</th>
           <th class="py-3 text-right">เบอร์โทรศัพท์</th>
-          <th class="py-3 text-right"></th>
+          <th class="py-3 text-right" *ngIf="mode == ResponsibleListMode.Editable"></th>
         </tr>
         </thead>
         <tbody>
@@ -39,10 +38,10 @@
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.user.role.organization.name }}</span></td>
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.user.role.position.name }}</span></td>
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ obj.user.student.phoneNumber }}</span></td>
-            <td class="py-2 pl-2 text-right">
+            <td class="py-2 pl-2 text-right" *ngIf="mode == ResponsibleListMode.Editable">
               <div class="flex justify-end">
                 <button class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
-                  <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" svgClass="h-5 w-5">
+                  <svg-icon src="assets/icons/heroicons/outline/x.svg" svgClass="h-5 w-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
@@ -64,10 +63,10 @@
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ newUser.value.user?.['role']?.['organization']?.['name'] }}</span></td>
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ newUser.value.user?.['role']?.['position']?.['name'] }}</span></td>
             <td class="py-2 pl-2 text-right"><span class="text-sm font-semibold text-muted-foreground">{{ newUser.value.user?.['student']?.['phoneNumber'] }}</span></td>
-            <td class="py-2 pl-2 text-right">
+            <td class="py-2 pl-2 text-right" *ngIf="mode == ResponsibleListMode.Editable">
               <div class="flex justify-end">
-                <button class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-muted hover:text-foreground">
-                  <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" svgClass="h-5 w-5">
+                <button class="flex h-7 w-7 items-center justify-center rounded-md bg-card text-muted-foreground hover:bg-red-50 hover:text-red-500">
+                  <svg-icon src="assets/icons/heroicons/outline/x.svg" svgClass="h-5 w-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>

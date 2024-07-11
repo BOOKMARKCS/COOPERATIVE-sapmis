@@ -1,17 +1,18 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {NgClass, NgIf, NgOptimizedImage, TitleCasePipe} from '@angular/common';
-import {ClickOutsideDirective} from '../../../../../shared/directives/click-outside.directive';
-import {ThemeService} from '../../../../../core/services/theme.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {AuthService} from "../../../../../core/services/auth.service";
-import {SvgIconComponent} from "../../../../../shared/components/svg-icon/svg-icon.component";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { JsonPipe, NgClass, NgIf, NgOptimizedImage, TitleCasePipe } from '@angular/common';
+import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+import { ThemeService } from '../../../../../core/services/theme.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AuthService } from "../../../../../core/services/auth.service";
+import { SvgIconComponent } from "../../../../../shared/components/svg-icon/svg-icon.component";
+import { environment } from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-profile-menu',
   templateUrl: './profile-menu.component.html',
   standalone: true,
-  imports: [ClickOutsideDirective, NgClass, RouterLink, NgOptimizedImage, NgIf, TitleCasePipe, SvgIconComponent, SvgIconComponent],
+  imports: [ClickOutsideDirective, NgClass, RouterLink, NgOptimizedImage, NgIf, TitleCasePipe, SvgIconComponent, SvgIconComponent, JsonPipe],
   animations: [
     trigger('openClose', [
       state(
@@ -52,7 +53,7 @@ export class ProfileMenuComponent implements OnInit {
     {
       title: 'Log out',
       icon: './assets/icons/heroicons/outline/logout.svg',
-      link: '/auth',
+      link: '/sign-in',
     },
   ];
 
@@ -89,7 +90,7 @@ export class ProfileMenuComponent implements OnInit {
 
   public themeMode = ['light', 'dark'];
 
-  constructor(private authService: AuthService, public themeService: ThemeService, @Inject('BASE_URL') public baseUrl: string) {
+  constructor(private authService: AuthService, public themeService: ThemeService) {
   }
 
   ngOnInit(): void {
@@ -111,4 +112,5 @@ export class ProfileMenuComponent implements OnInit {
   }
 
   signOut = () => this.authService.logout()
+  protected readonly environment = environment;
 }

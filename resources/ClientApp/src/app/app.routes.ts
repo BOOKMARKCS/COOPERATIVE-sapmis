@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -9,4 +9,10 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./modules/system/auth/auth.module').then((m) => m.AuthModule),
   },
+  {
+    path: 'errors', data: {role: window.location.pathname},
+    loadChildren: () => import('./modules/system/error/error.module').then((m) => m.ErrorModule),
+  },
+  {path: '**', redirectTo: 'errors/404'},
+
 ];

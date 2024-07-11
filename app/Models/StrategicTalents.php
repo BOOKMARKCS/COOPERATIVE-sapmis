@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Models;
 
@@ -14,7 +14,7 @@ class StrategicTalents extends Model
         'strategic_talent_detail_id'
     ];
 
-    public function store($request, $projectDetailId)
+    public function store($request, $projectDetailId): void
     {
         array_map(fn($strategicTalentDetailId) => StrategicTalents::create(['project_detail_id' => $projectDetailId, 'strategic_talent_detail_id' => $strategicTalentDetailId]), $request);
     }

@@ -1,15 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {EndorseComponent} from "./endorse.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { EndorseComponent } from "./endorse.component";
 import {
   OrganizationalUsersListComponent
 } from "./organizational-users-management/organizational-users-list/organizational-users-list.component";
 import {
   OrganizationalUsersAddComponent
 } from "./organizational-users-management/organizational-users-add/organizational-users-add.component";
-import {projectMaterResolver} from "../../system/project/projectResolver";
-import {ProjectAddComponent} from "../../system/project/project-add/project-add.component";
-import {ProjectListComponent} from "../../system/project/project-list/project-list.component";
+import { projectMaterResolver } from "../../system/project/projectResolver";
+import { ProjectAddComponent } from "../../system/project/project-add/project-add.component";
+import { ProjectListComponent } from "../../system/project/project-list/project-list.component";
+import { ProjectDetailComponent } from "../../system/project/project-detail/project-detail.component";
 
 const routes: Routes = [
   {path: '', component: EndorseComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     path: 'projects',
     children: [
       {path: 'list', component: ProjectListComponent},
+      {path: 'detail', component: ProjectDetailComponent},
       {path: 'add', component: ProjectAddComponent, resolve: {master: projectMaterResolver}}
     ]
   }
